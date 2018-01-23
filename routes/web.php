@@ -26,6 +26,15 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => ['a
     Route::group(['middleware' => ['auth', 'role:superadmin']],function(){
         Route::resource('admins','AdminController');
     });
+
+    /**
+    * Centers
+    */
     Route::resource('centers','CenterController');
+
+    /**
+    * Clients
+    */
+    Route::resource('clients','ClientController');
 
 });
