@@ -1,0 +1,533 @@
+body {
+    font-family: 'Open Sans' !important;
+    height: 100%;
+}
+
+body::-webkit-scrollbar-track {
+    background-color: #ebebeb;
+}
+
+body::-webkit-scrollbar {
+    width: 6px;
+    background-color: #019cd6;
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: #019cd6;
+    border-radius: 10px;
+}
+
+main {
+    position: relative;
+    margin-left: 20px;
+}
+
+@media (max-width:768px) and (max-width:992px) {
+    main {
+        position: relative;
+        margin-left: 80px !important;
+    }
+}
+
+@media (max-width:1199px) {
+    main {
+        position: relative;
+        margin-left: 60px !important;
+    }
+}
+
+.section-title {
+    font-family: "Open Sans";
+    color: rgb(1, 156, 214);
+    font-weight: 400;
+    font-size: 24px;
+}
+
+.secondry-title {
+    font-size: 16px;
+    font-family: "Open Sans";
+    color: rgb(157, 160, 160);
+    font-weight: 500;
+}
+
+.control-label {
+    font-size: 14px;
+    font-family: "Open Sans";
+    color: rgb(69, 69, 69);
+    font-weight: 600;
+}
+
+.form-control {
+    border-width: 1px;
+    border-color: rgb(157, 160, 160);
+    border-style: solid;
+    border-radius: 3px;
+    background-color: rgb(255, 255, 255);
+    font-size: 13px;
+    font-family: 'Open Sans';
+    font-weight: 400;
+}
+
+.form-control:focus {
+    box-shadow: 0px 0px 0px #019cd6 inset, 0 0 1px #019cd6;
+    border-color: #019cd6 !important;
+}
+
+.input-file-mod {
+    visibility: hidden;
+}
+
+.input-file-custom {
+    cursor: pointer;
+}
+
+.primary-btn {
+    color: #fff;
+    text-transform: capitalize;
+    border-radius: 3px;
+    background-color: rgb(1, 156, 214);
+    box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+    font-family: "Open Sans";
+    font-weight: 700;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.primary-btn:hover,
+.primary-btn:focus {
+    color: #fff !important;
+    border-radius: 20px;
+}
+
+.cancel-btn {
+    background-color: transparent;
+    font-size: 14px;
+    font-family: "Open Sans";
+    color: rgb(69, 69, 69);
+    font-weight: 700;
+    text-transform: capitalize;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.cancel-btn:focus,
+.cancel-btn:hover {
+    color: rgb(69, 69, 69);
+}
+
+.white-card {
+    border-radius: 5px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.1);
+}
+
+.img-center {
+    margin: 0 auto;
+}
+
+.contact-pp {
+    border-radius: 50%;
+    box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.1);
+}
+
+.contact-details-pp {
+    margin-top: -15% !important;
+}
+
+.contact-details-name {
+    font-size: 24px;
+    font-family: "Open Sans";
+    color: rgb(69, 69, 69);
+    font-weight: 600;
+}
+
+.contact-details-position {
+    font-size: 16px;
+    font-family: "Open Sans";
+    color: rgb(157, 160, 160);
+    font-weight: 300;
+}
+
+.contact-details-hr {
+    width: 30%;
+    background-color: #d4d3d3;
+    border-color: #d4d3d3;
+}
+
+.contact-detail-add-date {
+    font-size: 15px;
+    color: rgb(157, 160, 160);
+    font-weight: 300;
+}
+
+.contact-detail-headline {
+    font-size: 18px;
+    font-family: "Open Sans";
+    color: rgb(21, 63, 120);
+    font-weight: 500;
+}
+
+.contact-details-label {
+    font-size: 14px;
+    font-family: "Open Sans";
+    color: rgb(157, 160, 160);
+    font-weight: 600;
+}
+
+.contact-details-info {
+    font-size: 15px;
+    font-family: "Open Sans";
+    color: rgb(37, 37, 37);
+    font-weight: 600;
+}
+
+.contact-info-col {
+    padding: 0;
+}
+
+.edit-btn {
+    background-color: white;
+    color: #838385 !important;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    text-align: center;
+    padding-right: 10px;
+    min-width: 40px;
+}
+
+.convert-led-btn {
+    color: #fff;
+    text-transform: capitalize;
+    border-radius: 5px;
+    background-color: rgb(1, 156, 214);
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.convert-led-btn:focus,
+.convert-led-btn:hover {
+    color: #fff;
+}
+
+.contacts-section-title {
+    font-size: 30px;
+}
+
+.section-details {
+    font-size: 14px;
+    font-family: "Open Sans";
+    color: rgb(149, 149, 149);
+    font-weight: 600;
+}
+
+.sort-by-dropdown-btn {
+    color: #000;
+    font-family: 'Open Sans';
+    font-size: 14px;
+    font-weight: 600;
+    padding-top: 0px;
+    padding-bottom: 0;
+    background-color: transparent;
+    text-transform: capitalize;
+    margin-top: 12px;
+    letter-spacing: 0;
+    padding-left: 2px;
+    box-shadow: none !important;
+}
+
+.contact-dropdown {
+    margin-top: 0px;
+    border-radius: 3px;
+    background-color: white;
+    box-shadow: 0px -2px 4px 0px rgba(0, 0, 0, 0.05), 0px 6px 18px 0px rgba(0, 0, 0, 0.1);
+    border: 0;
+    padding: 0;
+}
+
+.contact-dropdown li a,.contact-dropdown li button {
+    font-size: 12px;
+    font-family: "Open Sans";
+    color: rgb(69, 69, 69);
+    font-weight: 600;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-transform: capitalize;
+}
+
+.contact-dropdown li button:hover {
+    background-color: rgb(237, 239, 249);
+}
+
+li button {
+    text-align: left;
+    width: 100%;
+    background-color: transparent;
+    text-decoration: none;
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    line-height: 1.42857143;
+    white-space: nowrap;
+    border: none;
+}
+
+.sort-col {
+    padding-right: 0;
+}
+
+.contact-edit-col {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.btn-white-blue {
+    border-radius: 5px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.1);
+    font-size: 13px !important;
+    font-weight: 600;
+    font-family: "Open Sans";
+    color: rgb(1, 156, 214) !important;
+    text-transform: capitalize;
+}
+
+.btn-white-blue i {
+    margin-right: 5px;
+}
+
+.btn-blue {
+    border-radius: 5px;
+    background-color: rgb(1, 156, 214);
+    box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.1) !important;
+    text-transform: capitalize;
+    font-family: 'Open Sans';
+    font-weight: 600;
+    font-size: 13px;
+    color: white !important;
+}
+
+.margin-left-10 {
+    margin-left: 10px !important;
+}
+
+.contact-list-view-column-categ {
+    font-size: 14px;
+    font-family: "Open Sans";
+    color: rgb(131, 131, 133);
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.checkbox-col {
+    padding-right: 0;
+}
+
+.contact-list-view-col-categ {
+    padding-left: 1px;
+}
+
+@media (max-width:767px) {
+    .contact-list-view-col-categ {
+        padding-left: 5px;
+    }
+}
+
+.navigation-btn {
+    border-radius: 3px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+    color: rgb(157, 160, 160) !important;
+    padding: 0px 7px 0px 7px;
+    margin-right: 5px;
+}
+
+.contacts-list-view-card {
+    border-radius: 5px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.1);
+}
+
+.contact-view-pp {
+    width: 45px;
+    border-radius: 50%;
+}
+
+.contact-name {
+    font-size: 16px;
+    font-family: "Open Sans";
+    color: rgb(37, 37, 37);
+    font-weight: 600;
+}
+
+.contact-details-view {
+    font-size: 14px;
+    font-family: "Open Sans";
+    color: rgb(37, 37, 37);
+    font-weight: 600;
+}
+
+.contact-view-email {
+    font-size: 14px;
+    font-family: "Open Sans";
+    color: rgb(149, 149, 149);
+    font-weight: 600;
+}
+
+.contact-edit-dots-shdw {
+    box-shadow: none !important;
+}
+
+.contact-edit-dots-shdw:focus {
+    box-shadow: none !important;
+}
+
+.edit-btn-contact-ico-color {
+    color: rgb(157, 160, 160);
+}
+
+.capitalize {
+    text-transform: capitalize;
+}
+
+.clear-filter {
+    color: rgb(1, 156, 214);
+}
+
+.clear-btn-filter {
+    background-color: transparent !important;
+    font-size: 14px;
+    font-family: "Open Sans";
+    color: rgb(1, 156, 214) !important;
+    font-weight: 600;
+    letter-spacing: 0;
+    text-transform: capitalize;
+    padding-right: 0;
+    outline: none !important;
+    padding-top: 4px;
+}
+
+#delete {
+    margin-top: 10%;
+}
+
+#delete .modal-content {
+    box-shadow: inherit;
+    border: none;
+    border-radius: 5px;
+    border-color: transparent;
+}
+
+#delete .modal-header {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    background-color: #ebebeb;
+}
+
+#delete .modal-header h4 {
+    font-family: 'Open Sans';
+    font-weight: 600;
+    color: rgb(1, 156, 214);
+    line-height: 2;
+    font-size: 24px;
+}
+
+#delete .modal-body p {
+    font-size: 16px;
+    font-family: "Open Sans";
+    color: rgb(69, 69, 69);
+    line-height: 2.667;
+    font-weight: 500;
+}
+
+#delete .modal-footer {
+    border-top: none;
+}
+
+#delete .delete-btn-modal {
+    border-radius: 3px;
+    background-color: rgb(1, 156, 214);
+    box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+    font-family: "Open Sans";
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+#delete .cancel-btn-modal {
+    background-color: transparent;
+    color: rgb(1, 156, 214);
+    text-transform: capitalize;
+}
+
+#delete .modal-dialog {
+    width: 40% !important;
+}
+
+.label {
+    border-radius: 3px;
+    background-color: rgb(235, 236, 241);
+    font-size: 12px;
+    font-family: "Open Sans";
+    color: rgb(131, 131, 133);
+    font-weight: 600;
+    margin-right: 5px;
+}
+
+.total-customer-col {
+    border-radius: 5px;
+    background-color: rgb(253, 253, 253);
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
+    border-left: 4px solid rgb(132, 118, 240);
+}
+
+.customer-stat-text {
+    font-size: 17px;
+    font-family: "Open Sans";
+    color: rgb(89, 89, 91);
+}
+
+.customer-stat-num {
+    font-size: 17px;
+    font-family: "Open Sans";
+    color: rgb(132, 118, 240);
+    font-weight: bold;
+}
+
+.active-customer-col {
+    border-radius: 5px;
+    background-color: rgb(253, 253, 253);
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
+    border-left: 4px solid rgb(246, 150, 121);
+}
+
+.inactive-customer-col {
+    border-radius: 5px;
+    background-color: rgb(253, 253, 253);
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
+    border-left: 4px solid rgb(70, 212, 170);
+}
+
+.active-stat-num {
+    font-size: 17px;
+    font-family: "Open Sans";
+    color: rgb(246, 150, 121);
+    font-weight: bold;
+}
+
+.inactive-stat-num {
+    font-size: 17px;
+    font-family: "Open Sans";
+    color: rgb(70, 212, 170);
+    font-weight: bold;
+}
+
+.customer-stat-col-pad {
+    padding-left: 0px;
+}
