@@ -28,7 +28,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = 'dashboard.index';
+    protected $redirectTo = 'dashboard';
 
     /**
      * Create a new controller instance.
@@ -69,7 +69,7 @@ class RegisterController extends Controller
             'password' => $data['password']
         ]);
 
-        $role = Role::where('name', 'admin')->first();
+        $role = Role::where('name', 'superadmin')->first();
         $user->attachRole($role);
 
         return $user;

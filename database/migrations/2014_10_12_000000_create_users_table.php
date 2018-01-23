@@ -18,6 +18,18 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email',191)->unique();
             $table->string('password');
+
+            $table->string('lat')->default('');
+            $table->string('lng')->default('');
+            $table->string('location')->default('');
+            $table->string('contact_number')->default('');
+            $table->text('description')->nullable();
+            $table->string('profile_image')->default('');
+            $table->string('cover_image')->default('');
+            $table->decimal('cost_per_hour',20,2)->default(0);
+            $table->integer('rate')->unsigned()->default(0);
+
+
             $table->rememberToken();
             $table->timestamps();
         });

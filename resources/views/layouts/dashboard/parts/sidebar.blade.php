@@ -20,8 +20,9 @@
                             </div>
                         </a>
                     </li>
-                    <li class="c-menu__item has-submenu {{ (request()->route()->getName() === 'dashboard.admins.index') ? 'is-active' : '' }} ? 'is-active' : '' }}" data-toggle="tooltip" title="Admins">
-                        <a href="" style="text-decoration: none;">
+                    @if(Auth::user() && Auth::user()->hasRole('superadmin'))
+                    <li class="c-menu__item has-submenu {{ strpos(request()->route()->getName() , 'dashboard.admins') !== FALSE ? 'is-active' : '' }} ? 'is-active' : '' }}" data-toggle="tooltip" title="Admins">
+                        <a href="{{ route('dashboard.admins.index') }}" style="text-decoration: none;">
                             <div class="c-menu__item__inner">
                                 <i class="fa fa-binoculars"></i>
                                 <div class="c-menu-item__title">
@@ -30,6 +31,19 @@
                             </div>
                         </a>
                     </li>
+                    @endif
+                    @if(Auth::user() && Auth::user()->hasRole(['superadmin','admin']))
+                    <li class="c-menu__item has-submenu {{ strpos(request()->route()->getName() , 'dashboard.centers') !== FALSE ? 'is-active' : '' }} ? 'is-active' : '' }}" data-toggle="tooltip" title="Admins">
+                        <a href="{{ route('dashboard.centers.index') }}" style="text-decoration: none;">
+                            <div class="c-menu__item__inner">
+                                <i class="fa fa-group"></i>
+                                <div class="c-menu-item__title">
+                                    <span>Centers</span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    @endif
                 </ul>
             </nav>
         </div>

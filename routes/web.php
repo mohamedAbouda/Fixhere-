@@ -19,4 +19,13 @@ Route::get('/','HomeController@index')->name('home');
 */
 Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => ['auth', 'role:superadmin|admin'] ,'namespace' => 'Dashboard'], function () {
     Route::get('/','HomeController@index')->name('index');
+
+    /**
+    * Admins
+    */
+    Route::group(['middleware' => ['auth', 'role:superadmin']],function(){
+        Route::resource('admins','AdminController');
+    });
+    Route::resource('centers','CenterController');
+
 });

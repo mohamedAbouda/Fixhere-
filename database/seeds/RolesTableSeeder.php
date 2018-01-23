@@ -22,6 +22,21 @@ class RolesTableSeeder extends Seeder
                 'name' 			=> 'admin',
                 'display_name' 	=> 'Admin',
             ],
+            [
+                'id'			=> 3,
+                'name' 			=> 'center',
+                'display_name' 	=> 'Maintenance center',
+            ],
+            [
+                'id'			=> 4,
+                'name' 			=> 'agent',
+                'display_name' 	=> 'Technical Agent',
+            ],
+            [
+                'id'			=> 5,
+                'name' 			=> 'client',
+                'display_name' 	=> 'Client',
+            ],
 		]);
     }
 }
