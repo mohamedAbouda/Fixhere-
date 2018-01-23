@@ -2,7 +2,7 @@
 <html lang="en" style="height:100%;">
 <head content="A">
     <meta charset="utf-8">
-    <title>Alpha Panel</title>
+    <title>{{ config('app.name') }} Panel</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="keywords" content=" bootstrap,graphic,hex" />
     <meta name="description" content="CRM" />
