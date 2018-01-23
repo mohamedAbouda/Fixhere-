@@ -100,7 +100,9 @@ class CenterController extends Controller
         if (isset($data['password']) && !$data['password']) {
             unset($data['password']);
         }
-
+        if (isset($data['cover_image']) && $data['cover_image'] && $center->cover_image && file_exists(public_path($center->upload_distination.$center->cover_image))) {
+            unlink(public_path($center->upload_distination.$center->cover_image));
+        }
         $center->update($data);
 
         alert()->success('Center updated successfully.', 'Success');
@@ -115,6 +117,9 @@ class CenterController extends Controller
     */
     public function destroy(User $center)
     {
+        if ($center->cover_image && file_exists(public_path($center->upload_distination.$center->cover_image))) {
+            unlink(public_path($center->upload_distination.$center->cover_image));
+        }
         $center->delete();
         alert()->success('Center deleted successfully.', 'Success');
         return redirect()->route('dashboard.centers.index');
