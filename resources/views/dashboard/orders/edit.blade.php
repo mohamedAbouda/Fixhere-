@@ -60,6 +60,7 @@
             {{ Form::select('client_id',$clients,$resource->client_id,['id'=>'client_id','required'=>'required','class' => 'form-control','placeholder'=>'Select client']) }}
             <p class="text-danger" style="margin-bottom: 0;">{{ $errors->first('client_id') }}</p>
         </div>
+        @if(isset($centers))
         <div class="form-group margin-bottom20 col-md-12">
             <label class="control-label" for="center_id">
                 <span class="text-danger">*</span>
@@ -69,6 +70,7 @@
             {{ Form::select('center_id',$centers,$resource->center_id,['id'=>'center_id','required'=>'required','class' => 'form-control','placeholder'=>'Select center']) }}
             <p class="text-danger" style="margin-bottom: 0;">{{ $errors->first('center_id') }}</p>
         </div>
+        @endif
         <div class="form-group margin-bottom20 col-md-12">
             <label class="control-label" for="agent_id">
                 <span class="text-danger">*</span>
@@ -77,8 +79,9 @@
             </label>
             <select class="form-control" name="agent_id" id="agent_id">
                 <option value="">Select agent</option>
+                <?php $agent_option_style = isset($centers) ? 'display:none;' : ''; ?>
                 @foreach($agents as $agent)
-                <option {{ $resource->agent_id === $agent->id ? 'selected' : 'style="display:none;"'}} value="{{ $agent->id }}" data-parent-id="{{ $agent->parent_id }}">{{ $agent->name }}</option>
+                <option {{ $resource->agent_id === $agent->id ? 'selected' : 'style="'.$agent_option_style.'"'}} value="{{ $agent->id }}" data-parent-id="{{ $agent->parent_id }}">{{ $agent->name }}</option>
                 @endforeach
             </select>
             <p class="text-danger" style="margin-bottom: 0;">{{ $errors->first('agent_id') }}</p>

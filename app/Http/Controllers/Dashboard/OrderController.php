@@ -9,6 +9,7 @@ use App\Http\Requests\Dashboard\OrderUpdateRequest;
 use App\Order;
 use App\User;
 use App\Role;
+use Auth;
 
 class OrderController extends Controller
 {
@@ -20,11 +21,18 @@ class OrderController extends Controller
     *
     * @return \Illuminate\Http\Response
     */
-    public function index()
+    public function index(Request $request)
     {
-        $data['resources'] = Order::paginate($this->paginate_by);
         $data['total_resources_count'] = Order::count();
-        $index = request()->get('page' , 1);
+
+        $data['resources'] = Order::orderBy('id','DESC')->paginate($this->paginate_by);
+        if (Auth::user()->hasRole('center')) {
+            $center = Auth::user();
+            $data['resources'] = Order::where('center_id',$center->id)->orderBy('id','DESC')->paginate($this->paginate_by);
+        }else {
+            $data['resources'] = Order::orderBy('id','DESC')->paginate($this->paginate_by);
+        }
+        $index = $request->get('page' , 1);
         $data['counter_offset'] = ($index * $this->paginate_by) - $this->paginate_by;
         return view($this->base_view_path . 'index',$data);
     }
@@ -39,12 +47,20 @@ class OrderController extends Controller
         $data['clients'] = User::whereHas('roles', function ($query)  {
             $query->where('name','client');
         })->pluck('name','id');
-        $data['centers'] = User::whereHas('roles', function ($query)  {
-            $query->where('name','center');
-        })->pluck('name','id');
-        $data['agents'] = User::whereHas('roles', function ($query)  {
-            $query->where('name','agent');
-        })->get(['id','name','parent_id']);
+
+        if (Auth::user()->hasRole('center')) {
+            $center = Auth::user();
+            $data['agents'] = User::where('parent_id',$center->id)->whereHas('roles', function ($query)  {
+                $query->where('name','agent');
+            })->get(['id','name','parent_id']);
+        }else{
+            $data['centers'] = User::whereHas('roles', function ($query)  {
+                $query->where('name','center');
+            })->pluck('name','id');
+            $data['agents'] = User::whereHas('roles', function ($query)  {
+                $query->where('name','agent');
+            })->get(['id','name','parent_id']);
+        }
 
         return view($this->base_view_path . 'create' , $data);
     }
@@ -58,6 +74,11 @@ class OrderController extends Controller
     public function store(OrderCreateRequest $request)
     {
         $data = $request->all();
+
+        if (Auth::user()->hasRole('center')) {
+            $center = Auth::user();
+            $data['center_id'] = $center->id;
+        }
 
         $user = Order::create($data);
 
@@ -89,14 +110,25 @@ class OrderController extends Controller
         $data['clients'] = User::whereHas('roles', function ($query)  {
             $query->where('name','client');
         })->pluck('name','id');
-        $data['centers'] = User::whereHas('roles', function ($query)  {
-            $query->where('name','center');
-        })->pluck('name','id');
-        $data['agents'] = User::whereHas('roles', function ($query)  {
-            $query->where('name','agent');
-        })->get(['id','name','parent_id']);
+        if (Auth::user()->hasRole('center')) {
+            $center = Auth::user();
+            if ($order->center_id !== $center->id) {
+                alert()->error('You aren\'t authorized to perform this action.', 'Error');
+                return redirect()->route('dashboard.orders.index');
+            }
+            $data['agents'] = User::where('parent_id',$center->id)->whereHas('roles', function ($query)  {
+                $query->where('name','agent');
+            })->get(['id','name','parent_id']);
+        }else{
+            $data['centers'] = User::whereHas('roles', function ($query)  {
+                $query->where('name','center');
+            })->pluck('name','id');
+            $data['agents'] = User::whereHas('roles', function ($query)  {
+                $query->where('name','agent');
+            })->get(['id','name','parent_id']);
+        }
         $data['resource'] = $order;
-        
+
         return view($this->base_view_path . 'edit',$data);
     }
 
@@ -110,6 +142,15 @@ class OrderController extends Controller
     public function update(OrderUpdateRequest $request, Order $order)
     {
         $data = $request->all();
+
+        if (Auth::user()->hasRole('center')) {
+            $center = Auth::user();
+            if ($order->center_id !== $center->id) {
+                alert()->error('You aren\'t authorized to perform this action.', 'Error');
+                return redirect()->route('dashboard.orders.index');
+            }
+            $data['center_id'] = $center->id;
+        }
 
         $order->update($data);
 
@@ -125,6 +166,14 @@ class OrderController extends Controller
     */
     public function destroy(Order $order)
     {
+        if (Auth::user()->hasRole('center')) {
+            $center = Auth::user();
+            if ($order->center_id !== $center->id) {
+                alert()->error('You aren\'t authorized to perform this action.', 'Error');
+                return redirect()->route('dashboard.orders.index');
+            }
+        }
+
         $order->delete();
         alert()->success('Order deleted successfully.', 'Success');
         return redirect()->route('dashboard.orders.index');

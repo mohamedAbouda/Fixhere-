@@ -17,29 +17,30 @@ Route::get('/','HomeController@index')->name('home');
 /*
 * Admin Dashbord Routes
 */
-Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => ['auth', 'role:superadmin|admin'] ,'namespace' => 'Dashboard'], function () {
+Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => ['auth', 'role:superadmin|admin|center'] ,'namespace' => 'Dashboard'], function () {
     Route::get('/','HomeController@index')->name('index');
 
     /**
     * Admins
     */
-    Route::group(['middleware' => ['auth', 'role:superadmin']],function(){
+    Route::group(['middleware' => ['role:superadmin']],function(){
         Route::resource('admins','AdminController');
     });
 
-    /**
-    * Centers
-    */
-    Route::resource('centers','CenterController');
+    Route::group(['middleware' => ['role:superadmin|admin']],function(){
+        /**
+        * Centers
+        */
+        Route::resource('centers','CenterController');
 
-    /**
-    * Clients
-    */
-    Route::resource('clients','ClientController');
+        /**
+        * Clients
+        */
+        Route::resource('clients','ClientController');
+    });
 
     /**
     * Orders
     */
     Route::resource('orders','OrderController');
-
 });
