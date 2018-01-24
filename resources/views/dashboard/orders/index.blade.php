@@ -75,6 +75,9 @@ body {
                         <th>
                             Location
                         </th>
+                        <th>
+                            Status
+                        </th>
                         <th></th>
                     </tr>
                     @foreach($resources as $resource)
@@ -121,6 +124,19 @@ body {
                                 <a href="">
                                     view on map
                                 </a>
+                            </h3>
+                        </td>
+                        <td>
+                            <h3 class="contact-list-view-column-categ margin-top10 contact-details-view" style="font-weight: 400;">
+                                @if($resource->status === 0)
+                                Recieved
+                                @elseif($resource->status === 1)
+                                Accepted
+                                @elseif($resource->status === 2)
+                                Technical agent is on the way
+                                @elseif($resource->status === 3)
+                                Done
+                                @endif
                             </h3>
                         </td>
 

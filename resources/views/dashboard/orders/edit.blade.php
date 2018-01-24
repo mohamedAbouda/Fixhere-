@@ -102,6 +102,18 @@
             <input type="hidden" name="lat" value="{{ $resource->lat }}">
             <input type="hidden" name="lng" value="{{ $resource->lng }}">
         </div>
+        <div class="form-group margin-bottom20 col-md-12">
+            <label class="control-label" for="status">
+                Status
+            </label>
+            <select class="form-control" name="status" id="status">
+                <option value="0" {{ $resource->status === 0 ? 'selected' : '' }}>Recieved</option>
+                <option value="1" {{ $resource->status === 1 ? 'selected' : '' }}>Accepted</option>
+                <option value="2" {{ $resource->status === 2 ? 'selected' : '' }}>Technical agent is on the way</option>
+                <option value="3" {{ $resource->status === 3 ? 'selected' : '' }}>Done</option>
+            </select>
+            <p class="text-danger" style="margin-bottom: 0;">{{ $errors->first('status') }}</p>
+        </div>
     </div>
 
 </div>

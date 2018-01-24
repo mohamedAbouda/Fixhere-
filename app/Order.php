@@ -7,8 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     protected $fillable = [
-        'service_type' ,'center_id' ,'agent_id' ,'order_date' ,'time_from' ,
-        'time_to' ,'lat' ,'lng' ,'problem' ,'status' ,'client_id'
+        'service_type' ,'center_id' ,'agent_id' ,'client_id','order_date' ,
+        'time_from' ,'time_to' ,'lat' ,'lng' ,'problem'
+        ,'status' //0 => recieved , 1 => accepted , 2 => agent on the way , 3 => done
     ];
 
     /**

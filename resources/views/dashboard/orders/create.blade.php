@@ -103,6 +103,18 @@
             <p class="text-danger" style="margin-bottom: 0;">{{ $errors->first('lat') }}</p>
             <p class="text-danger" style="margin-bottom: 0;">{{ $errors->first('lng') }}</p>
         </div>
+        <div class="form-group margin-bottom20 col-md-12">
+            <label class="control-label" for="status">
+                Status
+            </label>
+            <select class="form-control" name="status" id="status">
+                <option value="0" selected>Recieved</option>
+                <option value="1">Accepted</option>
+                <option value="2">Technical agent is on the way</option>
+                <option value="3">Done</option>
+            </select>
+            <p class="text-danger" style="margin-bottom: 0;">{{ $errors->first('status') }}</p>
+        </div>
     </div>
 
 </div>
