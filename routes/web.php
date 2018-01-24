@@ -43,4 +43,9 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => ['a
     * Orders
     */
     Route::resource('orders','OrderController');
+
+    /**
+    * Agents
+    */
+    Route::resource('agents','AgentController');
 });
