@@ -26,6 +26,7 @@ class ClientCreateRequest extends FormRequest
         return [
             'name'=>'required',
             'email'=>'required|unique:users,email',
+            'password'=>'required|confirmed',
             'contact_number'=>'required',
             'location'=>'required',
             'profile_image'=>'required|image',

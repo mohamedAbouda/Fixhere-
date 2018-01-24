@@ -27,6 +27,7 @@ class ClientUpdateRequest extends FormRequest
         return [
             'name'=>'required',
             'email'=>'required|unique:users,email,'.$rid,
+            'password'=>'confirmed',
             'contact_number'=>'required',
             'location'=>'required',
             'profile_image'=>'nullable|image',

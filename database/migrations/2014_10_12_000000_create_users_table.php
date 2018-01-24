@@ -28,6 +28,7 @@ class CreateUsersTable extends Migration
             $table->string('cover_image')->default('');
             $table->decimal('cost_per_hour',20,2)->default(0);
             $table->integer('rate')->unsigned()->default(0);
+            $table->integer('parent_id')->unsigned()->nullable();
 
 
             $table->rememberToken();

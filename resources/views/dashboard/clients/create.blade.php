@@ -48,6 +48,22 @@
             <p class="text-danger" style="margin-bottom: 0;">{{ $errors->first('email') }}</p>
         </div>
     </div>
+    <div class="col-md-12">
+        <div class="form-group margin-bottom20 col-md-6">
+            <label class="control-label" for="password">
+                Password
+            </label>
+            {{ Form::password('password',['id'=>'password','class' => 'form-control']) }}
+            <p class="text-danger" style="margin-bottom: 0;">{{ $errors->first('password') }}</p>
+        </div>
+        <div class="form-group margin-bottom20 col-md-6">
+            <label class="control-label" for="password_confirmation">
+                Confirm password
+            </label>
+            {{ Form::password('password_confirmation',['id'=>'password_confirmation','class' => 'form-control']) }}
+            <p class="text-danger" style="margin-bottom: 0;">{{ $errors->first('password_confirmation') }}</p>
+        </div>
+    </div>
 
     <div class="col-md-12">
         <div class="form-group margin-bottom20 col-md-6">

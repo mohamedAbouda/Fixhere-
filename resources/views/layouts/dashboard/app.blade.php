@@ -36,6 +36,57 @@
     .table-borderless > thead > tr > th {
         border: none;
     }
+
+    .select2-selection {
+        display: block !important;
+        width: 100% !important;
+        height: 34px !important;
+        padding: 6px 12px !important;
+        font-size: 14px !important;
+        line-height: 1.42857143 !important;
+        color: #555 !important;
+        background-color: #fff !important;
+        background-image: none !important;
+        border: 1px solid #ccc !important;
+        border-radius: 4px !important;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075) !important;
+        box-shadow: inset 0 1px 1px rgba(0,0,0,.075) !important;
+        -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s !important;
+        -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s !important;
+        transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s !important;
+        border: 2px solid #ecf0f1 !important;
+        border-top-width: 2px !important;
+        border-right-width: 2px !important;
+        border-bottom-width: 2px !important;
+        border-left-width: 2px !important;
+        border-top-style: solid !important;
+        border-right-style: solid !important;
+        border-bottom-style: solid !important;
+        border-left-style: solid !important;
+        border-top-color: rgb(236, 240, 241) !important;
+        border-right-color: rgb(236, 240, 241) !important;
+        border-bottom-color: rgb(236, 240, 241) !important;
+        border-left-color: rgb(236, 240, 241) !important;
+        border-radius: 0 !important;
+        color: #34495e !important;
+        font-size: 14px !important;
+        line-height: 1.467 !important;
+        padding: 8px 12px !important;
+        height: 40px !important;
+        border-radius: 6px !important;
+        -webkit-box-shadow: none !important;
+        box-shadow: none !important;
+        -webkit-transition: border .25s linear, color .25s linear, background-color .25s linear !important;
+        transition: border .25s linear, color .25s linear, background-color .25s linear !important;
+        border-width: 1px !important;
+        border-color: rgb(157, 160, 160) !important;
+        border-style: solid !important;
+        border-radius: 3px !important;
+        background-color: rgb(255, 255, 255) !important;
+        font-size: 13px !important;
+        font-family: 'Open Sans' !important;
+        font-weight: 400 !important;
+    }
     </style>
     @yield('stylesheets')
 </head>

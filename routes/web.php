@@ -37,4 +37,9 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => ['a
     */
     Route::resource('clients','ClientController');
 
+    /**
+    * Orders
+    */
+    Route::resource('orders','OrderController');
+
 });
