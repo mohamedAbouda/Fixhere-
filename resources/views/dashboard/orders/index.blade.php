@@ -113,7 +113,7 @@ body {
                         </td>
                         <td>
                             <h3 class="contact-list-view-column-categ margin-top10 contact-details-view" style="font-weight: 400;">
-                                {{ $resource->order_date.' - '.$resource->time_from.' : '.$resource->time_to }}
+                                {{ $resource->order_date.' - ('.$resource->time_from.') : ('.$resource->time_to.')' }}
                             </h3>
                         </td>
                         <td>

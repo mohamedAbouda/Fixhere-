@@ -9,7 +9,7 @@
 @stop
 
 @section('content')
-{{ Form::open(['route' => 'dashboard.orders.store','files'=>'true']) }}
+{{ Form::open(['route' => 'dashboard.orders.store']) }}
 <div class="row">
     <div class="col-md-12">
         <h3 class="secondry-title">Order Info.</h3>

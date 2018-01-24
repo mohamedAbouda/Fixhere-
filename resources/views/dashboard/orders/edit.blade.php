@@ -3,99 +3,95 @@
 @section('section-title')
 <div class="row">
     <div class="col-md-4 col-sm-12">
-        <h3 class="section-title">Edit center ({{ $resource->name }})</h3>
+        <h3 class="section-title">Edit order</h3>
     </div>
 </div>
 @stop
 
 @section('content')
-{{ Form::open(['route' => ['dashboard.centers.update' , $resource->id] ,'method' => 'PATCH','files'=>'true']) }}
+{{ Form::open(['route' => ['dashboard.orders.update' , $resource->id] ,'method' => 'PATCH']) }}
 <input type="hidden" name="resource_id" value="{{ $resource->id }}">
 <div class="row">
     <div class="col-md-12">
-        <h3 class="secondry-title">Center Info.</h3>
+        <h3 class="secondry-title">Order Info.</h3>
     </div>
+    <div class="col-md-12">
+        <div class="form-group margin-bottom20 col-md-6">
+            <label class="control-label" for="service_type">
+                <span class="text-danger">*</span>
+                Service type
+            </label>
+            {{ Form::text('service_type',$resource->service_type,['id'=>'service_type','required'=>'required','class' => 'form-control']) }}
+            <p class="text-danger" style="margin-bottom: 0;">{{ $errors->first('service_type') }}</p>
+        </div>
+        <div class="form-group margin-bottom20 col-md-6">
+            <label class="control-label" for="order_date">
+                <span class="text-danger">*</span>
+                Date
+            </label>
+            {{ Form::text('order_date',$resource->order_date,['id'=>'order_date','required'=>'required','class' => 'form-control' ,'placeholder' => 'YYYY-MM-DD']) }}
+            <p class="text-danger" style="margin-bottom: 0;">{{ $errors->first('order_date') }}</p>
+        </div>
+        <div class="form-group margin-bottom20 col-md-6">
+            <label class="control-label" for="time_from">
+                <span class="text-danger">*</span>
+                Time from
+            </label>
+            {{ Form::text('time_from',$resource->time_from,['id'=>'time_from','required'=>'required','class' => 'form-control','placeholder' => 'HH:mm']) }}
+            <p class="text-danger" style="margin-bottom: 0;">{{ $errors->first('time_from') }}</p>
+        </div>
+        <div class="form-group margin-bottom20 col-md-6">
+            <label class="control-label" for="time_to">
+                <span class="text-danger">*</span>
+                Time to
+            </label>
+            {{ Form::text('time_to',$resource->time_to,['id'=>'time_to','required'=>'required','class' => 'form-control','placeholder' => 'HH:mm']) }}
+            <p class="text-danger" style="margin-bottom: 0;">{{ $errors->first('time_to') }}</p>
+        </div>
+    </div>
+
     <div class="col-md-12">
         <div class="form-group margin-bottom20 col-md-12">
-            <div class="form-group">
-                <label class="control-label" for="cover_image">
-                    <span class="text-danger">*</span>
-                    Cover image :
-                </label>
-                <div class="clearfix"></div>
-                <label for="cover_image">
-                    <img src="{{ $resource->cover_image ? $resource->cover_image_url : asset('panel-assets/images/fields/01_picture.png') }}" alt="" class="thumbnail" style="width:215px;height:215px;cursor: pointer; cursor: hand;">
-                    <input type="file" name="cover_image" id="cover_image" style="display:none;" onchange="preview(this);">
-                </label>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-12">
-        <div class="form-group margin-bottom20 col-md-6">
-            <label class="control-label" for="name">
+            <label class="control-label" for="client_id">
                 <span class="text-danger">*</span>
-                Name
+                Client
+                <span class="text-info" style="font-weight: 200;margin-left:10px;">You must have clients first</span>
             </label>
-            {{ Form::text('name',$resource->name,['id'=>'name','required'=>'required','class' => 'form-control']) }}
-            <p class="text-danger" style="margin-bottom: 0;">{{ $errors->first('name') }}</p>
-        </div>
-        <div class="form-group margin-bottom20 col-md-6">
-            <label class="control-label" for="email">
-                <span class="text-danger">*</span>
-                Email
-            </label>
-            {{ Form::email('email',$resource->email,['id'=>'email','required'=>'required','class' => 'form-control']) }}
-            <p class="text-danger" style="margin-bottom: 0;">{{ $errors->first('email') }}</p>
-        </div>
-    </div>
-    <div class="col-md-12">
-        <div class="form-group margin-bottom20 col-md-6">
-            <label class="control-label" for="password">
-                Password
-            </label>
-            {{ Form::password('password',['id'=>'password','class' => 'form-control']) }}
-            <p class="text-danger" style="margin-bottom: 0;">{{ $errors->first('password') }}</p>
-        </div>
-        <div class="form-group margin-bottom20 col-md-6">
-            <label class="control-label" for="password_confirmation">
-                Confirm password
-            </label>
-            {{ Form::password('password_confirmation',['id'=>'password_confirmation','class' => 'form-control']) }}
-            <p class="text-danger" style="margin-bottom: 0;">{{ $errors->first('password_confirmation') }}</p>
-        </div>
-    </div>
-    <div class="col-md-12">
-        <div class="form-group margin-bottom20 col-md-6">
-            <label class="control-label" for="contact_number">
-                <span class="text-danger">*</span>
-                Contact number
-            </label>
-            {{ Form::text('contact_number',$resource->contact_number,['id'=>'contact_number','required'=>'required','class' => 'form-control']) }}
-            <p class="text-danger" style="margin-bottom: 0;">{{ $errors->first('contact_number') }}</p>
-        </div>
-        <div class="form-group margin-bottom20 col-md-6">
-            <label class="control-label" for="location">
-                <span class="text-danger">*</span>
-                Address
-            </label>
-            {{ Form::text('location',$resource->location,['id'=>'location','required'=>'required','class' => 'form-control']) }}
-            <p class="text-danger" style="margin-bottom: 0;">{{ $errors->first('location') }}</p>
-        </div>
-    </div>
-    <div class="col-md-12">
-        <div class="form-group margin-bottom20 col-md-12">
-            <label class="control-label" for="cost_per_hour">
-                Cost per hour
-            </label>
-            {{ Form::number('cost_per_hour',$resource->cost_per_hour,['id'=>'cost_per_hour','min' => 0 , 'step' => 0.1,'required'=>'required','class' => 'form-control']) }}
-            <p class="text-danger" style="margin-bottom: 0;">{{ $errors->first('cost_per_hour') }}</p>
+            {{ Form::select('client_id',$clients,$resource->client_id,['id'=>'client_id','required'=>'required','class' => 'form-control','placeholder'=>'Select client']) }}
+            <p class="text-danger" style="margin-bottom: 0;">{{ $errors->first('client_id') }}</p>
         </div>
         <div class="form-group margin-bottom20 col-md-12">
-            <label class="control-label" for="description">
-                Description
+            <label class="control-label" for="center_id">
+                <span class="text-danger">*</span>
+                Center
+                <span class="text-info" style="font-weight: 200;margin-left:10px;">You must have centers first</span>
             </label>
-            {{ Form::textarea('description',$resource->description,['id'=>'description','required'=>'required','class' => 'form-control']) }}
-            <p class="text-danger" style="margin-bottom: 0;">{{ $errors->first('description') }}</p>
+            {{ Form::select('center_id',$centers,$resource->center_id,['id'=>'center_id','required'=>'required','class' => 'form-control','placeholder'=>'Select center']) }}
+            <p class="text-danger" style="margin-bottom: 0;">{{ $errors->first('center_id') }}</p>
+        </div>
+        <div class="form-group margin-bottom20 col-md-12">
+            <label class="control-label" for="agent_id">
+                <span class="text-danger">*</span>
+                Agent
+                <span class="text-info" style="font-weight: 200;margin-left:10px;">You must have technical agents first</span>
+            </label>
+            <select class="form-control" name="agent_id" id="agent_id">
+                <option value="">Select agent</option>
+                @foreach($agents as $agent)
+                <option {{ $resource->agent_id === $agent->id ? 'selected' : 'style="display:none;"'}} value="{{ $agent->id }}" data-parent-id="{{ $agent->parent_id }}">{{ $agent->name }}</option>
+                @endforeach
+            </select>
+            <p class="text-danger" style="margin-bottom: 0;">{{ $errors->first('agent_id') }}</p>
+        </div>
+    </div>
+
+    <div class="col-md-12">
+        <div class="form-group margin-bottom20 col-md-12">
+            <label class="control-label" for="problem">
+                Problem
+            </label>
+            {{ Form::textarea('problem',$resource->problem,['id'=>'problem','required'=>'required','class' => 'form-control']) }}
+            <p class="text-danger" style="margin-bottom: 0;">{{ $errors->first('problem') }}</p>
         </div>
         <div class="form-group margin-bottom20 col-md-12">
             <div id="map">
@@ -118,22 +114,17 @@
 @stop
 
 @section('scripts')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 <script type="text/javascript">
-function preview(input)
-{
-    var parent = $(input).parent();
-    var preview = parent.find('img');
-    var file    = input.files[0];
-    var reader  = new FileReader();
-
-    reader.addEventListener("load", function () {
-        preview.attr('src',reader.result);
-    }, false);
-
-    if (file) {
-        reader.readAsDataURL(file);
-    }
-}
+$(document).ready(function(){
+    $('select').not('select[name=agent_id]').select2();
+    $('select[name=center_id]').change(function(){
+        var value = $(this).val();
+        $('select[name=agent_id]').find('option').hide();
+        $('select[name=agent_id]').find("option[data-parent-id='" + value + "']").show();
+        $('select[name=agent_id]').val('');
+    });
+});
 </script>
 
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCn2wwrPJu1htS6t-KDmt_K8i8SMX81jfg &callback=initMap">
@@ -188,6 +179,7 @@ function initMap() {
 @stop
 
 @section('stylesheets')
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
 <style media="screen">
 #map {
     height: 400px;

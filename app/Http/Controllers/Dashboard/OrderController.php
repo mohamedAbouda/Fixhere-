@@ -86,7 +86,17 @@ class OrderController extends Controller
     */
     public function edit(Order $order)
     {
+        $data['clients'] = User::whereHas('roles', function ($query)  {
+            $query->where('name','client');
+        })->pluck('name','id');
+        $data['centers'] = User::whereHas('roles', function ($query)  {
+            $query->where('name','center');
+        })->pluck('name','id');
+        $data['agents'] = User::whereHas('roles', function ($query)  {
+            $query->where('name','agent');
+        })->get(['id','name','parent_id']);
         $data['resource'] = $order;
+        
         return view($this->base_view_path . 'edit',$data);
     }
 

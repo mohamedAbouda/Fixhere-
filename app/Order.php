@@ -12,6 +12,20 @@ class Order extends Model
     ];
 
     /**
+    * Accessors & Mutators
+    */
+    public function getTimeFromAttribute()
+    {
+        $exploded_time = explode(':', $this->attributes['time_from']);
+        return $exploded_time[0].':'.$exploded_time[1];
+    }
+    public function getTimeToAttribute()
+    {
+        $exploded_time = explode(':', $this->attributes['time_to']);
+        return $exploded_time[0].':'.$exploded_time[1];
+    }
+
+    /**
      * Relations
      */
      public function center()
