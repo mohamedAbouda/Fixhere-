@@ -43,7 +43,7 @@
                 Center
                 <span class="text-info" style="font-weight: 200;margin-left:10px;">You must have centers first</span>
             </label>
-            {{ Form::select('parent_id',$centers,$resource->parent_id,['id'=>'parent_id','required'=>'required','class' => 'form-control','placeholder'=>'Select center']) }}
+            {{ Form::select('parent_id',$centers,$resource->parent_id,['id'=>'parent_id','required'=>'required','class' => 'form-control']) }}
             <p class="text-danger" style="margin-bottom: 0;">{{ $errors->first('parent_id') }}</p>
             @endif
         </div>

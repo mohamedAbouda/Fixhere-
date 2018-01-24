@@ -54,12 +54,22 @@
                         </a>
                     </li>
                     @endif
-                    <li class="c-menu__item has-submenu {{ strpos(request()->route()->getName() , 'dashboard.orders') !== FALSE ? 'is-active' : '' }} ? 'is-active' : '' }}" data-toggle="tooltip" title="Clients">
+                    <li class="c-menu__item has-submenu {{ strpos(request()->route()->getName() , 'dashboard.orders') !== FALSE ? 'is-active' : '' }} ? 'is-active' : '' }}" data-toggle="tooltip" title="Orders">
                         <a href="{{ route('dashboard.orders.index') }}" style="text-decoration: none;">
                             <div class="c-menu__item__inner">
                                 <i class="fa fa-shopping-basket"></i>
                                 <div class="c-menu-item__title">
                                     <span>Orders</span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="c-menu__item has-submenu {{ strpos(request()->route()->getName() , 'dashboard.agents') !== FALSE ? 'is-active' : '' }} ? 'is-active' : '' }}" data-toggle="tooltip" title="Technical agents">
+                        <a href="{{ route('dashboard.agents.index') }}" style="text-decoration: none;">
+                            <div class="c-menu__item__inner">
+                                <i class="fa fa-address-card-o"></i>
+                                <div class="c-menu-item__title">
+                                    <span>Technical agents</span>
                                 </div>
                             </div>
                         </a>
