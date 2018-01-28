@@ -93,8 +93,8 @@ class AuthController extends Controller
             'message'=>'Logged in.',
             'data' => fractal()
             ->item($request->user())
-            ->addMeta(['token'=>$token])
-            ->transformWith(new UserTransformer)
+            ->addMeta(['token' => $token])
+            ->transformWith(new ClientTransformer)
             ->serializeWith(new \League\Fractal\Serializer\ArraySerializer())
             ->toArray(),
         ],200);
