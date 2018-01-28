@@ -86,7 +86,7 @@ body {
                         </td>
                         <td>
                             <div class="no-shadow btn-group pull-right" style="margin:0;padding:0;">
-                                <a href="#" class="btn btn-sm edit-btn text-center margin-left-10 dropdown-toggle contact-edit-dots-shdw pad0">
+                                <a href="{{ route('dashboard.enquiries.show',$resource->first()->group) }}" class="btn btn-sm edit-btn text-center margin-left-10 dropdown-toggle contact-edit-dots-shdw pad0">
                                     <i class="fa fa-reply"></i>
                                 </a>
                                 <button type="button" class="btn btn-sm edit-btn text-center margin-left-10 dropdown-toggle contact-edit-dots-shdw pad0" data-toggle="dropdown">

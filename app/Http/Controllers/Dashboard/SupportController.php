@@ -31,20 +31,20 @@ class SupportController extends Controller
         return view($this->base_view_path . 'index',$data);
     }
 
-    /**
-    * vluzrmos/paginate.php
-    *
-    * @param array|Collection      $items
-    * @param int   $perPage
-    * @param int  $page
-    * @param array $options
-    *
-    * @return LengthAwarePaginator
-    */
-    public function paginate($items, $perPage = 15, $page = null, $options = [])
+    public function show(Request $request , $group)
     {
-        $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
-        $items = $items instanceof Collection ? $items : Collection::make($items);
-        return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
+        $data['index'] = $request->get('page' , 1);
+        $data['group'] = $group;
+        $limit = 5 * $data['index'];
+        $messages_count = Enquiry::where('group',$group)->count();
+        if ($messages_count > $limit) {
+            $data['messages'] =  Enquiry::where('group',$group)->skip($messages_count - $limit)->take($limit)->get();
+        }else{
+            $data['messages'] =  Enquiry::where('group',$group)->get();
+        }
+        $data['messages_count'] = $messages_count;
+        $data['limit'] = $limit;
+
+        return view($this->base_view_path . 'show',$data);
     }
 }
