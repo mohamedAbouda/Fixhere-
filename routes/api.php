@@ -23,5 +23,10 @@ Route::group(['prefix'=>'v1','namespace' => 'Apis'],function(){
     Route::group(['middleware'=>['JWT.auth']],function (){
         Route::post('/auth/confirm','AuthController@confirm');
         Route::post('/auth/resend/code','AuthController@resendCode');
+
+        Route::group(['prefix' => 'profile'] , function(){
+            Route::get('/','ClientController@show');
+            Route::post('/edit','ClientController@edit');
+        });
     });
 });
