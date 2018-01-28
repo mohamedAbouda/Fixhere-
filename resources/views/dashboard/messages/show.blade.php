@@ -9,10 +9,18 @@
 @stop
 
 @section('content')
-{{ Form::open(['route' => 'dashboard.clients.store','files'=>'true']) }}
+{{ Form::open(['route' => ['dashboard.enquiries.reply' , $group],'method' => 'post']) }}
 <div class="row">
     <div class="col-md-12">
-        <h3 class="secondry-title">Messages with "someone"</h3>
+        <?php
+        $other_party = '';
+        if (Auth::user()->id === $messages->first()->from){
+            $other_party = $messages->first()->toUser->name;
+        }else{
+            $other_party = $messages->first()->fromUser->name;
+        }
+        ?>
+        <h3 class="secondry-title">Messages with "{{ $other_party }}"</h3>
     </div>
 
     <div class="col-md-12">
@@ -47,7 +55,7 @@
 
     <div class="col-md-12">
         <div class="form-group margin-bottom20 col-md-12">
-            {{ Form::textarea('message',old('message'),['id'=>'message','required'=>'required','class' => 'form-control','rows' => 3 , 'style' => 'resize: none;']) }}
+            {{ Form::text('message',old('message'),['id'=>'message','required'=>'required','class' => 'form-control']) }}
             <p class="text-danger" style="margin-bottom: 0;">{{ $errors->first('message') }}</p>
         </div>
     </div>

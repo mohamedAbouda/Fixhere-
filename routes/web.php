@@ -52,6 +52,7 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => ['a
     Route::group(['prefix' => 'enquiries','as' => 'enquiries.','middleware' => ['role:center']],function(){
         Route::get('/','SupportController@index')->name('index');
         Route::get('show/{group}','SupportController@show')->name('show');
+        Route::post('show/{group}','SupportController@reply')->name('reply');
         Route::delete('/','SupportController@index')->name('destroy');
     });
 });
