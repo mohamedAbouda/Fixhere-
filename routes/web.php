@@ -48,4 +48,9 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => ['a
     * Agents
     */
     Route::resource('agents','AgentController');
+
+    Route::group(['prefix' => 'enquiries','as' => 'enquiries.','middleware' => ['role:center']],function(){
+        Route::get('/','SupportController@index')->name('index');
+        Route::delete('/','SupportController@index')->name('destroy');
+    });
 });
