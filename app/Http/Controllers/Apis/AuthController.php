@@ -103,7 +103,7 @@ class AuthController extends Controller
     public function socialRegister(UserSocialRegisteration $request)
     {
         $input = $request->all();
-        $input['confirmed'] = 1;
+
         $user = User::create($input);
 
         $token = JWTAuth::fromUser($user,[
@@ -113,10 +113,10 @@ class AuthController extends Controller
         return response()->json([
             'status' => 'true',
             'message'=>'Thanks for signing up.',
-            'data'=>fractal()
+            'data' => fractal()
             ->item($user)
             ->addMeta(['token' => $token])
-            ->transformWith(new UserTransformer)
+            ->transformWith(new ClientTransformer)
             ->serializeWith(new \League\Fractal\Serializer\ArraySerializer())
             ->toArray(),
         ],200);
@@ -135,6 +135,7 @@ class AuthController extends Controller
                 ],
             ],422);
         }
+        
         $token = JWTAuth::fromUser($user,[
             'exp' => Carbon::now()->addweek()->timestamp,
         ]);
@@ -145,7 +146,7 @@ class AuthController extends Controller
             'data' => fractal()
             ->item($user)
             ->addMeta(['token' => $token])
-            ->transformWith(new UserTransformer)
+            ->transformWith(new ClientTransformer)
             ->serializeWith(new \League\Fractal\Serializer\ArraySerializer())
             ->toArray(),
         ],200);
