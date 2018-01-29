@@ -30,5 +30,10 @@ Route::group(['prefix'=>'v1','namespace' => 'Apis'],function(){
         });
         Route::post('/nearby/centers','CenterController@nearbyCenters');
         Route::post('/center/details','CenterController@centerDetails');
+
+        Route::group(['prefix' => 'order'] , function(){
+            Route::post('/create','OrderController@store');
+            Route::get('/{order}','OrderController@show');
+        });
     });
 });
