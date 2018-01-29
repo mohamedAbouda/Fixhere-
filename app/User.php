@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Zizaco\Entrust\Traits\EntrustUserTrait;
 use Illuminate\Http\UploadedFile;
+use DB;
 
 class User extends Authenticatable
 {
@@ -44,6 +45,12 @@ class User extends Authenticatable
         $this->attributes['password'] = bcrypt($value);
     }
 
+
+    public function roles()
+    {
+        return $this->belongsToMany('App\Role');
+    }
+
     public function setProfileImageAttribute($value)
     {
         if (!$value instanceof UploadedFile) {
@@ -76,6 +83,13 @@ class User extends Authenticatable
     public function getCoverImageUrlAttribute()
     {
         return asset($this->upload_distination.$this->cover_image);
+    }
+
+    public function getByDistance($lat, $lng, $distance)
+    {
+        $results = DB::select(DB::raw('SELECT id, ( 3959 * acos( cos( radians(' . $lat . ') ) * cos( radians( lat ) ) * cos( radians( lng ) - radians(' . $lng . ') ) + sin( radians(' . $lat .') ) * sin( radians(lat) ) ) ) AS distance FROM users HAVING distance < ' . $distance . ' ORDER BY distance') );
+
+        return $results;
     }
 
     /**

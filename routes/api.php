@@ -28,5 +28,7 @@ Route::group(['prefix'=>'v1','namespace' => 'Apis'],function(){
             Route::get('/','ClientController@show');
             Route::post('/edit','ClientController@edit');
         });
+        Route::post('/nearby/centers','CenterController@nearbyCenters');
+        Route::post('/center/details','CenterController@centerDetails');
     });
 });
