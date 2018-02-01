@@ -36,6 +36,21 @@ class CenterController extends Controller
     	
     }
 
+    public function recentCenters()
+    {
+        $centers = User::whereHas('roles', function ($query) {
+            $query->where('name','center');
+        })->orderBy('id','desc')->get();
+
+        return response()->json(
+           fractal()
+            ->collection($centers)
+            ->transformWith(new CenterTransformer)
+            ->serializeWith(new \League\Fractal\Serializer\ArraySerializer())
+            ->toArray()
+        ,200);
+    }
+
     public function centerDetails(Request $request)
     {
     	if(!$request->input('center_id')){
