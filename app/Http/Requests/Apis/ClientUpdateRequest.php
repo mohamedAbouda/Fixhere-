@@ -4,7 +4,7 @@ namespace App\Http\Requests\Apis;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UserRegisteration extends FormRequest
+class ClientUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,13 +23,10 @@ class UserRegisteration extends FormRequest
      */
     public function rules()
     {
+        $rid = request()->user()->id;
         return [
-            'name'=>'required',
-            'email'=>'required|email|unique:users,email',
-            'password'=>'required',
-            'contact_number'=>'required',
-            'location'=>'required',
-            'profile_image'=>'required|image',
+            'email'=>'unique:users,email,'.$rid,
+            'profile_image'=>'nullable|image',
         ];
     }
 

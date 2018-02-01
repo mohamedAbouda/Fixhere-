@@ -24,11 +24,13 @@ class UserSocialRegisteration extends FormRequest
      public function rules()
      {
          return [
-             'full_name' => 'required',
+             'name' => 'required',
              'email' => 'required|email|unique:users,email',
-             'phone_number' => 'required',
+             'contact_number' => 'required',
              'social_id' => 'required',
              'social_type' => 'required',
+             'location'=>'required',
+             'profile_image'=>'nullable|image',
          ];
      }
 

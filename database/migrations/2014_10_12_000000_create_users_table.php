@@ -30,6 +30,8 @@ class CreateUsersTable extends Migration
             $table->integer('rate')->unsigned()->default(0);
             $table->integer('parent_id')->unsigned()->nullable();
 
+            $table->string('social_id')->nullable();
+            $table->string('social_type')->nullable();
 
             $table->rememberToken();
             $table->timestamps();

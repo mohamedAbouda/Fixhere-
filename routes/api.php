@@ -23,9 +23,22 @@ Route::group(['prefix'=>'v1','namespace' => 'Apis'],function(){
     Route::group(['middleware'=>['JWT.auth']],function (){
         Route::post('/auth/confirm','AuthController@confirm');
         Route::post('/auth/resend/code','AuthController@resendCode');
+
+        Route::group(['prefix' => 'profile'] , function(){
+            Route::get('/','ClientController@show');
+            Route::post('/edit','ClientController@edit');
+        });
         Route::post('/nearby/centers','CenterController@nearbyCenters');
+<<<<<<< HEAD
         Route::get('/recent/centers','CenterController@recentCenters');
 		Route::post('/center/details','CenterController@centerDetails');
+=======
+        Route::post('/center/details','CenterController@centerDetails');
+>>>>>>> 940130ed17d54135bbd01ff66a0bd753992bc55c
 
+        Route::group(['prefix' => 'order'] , function(){
+            Route::post('/create','OrderController@store');
+            Route::get('/{order}','OrderController@show');
+        });
     });
 });
