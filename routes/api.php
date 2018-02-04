@@ -37,5 +37,12 @@ Route::group(['prefix'=>'v1','namespace' => 'Apis'],function(){
             Route::post('/create','OrderController@store');
             Route::get('/{order}','OrderController@show');
         });
+
+        Route::group(['prefix' => 'chat'] , function(){
+            Route::post('/','SupportController@index');
+            Route::post('/show/{group}','SupportController@show');
+            Route::post('/new','SupportController@newChat');
+            Route::post('/reply/{group}','SupportController@reply');
+        });
     });
 });

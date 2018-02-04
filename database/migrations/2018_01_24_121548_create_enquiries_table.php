@@ -17,6 +17,9 @@ class CreateEnquiriesTable extends Migration
             $table->increments('id');
 
             $table->text('message')->nullable();
+            $table->string('title')->default('');
+
+            $table->string('type')->default(''); //spare_parts //behavior
 
             $table->integer('from')->unsigned();
             $table->foreign('from')->references('id')->on('users')
