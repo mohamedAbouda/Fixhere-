@@ -25,8 +25,10 @@ class AgentCreateRequest extends FormRequest
     {
         return [
             'name'=>'required',
+            'email'=>'required|unique:users,email',
+            'password'=>'required|confirmed',
             'profile_image'=>'required|image',
-            'parent_id' => 'nullable|exists:users,id'
+            'parent_id' => 'required|exists:users,id'
         ];
     }
 }
