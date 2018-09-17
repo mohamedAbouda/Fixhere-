@@ -23,10 +23,13 @@ class AgentUpdateRequest extends FormRequest
     */
     public function rules()
     {
+        $rid = request()->get('resource_id');
         return [
             'name'=>'required',
+            'email'=>'required|unique:users,email,' . $rid,
+            'password'=>'nullable|confirmed',
             'profile_image'=>'nullable|image',
-            'parent_id' => 'nullable|exists:users,id'
+            'parent_id' => 'required|exists:users,id'
         ];
     }
 }
