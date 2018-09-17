@@ -31,6 +31,7 @@ Route::group(['prefix'=>'v1','namespace' => 'Apis'],function(){
 
         Route::post('/nearby/centers','CenterController@nearbyCenters');
         Route::get('/recent/centers','CenterController@recentCenters');
+
         Route::post('/center/details','CenterController@centerDetails');
 
         Route::group(['prefix' => 'order'] , function(){
