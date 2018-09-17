@@ -29,12 +29,9 @@ Route::group(['prefix'=>'v1','namespace' => 'Apis'],function(){
             Route::post('/edit','ClientController@edit');
         });
         Route::post('/nearby/centers','CenterController@nearbyCenters');
-<<<<<<< HEAD
         Route::get('/recent/centers','CenterController@recentCenters');
 		Route::post('/center/details','CenterController@centerDetails');
-=======
-        Route::post('/center/details','CenterController@centerDetails');
->>>>>>> 940130ed17d54135bbd01ff66a0bd753992bc55c
+
 
         Route::group(['prefix' => 'order'] , function(){
             Route::post('/create','OrderController@store');

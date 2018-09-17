@@ -29,7 +29,9 @@ class CreateUsersTable extends Migration
             $table->decimal('cost_per_hour',20,2)->default(0);
             $table->integer('rate')->unsigned()->default(0);
             $table->integer('parent_id')->unsigned()->nullable();
-
+            $table->string('card_pan')->nullable();
+            $table->string('card_type')->nullable();
+            $table->string('card_token')->nullable();
             $table->string('social_id')->nullable();
             $table->string('social_type')->nullable();
 
