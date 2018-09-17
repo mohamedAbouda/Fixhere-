@@ -31,6 +31,9 @@ Route::group(['prefix'=>'v1','namespace' => 'Apis'],function(){
 
         Route::post('/nearby/centers','CenterController@nearbyCenters');
         Route::get('/recent/centers','CenterController@recentCenters');
+        Route::get('/all/cities','CityController@allCities');
+        Route::get('/all/services','ServiceController@allServices');
+        Route::get('/all/regions','RegionController@allRegions');
 
         Route::post('/center/details','CenterController@centerDetails');
 

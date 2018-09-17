@@ -37,6 +37,26 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => ['a
         * Clients
         */
         Route::resource('clients','ClientController');
+
+        /**
+        * Cities
+        */
+        Route::resource('cities','CityController');
+
+        /**
+        * Services
+        */
+        Route::resource('services','ServiceController');
+
+        /**
+        * Promo codes
+        */
+        Route::resource('promo_codes','PromoCodeController');
+
+        /**
+        * Regions
+        */
+        Route::resource('regions','RegionController');
     });
 
     /**

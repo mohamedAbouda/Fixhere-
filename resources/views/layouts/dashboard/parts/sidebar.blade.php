@@ -74,6 +74,46 @@
                             </div>
                         </a>
                     </li>
+                    <li class="c-menu__item has-submenu {{ strpos(request()->route()->getName() , 'dashboard.cities') !== FALSE ? 'is-active' : '' }} ? 'is-active' : '' }}" data-toggle="tooltip" title="Cities">
+                        <a href="{{ route('dashboard.cities.index') }}" style="text-decoration: none;">
+                            <div class="c-menu__item__inner">
+                                <i class="fa fa-address-card-o"></i>
+                                <div class="c-menu-item__title">
+                                    <span>Cities</span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                      <li class="c-menu__item has-submenu {{ strpos(request()->route()->getName() , 'dashboard.services') !== FALSE ? 'is-active' : '' }} ? 'is-active' : '' }}" data-toggle="tooltip" title="Services">
+                        <a href="{{ route('dashboard.services.index') }}" style="text-decoration: none;">
+                            <div class="c-menu__item__inner">
+                                <i class="fa fa-address-card-o"></i>
+                                <div class="c-menu-item__title">
+                                    <span>Services</span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                         <li class="c-menu__item has-submenu {{ strpos(request()->route()->getName() , 'dashboard.promo_codes') !== FALSE ? 'is-active' : '' }} ? 'is-active' : '' }}" data-toggle="tooltip" title="Promo Codes">
+                        <a href="{{ route('dashboard.promo_codes.index') }}" style="text-decoration: none;">
+                            <div class="c-menu__item__inner">
+                                <i class="fa fa-address-card-o"></i>
+                                <div class="c-menu-item__title">
+                                    <span>Promo Codes</span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                           <li class="c-menu__item has-submenu {{ strpos(request()->route()->getName() , 'dashboard.regions') !== FALSE ? 'is-active' : '' }} ? 'is-active' : '' }}" data-toggle="tooltip" title="Regions">
+                        <a href="{{ route('dashboard.regions.index') }}" style="text-decoration: none;">
+                            <div class="c-menu__item__inner">
+                                <i class="fa fa-address-card-o"></i>
+                                <div class="c-menu-item__title">
+                                    <span>Regions</span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
                     @if(Auth::user() && Auth::user()->hasRole(['center']))
                     <li class="c-menu__item has-submenu {{ strpos(request()->route()->getName() , 'dashboard.enquiries') !== FALSE ? 'is-active' : '' }} ? 'is-active' : '' }}" data-toggle="tooltip" title="Enquiries">
                         <a href="{{ route('dashboard.enquiries.index') }}" style="text-decoration: none;">
