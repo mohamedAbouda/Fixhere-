@@ -63,6 +63,7 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => ['a
     * Orders
     */
     Route::resource('orders','OrderController');
+    Route::get('order/{id}/location','OrderController@location')->name('order.location');
 
     /**
     * Agents

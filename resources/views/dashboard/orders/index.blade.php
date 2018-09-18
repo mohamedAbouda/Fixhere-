@@ -23,11 +23,11 @@ body {
             </div>
         </div>
     </div>
-    <div class="col-md-4 col-md-offset-1 text-right col-xs-11">
-        <a href="{{ route('dashboard.orders.create') }}"class="btn btn-blue margin-left-10">
-            <span>+ </span>Add order
-        </a>
-    </div>
+   <!--  <div class="col-md-4 col-md-offset-1 text-right col-xs-11">
+       <a href="{{ route('dashboard.orders.create') }}"class="btn btn-blue margin-left-10">
+           <span>+ </span>Add order
+       </a>
+   </div> -->
 </div>
 @stop
 
@@ -42,7 +42,7 @@ body {
                     </div>
                     <div class="col-md-3 text-center">
                         <h5 class="customer-stat-num pad5">
-                            {{ $total_resources_count }}
+                            {{ count($orders) }}
                         </h5>
                     </div>
                 </div>
@@ -53,7 +53,7 @@ body {
 <div class="row margin-top15">
     <div class="col-md-12">
         <div class="row margin-bottom10">
-            {{ $resources->links() }}
+            {{ $orders->links() }}
         </div>
         <div class="row margin-bottom10 contacts-list-view-card pad15">
             <table class="table table-borderless table-responsive" style="margin-bottom:0;">
@@ -64,14 +64,9 @@ body {
                             Client
                         </th>
                         <th>
-                            Problem summary
-                        </th>
-                        <th>
                             Technical agent
                         </th>
-                        <th>
-                            Date - Time from : to
-                        </th>
+                     
                         <th>
                             Location
                         </th>
@@ -80,11 +75,11 @@ body {
                         </th>
                         <th></th>
                     </tr>
-                    @foreach($resources as $resource)
+                    @foreach($orders as $resource)
                     <tr>
                         <td class="text-center">
                             <h3 class="contact-list-view-column-categ margin-top10 contact-details-view" style="font-weight: 400;">
-                                {{ $counter_offset + $loop->iteration }}
+                                {{ $loop->iteration }}
                             </h3>
                         </td>
                         <td>
@@ -98,30 +93,22 @@ body {
                                 @endif
                             </h3>
                         </td>
+                   
                         <td>
                             <h3 class="contact-list-view-column-categ margin-top10 contact-details-view" style="font-weight: 400;">
-                                {{ $resource->problem }}
-                            </h3>
-                        </td>
-                        <td>
-                            <h3 class="contact-list-view-column-categ margin-top10 contact-details-view" style="font-weight: 400;">
-                                @if($resource->agent)
+                                @if($resource->technician)
                                 <a href="#">
-                                    {{ $resource->agent->name }}
+                                    {{ $resource->technician->name }}
                                 </a>
                                 @else
                                 <span class="text-danger">[DELETED]</span>
                                 @endif
                             </h3>
                         </td>
+                  
                         <td>
                             <h3 class="contact-list-view-column-categ margin-top10 contact-details-view" style="font-weight: 400;">
-                                {{ $resource->order_date.' - ('.$resource->time_from.') : ('.$resource->time_to.')' }}
-                            </h3>
-                        </td>
-                        <td>
-                            <h3 class="contact-list-view-column-categ margin-top10 contact-details-view" style="font-weight: 400;">
-                                <a href="">
+                                <a href="{{route('dashboard.order.location',$resource->id)}}">
                                     view on map
                                 </a>
                             </h3>
@@ -147,7 +134,7 @@ body {
                                 </button>
                                 <ul class="dropdown-menu contact-dropdown pull-right">
                                     <li>
-                                        <a href="{{ route('dashboard.orders.edit', $resource->id) }}">Edit</a>
+                                        <a href="{{ route('dashboard.orders.show', $resource->id) }}">Show</a>
                                     </li>
                                     <li>
                                         {{ Form::open(['route' => ['dashboard.orders.destroy' ,$resource->id] ,'method' => 'DELETE']) }}

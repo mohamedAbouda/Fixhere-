@@ -13,7 +13,7 @@ body {
 <div class="row">
     <div class="col-md-4 col-xs-12">
         <h3 class="section-title contacts-section-title">
-            ({{ $resource->name }})'s data.
+            ({{ $resource->client->name }})'s data.
         </h3>
     </div>
     <div class="col-xs-12 col-md-3">
@@ -24,14 +24,14 @@ body {
             </div>
         </div>
     </div>
-    <div class="col-md-4 col-md-offset-1 text-right col-xs-11">
-        <a href="{{ route('dashboard.admins.create') }}"class="btn btn-primary margin-left-10">
-            <span>+ </span>Add admin
-        </a>
-        <a href="{{ route('dashboard.admins.edit',$resource->id) }}"class="btn btn-warning margin-left-10">
-            Edit admin
-        </a>
-    </div>
+  <!--   <div class="col-md-4 col-md-offset-1 text-right col-xs-11">
+      <a href="{{ route('dashboard.admins.create') }}"class="btn btn-primary margin-left-10">
+          <span>+ </span>Add admin
+      </a>
+      <a href="{{ route('dashboard.admins.edit',$resource->id) }}"class="btn btn-warning margin-left-10">
+          Edit admin
+      </a>
+  </div> -->
 </div>
 @stop
 
@@ -64,23 +64,77 @@ body {
                     <tr>
                         <td class="">
                             <span style="margin-left:30px;">
-                                Name
+                               Client Name
                             </span>
                         </td>
                         <td>
-                            {{ $resource->name }}
+                            <a href="{{ route('dashboard.clients.show', $resource->client->id) }}">
+                                    {{ $resource->client->name }}
                         </td>
                     </tr>
-                    <tr>
+                       <tr>
                         <td class="">
                             <span style="margin-left:30px;">
-                                Email
+                               Technician Name
                             </span>
                         </td>
                         <td>
-                            {{ $resource->email }}
+                            {{ $resource->technician->name }}
                         </td>
                     </tr>
+
+                        <tr>
+                        <td class="">
+                            <span style="margin-left:30px;">
+                             Service
+                            </span>
+                        </td>
+                        <td>
+                            {{ $resource->service->name }}
+                        </td>
+                    </tr>
+
+                        <tr>
+                        <td class="">
+                            <span style="margin-left:30px;">
+                              Region
+                            </span>
+                        </td>
+                        <td>
+                            {{ $resource->region->city->name }}
+                        </td>
+                    </tr>
+
+                        <tr>
+                        <td class="">
+                            <span style="margin-left:30px;">
+                               Description
+                            </span>
+                        </td>
+                        <td>
+                            {{ $resource->description }}
+                        </td>
+                    </tr>
+
+                        <tr>
+                        <td class="">
+                            <span style="margin-left:30px;">
+                               Status
+                            </span>
+                        </td>
+                        <td>
+                             @if($resource->status === 0)
+                                Recieved
+                                @elseif($resource->status === 1)
+                                Accepted
+                                @elseif($resource->status === 2)
+                                Technical agent is on the way
+                                @elseif($resource->status === 3)
+                                Done
+                                @endif
+                        </td>
+                    </tr>
+                 
                 </tbody>
             </table>
         </div>

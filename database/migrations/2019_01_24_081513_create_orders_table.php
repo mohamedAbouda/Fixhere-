@@ -16,26 +16,26 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->string('service_type')->default('');
 
-            $table->integer('center_id')->unsigned()->nullable();
-            $table->foreign('center_id')->references('id')->on('users')
+            $table->integer('user_id')->unsigned()->nullable();
+            $table->foreign('user_id')->references('id')->on('users')
             ->onUpdate('cascade')->onDelete('cascade');
 
-            $table->integer('agent_id')->unsigned();
-            $table->foreign('agent_id')->references('id')->on('users')
+            $table->integer('technician_id')->unsigned();
+            $table->foreign('technician_id')->references('id')->on('users')
             ->onUpdate('cascade')->onDelete('cascade');
 
-            $table->integer('client_id')->unsigned();
-            $table->foreign('client_id')->references('id')->on('users')
+            $table->integer('service_id')->unsigned();
+            $table->foreign('service_id')->references('id')->on('services')
             ->onUpdate('cascade')->onDelete('cascade');
 
-            $table->date('order_date');
-            $table->time('time_from');
-            $table->time('time_to');
+            $table->integer('region_id')->unsigned();
+            $table->foreign('region_id')->references('id')->on('regions')
+            ->onUpdate('cascade')->onDelete('cascade');
+
+            $table->text('description');
             $table->string('lat')->default('');
             $table->string('lng')->default('');
-            $table->text('problem')->nullable();
             $table->tinyInteger('status')->unsigned()->default(0);
 
             $table->timestamps();

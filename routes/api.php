@@ -39,7 +39,10 @@ Route::group(['prefix'=>'v1','namespace' => 'Apis'],function(){
 
         Route::group(['prefix' => 'order'] , function(){
             Route::post('/create','OrderController@store');
-            Route::get('/{order}','OrderController@show');
+            Route::post('/update','OrderController@update');
+            Route::post('/pending','OrderController@pending');
+            Route::post('/history','OrderController@history');
+            Route::post('details','OrderController@show');
         });
 
         Route::group(['prefix' => 'chat'] , function(){

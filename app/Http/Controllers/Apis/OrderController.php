@@ -10,14 +10,37 @@ use App\Order;
 
 class OrderController extends Controller
 {
-    public function store(OrderCreateRequest $request)
+    public function store(Request $request)
     {
-        $input = $request->all();
-        $client = $request->user();
-        $input['client_id'] = $client->id;
+        $data = $request->all();
+        $data['user_id'] = $request->user()->id;
+        $order = Order::create($data);
+        return response()->json([
+            'status' => 'true',
+            'message' => 'Order created successfully.',
+        ],200);
+    }
 
-        $order = Order::create($input);
+    public function update(Request $request)
+    {
+        $data = $request->all();
+        $order = order::where('id',$request->input('order_id'))->first();
+        $order->update($data);
+        return response()->json([
+            'status' => 'true',
+            'message' => 'Order updated successfully.',
+        ],200);
+    }
 
+    public function show(Request $request)
+    {
+        if(!$request->input('order_id')){
+            return response()->json([
+                'status' => 'false',
+                'error' => 'please provide the id.',
+            ],404);
+        }
+        $order = Order::where('id',$request->input('order_id'))->first();
         return response()->json([
             'status' => 'true',
             'data'=>fractal()
@@ -28,25 +51,47 @@ class OrderController extends Controller
         ],200);
     }
 
-    public function show(Request $request ,Order $order)
+    public function pending(Request $request)
     {
-        $client = $request->user();
-        if ($client->id !== $order->client_id) {
-            return response()->json([
-                'status' => 'false',
-                'error' => 'Unauthorized to view this content.',
-            ],403);
-        }
+       $orders = Order::where('id','!=',null);
 
-        return response()->json([
-            'status' => 'true',
-            'data'=>fractal()
-            ->item($order)
+       if($request->input('technician_id')){
+            $orders->where('technician_id',$request->input('technician_id'));
+       }
+
+       if($request->input('user_id')){
+            $orders->where('user_id',$request->input('user_id'));
+       }
+       $orders = $orders->get();
+
+      return response()->json(
+           fractal()
+            ->collection($orders)
             ->transformWith(new OrderTransformer)
-            ->includeAgent()
-            ->includeCenter()
             ->serializeWith(new \League\Fractal\Serializer\ArraySerializer())
-            ->toArray(),
-        ],200);
+            ->toArray()
+        ,200);
+    }
+
+    public function history(Request $request)
+    {
+       $orders = Order::where('id','!=',null);
+
+       if($request->input('technician_id')){
+            $orders->where('technician_id',$request->input('technician_id'));
+       }
+
+       if($request->input('user_id')){
+            $orders->where('user_id',$request->input('user_id'));
+       }
+       $orders = $orders->get();
+
+      return response()->json(
+           fractal()
+            ->collection($orders)
+            ->transformWith(new OrderTransformer)
+            ->serializeWith(new \League\Fractal\Serializer\ArraySerializer())
+            ->toArray()
+        ,200);
     }
 }
