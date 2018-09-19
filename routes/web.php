@@ -59,7 +59,7 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => ['a
         * Regions
         */
         Route::resource('regions','RegionController');
-         /**
+        /**
         * Refers
         */
         Route::resource('refers','ReferController');
@@ -84,11 +84,15 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => ['a
     });
 
     /**
-     * Chat
-     */
+    * Chat
+    */
     Route::group(['prefix' => 'chats','as' => 'chats.','middleware' => ['role:admin|superadmin']] , function(){
         Route::get('/','ChatController@chats')->name('index');
         Route::get('/{order}','ChatController@chat')->name('show');
         Route::post('/{order}','ChatController@send')->name('send');
     });
+    /**
+    * FAQs
+    */
+    Route::resource('faqs','FAQController');
 });

@@ -56,7 +56,7 @@ body {
 {{ Form::open(['route' => ['dashboard.chats.send' ,$order->id]]) }}
 <div class="row margin-top15">
     <div class="input-group">
-        <input type="text" name="message" class="form-control">
+        <input type="text" name="message" class="form-control" required>
         <span class="input-group-btn">
             <button class="btn btn-primary" type="submit" style="height:100%;">
                 <i class="fa fa-reply"></i>

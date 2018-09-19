@@ -67,5 +67,6 @@ Route::group(['prefix'=>'v1','namespace' => 'Apis'],function(){
             Route::post('/show','ChatController@chat');
             Route::post('/send','ChatController@send');
         });
+        Route::get('faqs','FAQController@index');
     });
 });
