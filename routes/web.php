@@ -76,4 +76,13 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => ['a
         Route::post('show/{group}','SupportController@reply')->name('reply');
         Route::delete('/','SupportController@index')->name('destroy');
     });
+
+    /**
+     * Chat
+     */
+    Route::group(['prefix' => 'chats','as' => 'chats.','middleware' => ['role:admin|superadmin']] , function(){
+        Route::get('/','ChatController@chats')->name('index');
+        Route::get('/{order}','ChatController@chat')->name('show');
+        Route::post('/{order}','ChatController@send')->name('send');
+    });
 });

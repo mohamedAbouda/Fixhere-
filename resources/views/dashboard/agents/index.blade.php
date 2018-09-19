@@ -59,7 +59,7 @@ body {
             <table class="table table-borderless table-responsive" style="margin-bottom:0;">
                 <tbody>
                     <tr>
-                        <th class="text-agent">#</th>
+                        <th class="text-center">#</th>
                         <th style="width:400px !important;">
                             Profile pic
                         </th>
@@ -70,7 +70,7 @@ body {
                     </tr>
                     @foreach($resources as $resource)
                     <tr>
-                        <td class="text-agent">
+                        <td class="text-center">
                             <h3 class="contact-list-view-column-categ margin-top10 contact-details-view" style="font-weight: 400;">
                                 {{ $counter_offset + $loop->iteration }}
                             </h3>

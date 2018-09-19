@@ -126,6 +126,18 @@
                         </a>
                     </li>
                     @endif
+                    @if(Auth::user() && Auth::user()->hasRole(['admin' ,'superadmin']))
+                    <li class="c-menu__item has-submenu {{ strpos(request()->route()->getName() , 'dashboard.chats') !== FALSE ? 'is-active' : '' }} ? 'is-active' : '' }}" data-toggle="tooltip" title="Order chats">
+                        <a href="{{ route('dashboard.chats.index') }}" style="text-decoration: none;">
+                            <div class="c-menu__item__inner">
+                                <i class="fa fa-envelope"></i>
+                                <div class="c-menu-item__title">
+                                    <span>Order chats</span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    @endif
                 </ul>
             </nav>
         </div>

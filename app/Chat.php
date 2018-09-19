@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Chat extends Model
 {
@@ -13,6 +14,14 @@ class Chat extends Model
     protected $fillable = [
         'message' ,'order_id' ,'sender_id' ,'sender_type'
     ];
+
+    /**
+    * Accessors & Mutators
+    */
+    public function getCreatedAtFriendlyFormatAttribute()
+    {
+        return Carbon::parse($this->attributes['created_at'])->format('d-m-Y h:i a');
+    }
 
     /**
     * Relations
