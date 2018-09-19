@@ -62,8 +62,8 @@ Route::group(['prefix'=>'v1','namespace' => 'Apis'],function(){
 
         Route::group(['prefix' => 'chats'] , function(){
             Route::get('/','ChatController@chats');
-            Route::get('/show','ChatController@chat');
-            Route::get('/send','ChatController@send');
+            Route::post('/show','ChatController@chat');
+            Route::post('/send','ChatController@send');
         });
     });
 });
