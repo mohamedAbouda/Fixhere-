@@ -8,7 +8,7 @@ use App\Order;
 class OrderTransformer extends TransformerAbstract
 {
     protected $defaultIncludes = [
-        'client','technician','region','service'
+        'client','technician','region','service','pickup','reviews'
     ];
     /**
      * A Fractal transformer.
@@ -41,7 +41,7 @@ class OrderTransformer extends TransformerAbstract
     }
 
 
- public function includeRegion(Order $order)
+    public function includeRegion(Order $order)
     {
         if ($order->region) {
             return $this->item($order->region ,new RegionTransformer);
@@ -49,10 +49,24 @@ class OrderTransformer extends TransformerAbstract
     }
 
 
- public function includeService(Order $order)
+    public function includeService(Order $order)
     {
         if ($order->service) {
             return $this->item($order->service ,new ServiceTransformer);
+        }
+    }
+
+    public function includePickup(Order $order)
+    {
+        if ($order->pickup) {
+            return $this->collection($order->pickup ,new PickupTransformer);
+        }
+    }
+
+    public function includeReviews(Order $order)
+    {
+        if ($order->reviews) {
+            return $this->collection($order->reviews ,new OrderReviewTransformer);
         }
     }
 

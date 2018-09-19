@@ -116,6 +116,23 @@ body {
                         </td>
                     </tr>
 
+                           <tr>
+                        <td class="">
+                            <span style="margin-left:30px;">
+                               Pickup Date
+                            </span>
+                        </td>
+                        <td>
+                            @if($resource->pickup)
+                            @foreach($resource->pickup as $pick)
+                                 {{$pick->date->format('Y/M/d - H:s')}}<br>
+                            @endforeach
+                            @else
+                            No Pickup date yet.
+                            @endif
+                        </td>
+                    </tr>
+
                         <tr>
                         <td class="">
                             <span style="margin-left:30px;">
@@ -132,6 +149,29 @@ body {
                                 @elseif($resource->status === 3)
                                 Done
                                 @endif
+                        </td>
+                    </tr>
+
+                        <tr>
+                        <td class="">
+                            <span style="margin-left:30px;">
+                              Reviews
+                            </span>
+                        </td>
+                        <td>
+                            @if($resource->reviews)
+                             <strong>Avg reviews : </strong> {{$resource->reviews->sum('rate') / count($resource->reviews)}}<br>
+                             <strong>Total reviews : </strong> {{ count($resource->reviews)}}<br>
+                             <hr>
+                            @foreach($resource->reviews as $review)
+                                 <strong>Rate : </strong> {{$review->rate}}<br>
+                                 <strong>Review : </strong>{{$review->review}}<br>
+                                 <hr>
+                            @endforeach
+
+                            @else
+                            No Reviews date yet.
+                            @endif
                         </td>
                     </tr>
                  

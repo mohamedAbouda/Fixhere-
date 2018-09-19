@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Apis\OrderCreateRequest;
 use App\Transformers\OrderTransformer;
 use App\Order;
+use App\PickupDate;
+use App\OrderReview;
 
 class OrderController extends Controller
 {
@@ -94,4 +96,37 @@ class OrderController extends Controller
             ->toArray()
         ,200);
     }
+
+    public function pickup(Request $request)
+    {
+      $data = $request->all();
+      if(!$request->input('date') || !$request->input('order_id')){
+         return response()->json([
+          'status' => 'false',
+          'error' => 'please provide the order id and date.',
+        ],404);
+      }
+
+      $pickup = PickupDate::create($data);
+        return response()->json([
+          'status' => 'true',
+          'message' => 'The pickup date has been created.',
+        ],200);
+    }
+
+    public function createReview(Request $request)
+    {
+      $data = $request->all();
+      if(!$request->input('order_id') || !$request->input('rate')){
+       return response()->json([
+        'status' => 'false',
+        'error' => 'please provide the order id and rate.',
+      ],404);
+     }
+     $createReview = OrderReview::create($data);
+      return response()->json([
+          'status' => 'true',
+          'message' => 'The order review date has been created.',
+        ],200);
+   }
 }
