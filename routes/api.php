@@ -45,5 +45,11 @@ Route::group(['prefix'=>'v1','namespace' => 'Apis'],function(){
             Route::post('/new','SupportController@newChat');
             Route::post('/reply/{group}','SupportController@reply');
         });
+
+        Route::group(['prefix' => 'agents'] , function(){
+            Route::get('/','AgentController@index');
+            Route::get('/profile','AgentController@show');
+            Route::get('/{agent}','AgentController@show');
+        });
     });
 });

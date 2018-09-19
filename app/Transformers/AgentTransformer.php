@@ -17,7 +17,10 @@ class AgentTransformer extends TransformerAbstract
         return [
             'id' => $agent->id,
             'name' => $agent->name,
-            'profile_image_url' => $agent->profile_image_url,
+            'email' => $agent->email,
+            'address' => $agent->location,
+            'contact_number' => $agent->contact_number,
+            'profile_image_url' => $agent->profile_image ? $agent->profile_image_url : '',
         ];
     }
 }
