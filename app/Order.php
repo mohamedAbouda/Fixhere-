@@ -35,4 +35,14 @@ class Order extends Model
      {
          return $this->belongsTo(User::class , 'user_id');
      }
+
+    public function pickup()
+     {
+         return $this->hasMany(PickupDate::class);
+     }
+
+      public function reviews()
+     {
+         return $this->hasMany(OrderReview::class);
+     }
 }

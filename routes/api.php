@@ -43,6 +43,8 @@ Route::group(['prefix'=>'v1','namespace' => 'Apis'],function(){
             Route::post('/pending','OrderController@pending');
             Route::post('/history','OrderController@history');
             Route::post('details','OrderController@show');
+            Route::post('pickup','OrderController@pickup');
+            Route::post('create/review','OrderController@createReview');
         });
 
         Route::group(['prefix' => 'enquiries'] , function(){
