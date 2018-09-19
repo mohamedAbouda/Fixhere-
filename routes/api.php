@@ -45,7 +45,7 @@ Route::group(['prefix'=>'v1','namespace' => 'Apis'],function(){
             Route::post('details','OrderController@show');
         });
 
-        Route::group(['prefix' => 'chat'] , function(){
+        Route::group(['prefix' => 'enquiries'] , function(){
             Route::post('/','SupportController@index');
             Route::post('/show/{group}','SupportController@show');
             Route::post('/new','SupportController@newChat');
@@ -56,6 +56,12 @@ Route::group(['prefix'=>'v1','namespace' => 'Apis'],function(){
             Route::get('/','AgentController@index');
             Route::get('/profile','AgentController@show');
             Route::get('/{agent}','AgentController@show');
+        });
+
+        Route::group(['prefix' => 'chats'] , function(){
+            Route::get('/','ChatController@chats');
+            Route::get('/show','ChatController@chat');
+            Route::get('/send','ChatController@send');
         });
     });
 });
