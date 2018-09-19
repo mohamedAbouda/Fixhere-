@@ -12,7 +12,7 @@ body {
 <div class="row">
     <div class="col-md-4 col-xs-12">
         <h3 class="section-title contacts-section-title">
-            Services
+            Refers
         </h3>
     </div>
     <div class="col-xs-12 col-md-3">
@@ -24,9 +24,7 @@ body {
         </div>
     </div>
     <div class="col-md-4 col-md-offset-1 text-right col-xs-11">
-        <a href="{{ route('dashboard.services.create') }}"class="btn btn-blue margin-left-10">
-            <span>+ </span>Add Service
-        </a>
+       
     </div>
 </div>
 @stop
@@ -38,11 +36,11 @@ body {
             <div class="col-md-5 margin-bottom10 margin-top20">
                 <div class="total-customer-col pad5 pad-bottom5 col-md-12">
                     <div class="col-md-9 customer-stat-col-pad">
-                        <h5 class="customer-stat-text pad5">Total Services count</h5>
+                        <h5 class="customer-stat-text pad5">Total Refers count</h5>
                     </div>
                     <div class="col-md-3 text-center">
                         <h5 class="customer-stat-num pad5">
-                            {{ count($services) }}
+                            {{ count($refers) }}
                         </h5>
                     </div>
                 </div>
@@ -53,7 +51,7 @@ body {
 <div class="row margin-top15">
     <div class="col-md-12">
         <div class="row margin-bottom10">
-            {{ $services->links() }}
+            {{ $refers->links() }}
         </div>
         <div class="row margin-bottom10 contacts-list-view-card pad15">
             <table class="table table-borderless table-responsive" style="margin-bottom:0;">
@@ -61,44 +59,38 @@ body {
                     <tr>
                         <th class="text-center">#</th>
                         <th>
-                            Name
+                            Email
+                        </th>
+                        <th>
+                            User 
                         </th>
                         
-                        <th></th>
+                        
                     </tr>
-                    @foreach($services as $service)
+                    @foreach($refers as $refer)
                     <tr>
                         <td class="text-center">
                             <h3 class="contact-list-view-column-categ margin-top10 contact-details-view" style="font-weight: 400;">
                                 {{  $loop->iteration }}
                             </h3>
                         </td>
-                        <td>
+                      
+                         <td>
                             <h3 class="contact-list-view-column-categ margin-top10 contact-details-view" style="font-weight: 400;">
                               
-                                    {{ $service->name }}
+                                    {{ $refer->email }}
+                               
+                            </h3>
+                        </td>
+                         <td>
+                            <h3 class="contact-list-view-column-categ margin-top10 contact-details-view" style="font-weight: 400;">
+                              
+                                    {{ $refer->user->name }}
                                
                             </h3>
                         </td>
                        
-                        <td>
-                            <div class="no-shadow btn-group pull-right" style="margin:0;padding:0;">
-                                <button type="button" class="btn btn-sm edit-btn text-center margin-left-10 dropdown-toggle contact-edit-dots-shdw pad0" data-toggle="dropdown">
-                                    <i class="fa fa-ellipsis-h fa-lg edit-btn-contact-ico-color"></i>
-                                </button>
-                                <ul class="dropdown-menu contact-dropdown pull-right">
-                                    <li>
-                                        <a href="{{ route('dashboard.services.edit', $service->id) }}">Edit</a>
-                                    </li>
-                                    
-                                    <li>
-                                        {{ Form::open(['route' => ['dashboard.services.destroy' ,$service->id] ,'method' => 'DELETE']) }}
-                                        <button type="submit">Delete</button>
-                                        {{ Form::close() }}
-                                    </li>
-                                </ul>
-                            </div>
-                        </td>
+                 
                     </tr>
                     @endforeach
                 </tbody>

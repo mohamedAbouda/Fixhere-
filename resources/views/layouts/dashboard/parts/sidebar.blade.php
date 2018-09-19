@@ -114,6 +114,16 @@
                             </div>
                         </a>
                     </li>
+                         <li class="c-menu__item has-submenu {{ strpos(request()->route()->getName() , 'dashboard.refers') !== FALSE ? 'is-active' : '' }} ? 'is-active' : '' }}" data-toggle="tooltip" title="Refers">
+                        <a href="{{ route('dashboard.refers.index') }}" style="text-decoration: none;">
+                            <div class="c-menu__item__inner">
+                                <i class="fa fa-address-card-o"></i>
+                                <div class="c-menu-item__title">
+                                    <span>Refers</span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
                     @if(Auth::user() && Auth::user()->hasRole(['center']))
                     <li class="c-menu__item has-submenu {{ strpos(request()->route()->getName() , 'dashboard.enquiries') !== FALSE ? 'is-active' : '' }} ? 'is-active' : '' }}" data-toggle="tooltip" title="Enquiries">
                         <a href="{{ route('dashboard.enquiries.index') }}" style="text-decoration: none;">

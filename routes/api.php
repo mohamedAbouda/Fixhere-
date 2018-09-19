@@ -23,12 +23,14 @@ Route::group(['prefix'=>'v1','namespace' => 'Apis'],function(){
     Route::group(['middleware'=>['JWT.auth']],function (){
         Route::post('/auth/confirm','AuthController@confirm');
         Route::post('/auth/resend/code','AuthController@resendCode');
+        Route::post('/auth/create/refer','AuthController@createRefer');
 
         Route::group(['prefix' => 'profile'] , function(){
             Route::get('/','ClientController@show');
             Route::post('/edit','ClientController@edit');
-        });
 
+        });
+        Route::post('user/promo/codes','ClientController@userPromoCodes');
         Route::post('/nearby/centers','CenterController@nearbyCenters');
         Route::get('/recent/centers','CenterController@recentCenters');
         Route::get('/all/cities','CityController@allCities');

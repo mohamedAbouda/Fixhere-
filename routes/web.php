@@ -37,6 +37,8 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => ['a
         * Clients
         */
         Route::resource('clients','ClientController');
+        Route::get('user/{id}/edit/wallet','ClientController@editWallet')->name('admin.edit.wallet.user');
+        Route::post('store/user/wallet/transaction','ClientController@storeWalletTransaction')->name('store.user.wallet.transaction');
 
         /**
         * Cities
@@ -57,6 +59,10 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => ['a
         * Regions
         */
         Route::resource('regions','RegionController');
+         /**
+        * Refers
+        */
+        Route::resource('refers','ReferController');
     });
 
     /**

@@ -15,7 +15,10 @@ use App\Mail\UserRegisterationMail;
 use App\Mail\UserVerificationCodeMail;
 use App\User;
 use App\Role;
+use App\Refer;
+use App\Wallet;
 use Carbon\Carbon;
+use App\PromoCode;
 use JWTAuth;
 use Auth;
 use Mail;
@@ -43,6 +46,8 @@ class AuthController extends Controller
         $user->attachRole($role);
 
         $email = $user->email;
+        $this->ReferUser($email);
+        $this->createWallet($user->id);
 
         //send email with verification code
         try {
@@ -110,6 +115,10 @@ class AuthController extends Controller
             'exp' => Carbon::now()->addMonth()->timestamp,
         ]);
 
+        $email = $user->email;
+        $this->ReferUser($email);
+        $this->createWallet($user->id);
+        
         return response()->json([
             'status' => 'true',
             'message'=>'Thanks for signing up.',
@@ -257,5 +266,50 @@ class AuthController extends Controller
         return response()->json([
                 'message' => 'token updated.',
             ],200);
+    }
+
+    public function createRefer(Request $request)
+    {
+        if(!$request->input('email')){
+             return response()->json([
+                'error' => 'Please provide the email.',
+            ],422);
+        }
+        $checkRefer = Refer::where('email',$request->input('email'))->first();
+        if($checkRefer){
+             return response()->json([
+                'message' => 'email already refered.',
+            ],409);
+        }else{
+            $createRefer = Refer::create([
+                'user_id'=>$request->user()->id,
+                'email'=>$request->input('email')
+            ]);
+        }
+         return response()->json([
+                'message' => 'user refered.',
+            ],200);
+    }
+
+    public function ReferUser($email)
+    {
+        $checkRefer = Refer::where('email',$email)->first();
+        if($checkRefer){
+            $createPromoCode = PromoCode::create([
+                'value'=>0.5,
+                'code'=>$this->generateRandomString(8),
+                'is_valid'=>1,
+                'user_id'=>$checkRefer->user_id,
+            ]);
+            $checkRefer->delete();
+        }
+    }
+
+    public function createWallet($id)
+    {
+        $createWallet = Wallet::create([
+            'value'=>0,
+            'user_id'=>$id,
+        ]);
     }
 }

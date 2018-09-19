@@ -8,6 +8,8 @@ use App\Http\Requests\Dashboard\ClientCreateRequest;
 use App\Http\Requests\Dashboard\ClientUpdateRequest;
 use App\User;
 use App\Role;
+use App\Wallet;
+use App\WalletTransaction;  
 
 class ClientController extends Controller
 {
@@ -123,5 +125,20 @@ class ClientController extends Controller
         $client->delete();
         alert()->success('Client deleted successfully.', 'Success');
         return redirect()->route('dashboard.clients.index');
+    }
+    public function editWallet($id)
+    {
+        $wallet = Wallet::where('user_id',$id)->first();
+        return view($this->base_view_path . 'editWallet',compact('wallet'));
+    }
+
+    public function storeWalletTransaction(Request $request)
+    {
+        $data =$request->all();
+        $createWalletTransaction = WalletTransaction::create($data);
+        $walletSum = WalletTransaction::where('wallet_id',$data['wallet_id'])->sum('value');
+        $updateWallet = Wallet::where('id',$data['wallet_id'])->update(['value'=>$walletSum]);
+        alert()->success('Wallet updated successfully.', 'Success');
+        return redirect()->back(); 
     }
 }

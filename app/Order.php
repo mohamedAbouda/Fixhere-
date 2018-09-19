@@ -8,7 +8,7 @@ class Order extends Model
 {
     protected $fillable = [
         'user_id' ,'technician_id' ,'service_id' ,'region_id','description' ,
-        'lat' ,'lng'
+        'lat' ,'lng' ,'payment_method','value'
         ,'status' //0 => recieved , 1 => accepted , 2 => agent on the way , 3 => done
     ];
 
