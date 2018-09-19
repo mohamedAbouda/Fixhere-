@@ -8,6 +8,8 @@ use App\Http\Requests\Apis\OrderCreateRequest;
 use App\Transformers\OrderTransformer;
 use App\Order;
 use App\PickupDate;
+use App\Wallet;
+use App\WalletTransaction;
 use App\OrderReview;
 
 class OrderController extends Controller
@@ -17,6 +19,16 @@ class OrderController extends Controller
         $data = $request->all();
         $data['user_id'] = $request->user()->id;
         $order = Order::create($data);
+        if($request->input('payment_method') == 2){
+          $userWallet = Wallet::where('user_id',$request->user()->id)->first();
+          $createWalletTransaction = WalletTransaction::create([
+            'order_id'=>$order->id,
+            'wallet_id'=>$userWallet->id,
+            'value'=>-$request->input('value')
+          ]);
+          $WalletSum = WalletTransaction::where('wallet_id',$userWallet->id)->sum('value');
+          $userWallet->update(['value'=>$WalletSum]);
+        }
         return response()->json([
             'status' => 'true',
             'message' => 'Order created successfully.',
@@ -104,7 +116,7 @@ class OrderController extends Controller
          return response()->json([
           'status' => 'false',
           'error' => 'please provide the order id and date.',
-        ],404);
+        ],422);
       }
 
       $pickup = PickupDate::create($data);
@@ -121,7 +133,7 @@ class OrderController extends Controller
        return response()->json([
         'status' => 'false',
         'error' => 'please provide the order id and rate.',
-      ],404);
+      ],422);
      }
      $createReview = OrderReview::create($data);
       return response()->json([

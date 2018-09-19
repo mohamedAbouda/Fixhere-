@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Apis\ClientUpdateRequest;
 use App\Transformers\ClientTransformer;
+use App\Transformers\PromoCodeTransformer;
 use App\User;
+use App\PromoCode;
 
 class ClientController extends Controller
 {
@@ -35,5 +37,17 @@ class ClientController extends Controller
             ->serializeWith(new \League\Fractal\Serializer\ArraySerializer())
             ->toArray(),
         ],200);
+    }
+
+    public function userPromoCodes(Request $request)
+    {
+        $promoCodes = PromoCode::where('user_id',$request->user()->id)->get();
+        return response()->json(
+           fractal()
+            ->collection($promoCodes)
+            ->transformWith(new PromoCodeTransformer)
+            ->serializeWith(new \League\Fractal\Serializer\ArraySerializer())
+            ->toArray()
+        ,200);
     }
 }

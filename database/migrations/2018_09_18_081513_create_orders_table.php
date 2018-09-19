@@ -37,6 +37,8 @@ class CreateOrdersTable extends Migration
             $table->string('lat')->default('');
             $table->string('lng')->default('');
             $table->tinyInteger('status')->unsigned()->default(0);
+            $table->integer('payment_method')->default(0);
+            $table->integer('value')->default(0);
 
             $table->timestamps();
         });
