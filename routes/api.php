@@ -31,12 +31,18 @@ Route::group(['prefix'=>'v1','namespace' => 'Apis'],function(){
 
         Route::post('/nearby/centers','CenterController@nearbyCenters');
         Route::get('/recent/centers','CenterController@recentCenters');
+        Route::get('/all/cities','CityController@allCities');
+        Route::get('/all/services','ServiceController@allServices');
+        Route::get('/all/regions','RegionController@allRegions');
 
         Route::post('/center/details','CenterController@centerDetails');
 
         Route::group(['prefix' => 'order'] , function(){
             Route::post('/create','OrderController@store');
-            Route::get('/{order}','OrderController@show');
+            Route::post('/update','OrderController@update');
+            Route::post('/pending','OrderController@pending');
+            Route::post('/history','OrderController@history');
+            Route::post('details','OrderController@show');
         });
 
         Route::group(['prefix' => 'chat'] , function(){

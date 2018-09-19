@@ -23,17 +23,7 @@ class OrderController extends Controller
     */
     public function index(Request $request)
     {
-        $index = $request->get('page' , 1);
-        $data['counter_offset'] = ($index * $this->paginate_by) - $this->paginate_by;
-        if (Auth::user()->hasRole('center')) {
-            $center = Auth::user();
-            $data['resources'] = Order::where('center_id',$center->id)->orderBy('id','DESC')->paginate($this->paginate_by);
-            $data['total_resources_count'] = Order::where('center_id',$center->id)->count();
-        }else {
-            $data['resources'] = Order::orderBy('id','DESC')->paginate($this->paginate_by);
-            $data['total_resources_count'] = Order::count();
-        }
-
+        $data['orders'] = Order::with('service','client','technician','region')->paginate($this->paginate_by);
         return view($this->base_view_path . 'index',$data);
     }
 
@@ -177,5 +167,11 @@ class OrderController extends Controller
         $order->delete();
         alert()->success('Order deleted successfully.', 'Success');
         return redirect()->route('dashboard.orders.index');
+    }
+
+    public function location($id)
+    {
+        $order = Order::where('id',$id)->first();;
+        return view('dashboard.orders.map',compact('order'));
     }
 }

@@ -12,7 +12,7 @@ body {
 <div class="row">
     <div class="col-md-4 col-xs-12">
         <h3 class="section-title contacts-section-title">
-            Orders
+            Promo Codes
         </h3>
     </div>
     <div class="col-xs-12 col-md-3">
@@ -23,11 +23,11 @@ body {
             </div>
         </div>
     </div>
-   <!--  <div class="col-md-4 col-md-offset-1 text-right col-xs-11">
-       <a href="{{ route('dashboard.orders.create') }}"class="btn btn-blue margin-left-10">
-           <span>+ </span>Add order
-       </a>
-   </div> -->
+    <div class="col-md-4 col-md-offset-1 text-right col-xs-11">
+        <a href="{{ route('dashboard.promo_codes.create') }}"class="btn btn-blue margin-left-10">
+            <span>+ </span>Add Promo Code
+        </a>
+    </div>
 </div>
 @stop
 
@@ -38,11 +38,11 @@ body {
             <div class="col-md-5 margin-bottom10 margin-top20">
                 <div class="total-customer-col pad5 pad-bottom5 col-md-12">
                     <div class="col-md-9 customer-stat-col-pad">
-                        <h5 class="customer-stat-text pad5">Total orders count</h5>
+                        <h5 class="customer-stat-text pad5">Total Promo Codes count</h5>
                     </div>
                     <div class="col-md-3 text-center">
                         <h5 class="customer-stat-num pad5">
-                            {{ count($orders) }}
+                            {{ count($promo_codes) }}
                         </h5>
                     </div>
                 </div>
@@ -53,7 +53,7 @@ body {
 <div class="row margin-top15">
     <div class="col-md-12">
         <div class="row margin-bottom10">
-            {{ $orders->links() }}
+            {{ $promo_codes->links() }}
         </div>
         <div class="row margin-bottom10 contacts-list-view-card pad15">
             <table class="table table-borderless table-responsive" style="margin-bottom:0;">
@@ -61,72 +61,54 @@ body {
                     <tr>
                         <th class="text-center">#</th>
                         <th>
-                            Client
+                            Code
                         </th>
-                        <th>
-                            Technical agent
+                          <th>
+                            Is Valid ?
                         </th>
-                     
-                        <th>
-                            Location
+                         <th>
+                            Value
                         </th>
-                        <th>
-                            Status
-                        </th>
+                        
                         <th></th>
                     </tr>
-                    @foreach($orders as $resource)
+                    @foreach($promo_codes as $promo_code)
                     <tr>
                         <td class="text-center">
                             <h3 class="contact-list-view-column-categ margin-top10 contact-details-view" style="font-weight: 400;">
-                                {{ $loop->iteration }}
+                                {{  $loop->iteration }}
                             </h3>
                         </td>
                         <td>
                             <h3 class="contact-list-view-column-categ margin-top10 contact-details-view" style="font-weight: 400;">
-                                @if($resource->client)
-                                <a href="{{ route('dashboard.clients.show', $resource->client->id) }}">
-                                    {{ $resource->client->name }}
-                                </a>
-                                @else
-                                <span class="text-danger">[DELETED]</span>
-                                @endif
+                              
+                                    {{ $promo_code->code }}
+                               
                             </h3>
                         </td>
-                   
-                        <td>
+                          <td>
                             <h3 class="contact-list-view-column-categ margin-top10 contact-details-view" style="font-weight: 400;">
-                                @if($resource->technician)
-                                <a href="#">
-                                    {{ $resource->technician->name }}
-                                </a>
-                                @else
-                                <span class="text-danger">[DELETED]</span>
-                                @endif
+                              
+                                   @if($promo_code->is_valid == 1)
+                                   Valid
+                                   @else
+                                   Not Valid
+                                   @endif
+                               
                             </h3>
                         </td>
-                  
-                        <td>
+                           <td>
                             <h3 class="contact-list-view-column-categ margin-top10 contact-details-view" style="font-weight: 400;">
-                                <a href="{{route('dashboard.order.location',$resource->id)}}">
-                                    view on map
-                                </a>
+                              
+                                   @if($promo_code->value < 1)
+                                   {{$promo_code->value*100}} %
+                                   @else 
+                                   {{$promo_code->value}} L.E
+                                   @endif
+                               
                             </h3>
                         </td>
-                        <td>
-                            <h3 class="contact-list-view-column-categ margin-top10 contact-details-view" style="font-weight: 400;">
-                                @if($resource->status === 0)
-                                Recieved
-                                @elseif($resource->status === 1)
-                                Accepted
-                                @elseif($resource->status === 2)
-                                Technical agent is on the way
-                                @elseif($resource->status === 3)
-                                Done
-                                @endif
-                            </h3>
-                        </td>
-
+                       
                         <td>
                             <div class="no-shadow btn-group pull-right" style="margin:0;padding:0;">
                                 <button type="button" class="btn btn-sm edit-btn text-center margin-left-10 dropdown-toggle contact-edit-dots-shdw pad0" data-toggle="dropdown">
@@ -134,10 +116,10 @@ body {
                                 </button>
                                 <ul class="dropdown-menu contact-dropdown pull-right">
                                     <li>
-                                        <a href="{{ route('dashboard.orders.show', $resource->id) }}">Show</a>
+                                        <a href="{{ route('dashboard.promo_codes.edit', $promo_code->id) }}">Edit</a>
                                     </li>
                                     <li>
-                                        {{ Form::open(['route' => ['dashboard.orders.destroy' ,$resource->id] ,'method' => 'DELETE']) }}
+                                        {{ Form::open(['route' => ['dashboard.promo_codes.destroy' ,$promo_code->id] ,'method' => 'DELETE']) }}
                                         <button type="submit">Delete</button>
                                         {{ Form::close() }}
                                     </li>

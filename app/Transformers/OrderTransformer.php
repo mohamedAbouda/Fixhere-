@@ -7,8 +7,8 @@ use App\Order;
 
 class OrderTransformer extends TransformerAbstract
 {
-    protected $availableIncludes = [
-        'center','agent'
+    protected $defaultIncludes = [
+        'client','technician','region','service'
     ];
     /**
      * A Fractal transformer.
@@ -19,30 +19,42 @@ class OrderTransformer extends TransformerAbstract
     {
         return [
             'id' => $order->id,
-            'service_type' => $order->service_type,
-            'date' => $order->order_date,
-            'time_from' => $order->time_from,
-            'time_to' => $order->time_to,
+            'description' => $order->description,
             'lat' => $order->lat,
             'lng' => $order->lng,
-            'problem' => $order->problem,
-            'agent_id' => $order->agent_id,
-            'center_id' => $order->center_id,
             'status' => $order->status,
         ];
     }
 
-    public function includeAgent(Order $order)
+    public function includeClient(Order $order)
     {
-        if ($order->agent) {
-            return $this->item($order->agent ,new AgentTransformer);
+        if ($order->client) {
+            return $this->item($order->client ,new ClientTransformer);
         }
     }
 
-    public function includeCenter(Order $order)
+     public function includeTechnician(Order $order)
     {
-        if ($order->center) {
-            return $this->item($order->center ,new CenterTransformer);
+        if ($order->technician) {
+            return $this->item($order->technician ,new AgentTransformer);
         }
     }
+
+
+ public function includeRegion(Order $order)
+    {
+        if ($order->region) {
+            return $this->item($order->region ,new RegionTransformer);
+        }
+    }
+
+
+ public function includeService(Order $order)
+    {
+        if ($order->service) {
+            return $this->item($order->service ,new ServiceTransformer);
+        }
+    }
+
+
 }

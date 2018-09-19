@@ -137,7 +137,7 @@ function preview(input)
 }
 </script>
 
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCn2wwrPJu1htS6t-KDmt_K8i8SMX81jfg &callback=initMap">
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCn2wwrPJu1htS6t-KDmt_K8i8SMX81jfg&callback=initMap">
 </script>
 
 <script type="text/javascript">
