@@ -28,7 +28,7 @@ class UserRegisteration extends FormRequest
             'email'=>'required|email|unique:users,email',
             'password'=>'required',
             'contact_number'=>'required',
-            'location'=>'required',
+            // 'location'=>'required',
             'profile_image'=>'nullable|image',
         ];
     }
