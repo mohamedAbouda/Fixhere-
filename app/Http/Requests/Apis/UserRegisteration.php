@@ -29,7 +29,7 @@ class UserRegisteration extends FormRequest
             'password'=>'required',
             'contact_number'=>'required',
             'location'=>'required',
-            'profile_image'=>'required|image',
+            'profile_image'=>'nullable|image',
         ];
     }
 
