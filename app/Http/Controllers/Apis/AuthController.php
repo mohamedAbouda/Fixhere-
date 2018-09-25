@@ -75,7 +75,7 @@ class AuthController extends Controller
                 'errors' => [
                     'Wrong credentials.'
                 ],
-            ],422);
+            ],420);
         }
 
         if(!$token){
@@ -85,7 +85,7 @@ class AuthController extends Controller
                 'errors' => [
                     'Wrong credentials.'
                 ],
-            ],422);
+            ],420);
         }
 
         return response()->json([
@@ -132,7 +132,7 @@ class AuthController extends Controller
                 'errors' => [
                     'Wrong credentials.'
                 ],
-            ],422);
+            ],420);
         }
 
         $token = JWTAuth::fromUser($user,[
