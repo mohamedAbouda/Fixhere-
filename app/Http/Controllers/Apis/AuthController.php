@@ -58,12 +58,7 @@ class AuthController extends Controller
         return response()->json([
             'status' => 'true',
             'message'=>'Thanks for signing up!',
-            'data'=>fractal()
-            ->item($user)
-            ->addMeta(['token' => $token])
-            ->transformWith(new ClientTransformer)
-            ->serializeWith(new \League\Fractal\Serializer\ArraySerializer())
-            ->toArray(),
+            'token' => $token
         ],200);
     }
 
@@ -122,12 +117,7 @@ class AuthController extends Controller
         return response()->json([
             'status' => 'true',
             'message'=>'Thanks for signing up.',
-            'data' => fractal()
-            ->item($user)
-            ->addMeta(['token' => $token])
-            ->transformWith(new ClientTransformer)
-            ->serializeWith(new \League\Fractal\Serializer\ArraySerializer())
-            ->toArray(),
+            'token' => $token
         ],200);
     }
 
