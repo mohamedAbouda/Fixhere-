@@ -118,7 +118,7 @@ class AuthController extends Controller
         $email = $user->email;
         $this->ReferUser($email);
         $this->createWallet($user->id);
-        
+
         return response()->json([
             'status' => 'true',
             'message'=>'Thanks for signing up.',
@@ -144,7 +144,7 @@ class AuthController extends Controller
                 ],
             ],422);
         }
-        
+
         $token = JWTAuth::fromUser($user,[
             'exp' => Carbon::now()->addweek()->timestamp,
         ]);
@@ -253,19 +253,19 @@ class AuthController extends Controller
 
     public function deviceToken(Request $request)
     {
-        if(!$request->input('device_token')){
+        if(!$request->input('device_id')){
             return response()->json([
-                'error' => 'Please provide the device token.',
+                'error' => 'Please provide the device id.',
             ],422);
         }
 
         $updateToken = User::where('id',$request->user()->id)->update([
-            'device_token'=>$request->input('device_token'),
+            'device_id'=>$request->input('device_id'),
         ]);
 
         return response()->json([
-                'message' => 'token updated.',
-            ],200);
+            'message' => 'Device id updated.',
+        ],200);
     }
 
     public function createRefer(Request $request)

@@ -21,6 +21,7 @@ Route::group(['prefix'=>'v1','namespace' => 'Apis'],function(){
     Route::post('/auth/forget','AuthController@forgetPassword');
 
     Route::group(['middleware'=>['JWT.auth']],function (){
+        Route::post('/auth/token','AuthController@deviceToken');
         Route::post('/auth/confirm','AuthController@confirm');
         Route::post('/auth/resend/code','AuthController@resendCode');
         Route::post('/auth/create/refer','AuthController@createRefer');

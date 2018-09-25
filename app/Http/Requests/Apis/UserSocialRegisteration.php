@@ -29,7 +29,7 @@ class UserSocialRegisteration extends FormRequest
              'contact_number' => 'required',
              'social_id' => 'required',
              'social_type' => 'required',
-             'location'=>'required',
+             // 'location'=>'required',
              'profile_image'=>'nullable|image',
          ];
      }

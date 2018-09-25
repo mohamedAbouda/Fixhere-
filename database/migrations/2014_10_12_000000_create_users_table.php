@@ -35,6 +35,7 @@ class CreateUsersTable extends Migration
             $table->string('card_token')->nullable();
             $table->string('social_id')->nullable();
             $table->string('social_type')->nullable();
+            $table->string('device_id')->nullable();
 
             $table->rememberToken();
             $table->timestamps();
