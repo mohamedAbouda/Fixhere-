@@ -59,7 +59,7 @@ body {
                     <tr>
                         <th class="text-center">#</th>
                         <th>
-                            Email
+                            Phone number
                         </th>
                         <th>
                             User 
@@ -78,7 +78,7 @@ body {
                          <td>
                             <h3 class="contact-list-view-column-categ margin-top10 contact-details-view" style="font-weight: 400;">
                               
-                                    {{ $refer->email }}
+                                    {{ $refer->phone }}
                                
                             </h3>
                         </td>

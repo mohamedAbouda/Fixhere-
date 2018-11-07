@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Transformers\AgentTransformer;
 use App\User;
+use App\Models\AgentReview;
 
 class AgentController extends Controller
 {
@@ -48,6 +49,21 @@ class AgentController extends Controller
             ->transformWith(new AgentTransformer)
             ->serializeWith(new \League\Fractal\Serializer\ArraySerializer())
             ->toArray(),
+        ],200);
+    }
+
+    public function review(Request $request)
+    {
+        if(!$request->input('agent_id') || !$request->input('rate')){
+            return response()->json([
+                'error' => 'Please provide agent id and rate.',
+            ],422);
+        }
+        $data = $request->all();
+        $data['user_id'] = $request->user()->id;
+        $createReview = AgentReview::create($data);
+        return response()->json([
+            'success' => 'review submited.',
         ],200);
     }
 }

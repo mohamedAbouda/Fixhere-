@@ -52,7 +52,8 @@ class PromoCodeController extends Controller
      */
     public function show($id)
     {
-        //
+        $promo_code = PromoCode::where('id',$id)->first();
+        return view($this->mainUrl . 'show')->with(['promo_code'=>$promo_code]);
     }
 
     /**

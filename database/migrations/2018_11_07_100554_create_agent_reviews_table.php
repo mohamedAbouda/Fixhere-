@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePromoCodesTable extends Migration
+class CreateAgentReviewsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,19 +13,16 @@ class CreatePromoCodesTable extends Migration
      */
     public function up()
     {
-        Schema::create('promo_codes', function (Blueprint $table) {
+        Schema::create('agent_reviews', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('code');
-            $table->integer('is_valid')->default(1);
-            $table->float('value')->default(0);
-            $table->integer('discount_type')->default(1);
-            $table->date('start_date')->nullable();
-            $table->date('end_date')->nullable();
-            $table->integer('number_of_usage')->default(0);
-            $table->text('description')->nullable();
+            $table->integer('agent_id')->unsigned()->nullable();
+            $table->foreign('agent_id')->references('id')->on('users')
+            ->onUpdate('cascade')->onDelete('cascade');
             $table->integer('user_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('id')->on('users')
             ->onUpdate('cascade')->onDelete('cascade');
+            $table->integer('rate')->default(1);
+            $table->text('review')->nullable();
             $table->timestamps();
         });
     }
@@ -37,6 +34,6 @@ class CreatePromoCodesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('promo_codes');
+        Schema::dropIfExists('agent_reviews');
     }
 }

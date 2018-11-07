@@ -100,12 +100,10 @@ body {
                            <td>
                             <h3 class="contact-list-view-column-categ margin-top10 contact-details-view" style="font-weight: 400;">
                               
-                                   @if($promo_code->value < 1)
-                                   {{$promo_code->value*100}} %
-                                   @else 
-                                   {{$promo_code->value}} L.E
-                                   @endif
-                               
+                                   {{$promo_code->value}}
+                                   @if($promo_code->discount_type == 1)
+                                   %
+                                    @endif
                             </h3>
                         </td>
                        
@@ -115,6 +113,9 @@ body {
                                     <i class="fa fa-ellipsis-h fa-lg edit-btn-contact-ico-color"></i>
                                 </button>
                                 <ul class="dropdown-menu contact-dropdown pull-right">
+                                     <li>
+                                        <a href="{{ route('dashboard.promo_codes.show', $promo_code->id) }}">Show</a>
+                                    </li>
                                     <li>
                                         <a href="{{ route('dashboard.promo_codes.edit', $promo_code->id) }}">Edit</a>
                                     </li>

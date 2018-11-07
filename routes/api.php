@@ -39,7 +39,7 @@ Route::group(['prefix'=>'v1','namespace' => 'Apis'],function(){
         Route::get('/all/regions','RegionController@allRegions');
 
         Route::post('/center/details','CenterController@centerDetails');
-
+        Route::post('client/review/agent','AgentController@review');
         Route::group(['prefix' => 'order'] , function(){
             Route::post('/create','OrderController@store');
             Route::post('/update','OrderController@update');

@@ -22,10 +22,20 @@
             </label>
             {{ Form::text('value',old('value'),['id'=>'value','required'=>'required','class' => 'form-control']) }}
             <p class="text-danger" style="margin-bottom: 0;">{{ $errors->first('value') }}</p>
-            if value < 1 it will percentage , if value > 1 it will be amount<br>
-            the code will be auto generated and you can edit it later
         </div>
-          <div class="form-group margin-bottom20 col-md-6">
+           <div class="form-group margin-bottom20 col-md-6">
+            <label class="control-label" for="name">
+                <span class="text-danger">*</span>
+               Discount type ?
+            </label>
+            <select class="form-control" name="discount_type">
+                <option selected disabled>Select Discount Type</option>
+                <option value="1">Percentage</option>
+                <option value="2">Flat Amount</option>
+            </select>
+            <p class="text-danger" style="margin-bottom: 0;">{{ $errors->first('discount_type') }}</p>
+        </div>
+          <div class="form-group margin-bottom20 col-md-12">
             <label class="control-label" for="name">
                 <span class="text-danger">*</span>
                Is Valid ?
@@ -36,6 +46,29 @@
                 <option value="0">Not Valid</option>
             </select>
             <p class="text-danger" style="margin-bottom: 0;">{{ $errors->first('is_valid') }}</p>
+        </div>
+            <div class="form-group margin-bottom20 col-md-6">
+            <label class="control-label" for="start_date">
+                <span class="text-danger">*</span>
+                Start Date
+            </label>
+            {{ Form::date('start_date',old('start_date'),['id'=>'start_date','required'=>'required','class' => 'form-control']) }}
+            <p class="text-danger" style="margin-bottom: 0;">{{ $errors->first('start_date') }}</p>
+        </div>
+              <div class="form-group margin-bottom20 col-md-6">
+            <label class="control-label" for="end_date">
+                <span class="text-danger">*</span>
+                Start Date
+            </label>
+            {{ Form::date('end_date',old('end_date'),['id'=>'end_date','required'=>'required','class' => 'form-control']) }}
+            <p class="text-danger" style="margin-bottom: 0;">{{ $errors->first('end_date') }}</p>
+        </div>
+              <div class="form-group margin-bottom20 col-md-12">
+            <label class="control-label" for="description">
+                Description
+            </label>
+            {{ Form::textarea('description',old('description'),['id'=>'description','required'=>'required','class' => 'form-control']) }}
+            <p class="text-danger" style="margin-bottom: 0;">{{ $errors->first('description') }}</p>
         </div>
       
     </div>

@@ -110,8 +110,8 @@ class AuthController extends Controller
             'exp' => Carbon::now()->addMonth()->timestamp,
         ]);
 
-        $email = $user->email;
-        $this->ReferUser($email);
+        $phone = $user->phone;
+        $this->ReferUser($phone);
         $this->createWallet($user->id);
 
         return response()->json([
@@ -260,20 +260,20 @@ class AuthController extends Controller
 
     public function createRefer(Request $request)
     {
-        if(!$request->input('email')){
+        if(!$request->input('phone')){
              return response()->json([
-                'error' => 'Please provide the email.',
+                'error' => 'Please provide the phone number.',
             ],422);
         }
-        $checkRefer = Refer::where('email',$request->input('email'))->first();
+        $checkRefer = Refer::where('phone',$request->input('phone'))->first();
         if($checkRefer){
              return response()->json([
-                'message' => 'email already refered.',
+                'message' => 'phone number already refered.',
             ],409);
         }else{
             $createRefer = Refer::create([
                 'user_id'=>$request->user()->id,
-                'email'=>$request->input('email')
+                'phone'=>$request->input('phone')
             ]);
         }
          return response()->json([
@@ -281,9 +281,9 @@ class AuthController extends Controller
             ],200);
     }
 
-    public function ReferUser($email)
+    public function ReferUser($phone)
     {
-        $checkRefer = Refer::where('email',$email)->first();
+        $checkRefer = Refer::where('phone',$phone)->first();
         if($checkRefer){
             $createPromoCode = PromoCode::create([
                 'value'=>0.5,
