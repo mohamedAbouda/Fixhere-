@@ -1,0 +1,11 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Request extends Model
+{
+    protected $table = 'requests';
+    protected $fillable = ['agent_id','user_id','status','request_type','spell_part'];
+}

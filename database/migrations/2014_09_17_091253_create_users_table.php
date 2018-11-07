@@ -37,9 +37,9 @@ class CreateUsersTable extends Migration
             $table->string('social_type')->nullable();
             $table->string('device_id')->nullable();
             $table->integer('city_id')->nullable();
-            $table->integer('android_fix')->nullable()
-            $table->integer('ios_fix')->nullable()
-            $table->integer('delivery')->nullable()
+            $table->integer('android_fix')->nullable();
+            $table->integer('ios_fix')->nullable();
+            $table->integer('delivery')->nullable();
             $table->string('phone')->nullable();
 
             $table->rememberToken();
