@@ -33,7 +33,8 @@ Route::group(['prefix'=>'v1','namespace' => 'Apis'],function(){
         });
          Route::group(['prefix' => 'request'] , function(){
             Route::post('/send','RequestController@send');
-
+            Route::post('/schedule','RequestController@Schedule');
+            Route::post('/accept','RequestController@accept');
         });
         Route::post('user/promo/codes','ClientController@userPromoCodes');
         Route::post('/nearby/centers','CenterController@nearbyCenters');

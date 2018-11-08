@@ -7,5 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class RequestSchedule extends Model
 {
 	protected $table = 'request_schedule';
+	/*
+	* 0 shceduled but not approved
+	* 1 sent and approved by technical agent
+	*/
 	protected $fillable = ['request_id','day_date','day_time','sent_times','approved'];
 }
