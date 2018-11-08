@@ -31,6 +31,10 @@ Route::group(['prefix'=>'v1','namespace' => 'Apis'],function(){
             Route::post('/edit','ClientController@edit');
 
         });
+         Route::group(['prefix' => 'request'] , function(){
+            Route::post('/send','RequestController@send');
+
+        });
         Route::post('user/promo/codes','ClientController@userPromoCodes');
         Route::post('/nearby/centers','CenterController@nearbyCenters');
         Route::get('/recent/centers','CenterController@recentCenters');
