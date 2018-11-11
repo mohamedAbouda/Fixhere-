@@ -36,6 +36,7 @@ Route::group(['prefix'=>'v1','namespace' => 'Apis'],function(){
             Route::post('/schedule','RequestController@Schedule');
             Route::post('/accept','RequestController@accept');
         });
+        Route::post('request/spell/part','AgentController@requestSpellPart');
         Route::post('user/promo/codes','ClientController@userPromoCodes');
         Route::post('/nearby/centers','CenterController@nearbyCenters');
         Route::get('/recent/centers','CenterController@recentCenters');

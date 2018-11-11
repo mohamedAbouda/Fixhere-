@@ -12,4 +12,11 @@ class RequestSchedule extends Model
 	* 1 sent and approved by technical agent
 	*/
 	protected $fillable = ['request_id','day_date','day_time','sent_times','approved'];
+	protected $dates = ['day_date'];
+
+
+	public function request()
+    {
+        return $this->belongsTo(Request::class);
+    }
 }

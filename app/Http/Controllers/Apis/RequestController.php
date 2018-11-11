@@ -24,10 +24,12 @@ class RequestController extends Controller
 		$createRequest = ClientRequest::create($data);
 		$schedule['request_id'] = $createRequest->id;
 		$schedule['day_date'] = Carbon::now()->format('Y-m-d');
-		$schedule['day_time'] = Carbon::now()->addMinutes(15)->format('h:i:s');
+		$schedule['day_time'] = Carbon::now()->format('h:i:s');
 		$createSchedule = RequestSchedule::create($schedule);
 		$tokens = User::where('device_id','!=',null)->pluck('device_id')->toArray();
-		$this->sendRequest('New Request','New Request hurry up','request',$createRequest->id,$tokens);
+		if($tokens){
+			$this->sendRequest('New Request','New Request hurry up','request',$createRequest->id,$tokens);
+		}
 		return response()->json([
 			'success' => ['Your request has been sent ,we will notify you when someone accepts it and you can check your request status at any time.'],
 		],200);
@@ -76,7 +78,7 @@ class RequestController extends Controller
 		$checkSchedule = RequestSchedule::where('request_id',$request->input('request_id'))
 							->first();
 		if($checkSchedule){
-			$checkSchedule->update(['approved'=>1]);
+			$checkSchedule->delete();
 		}
 
 		return response()->json([
