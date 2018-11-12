@@ -63,6 +63,13 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => ['a
         * Refers
         */
         Route::resource('refers','ReferController');
+
+        /**
+        * Request spell
+        */
+        Route::resource('spellRequests','SpellRequestController');
+        Route::post('update/part/status','SpellRequestController@updateStatus')->name('part.update.status');
+
         /**
         * Brands
         */

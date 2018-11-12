@@ -84,7 +84,7 @@
                             </div>
                         </a>
                     </li>
-                      <li class="c-menu__item has-submenu {{ strpos(request()->route()->getName() , 'dashboard.services') !== FALSE ? 'is-active' : '' }} ? 'is-active' : '' }}" data-toggle="tooltip" title="Services">
+                    <li class="c-menu__item has-submenu {{ strpos(request()->route()->getName() , 'dashboard.services') !== FALSE ? 'is-active' : '' }} ? 'is-active' : '' }}" data-toggle="tooltip" title="Services">
                         <a href="{{ route('dashboard.services.index') }}" style="text-decoration: none;">
                             <div class="c-menu__item__inner">
                                 <i class="fa fa-address-card-o"></i>
@@ -94,7 +94,7 @@
                             </div>
                         </a>
                     </li>
-                         <li class="c-menu__item has-submenu {{ strpos(request()->route()->getName() , 'dashboard.promo_codes') !== FALSE ? 'is-active' : '' }} ? 'is-active' : '' }}" data-toggle="tooltip" title="Promo Codes">
+                    <li class="c-menu__item has-submenu {{ strpos(request()->route()->getName() , 'dashboard.promo_codes') !== FALSE ? 'is-active' : '' }} ? 'is-active' : '' }}" data-toggle="tooltip" title="Promo Codes">
                         <a href="{{ route('dashboard.promo_codes.index') }}" style="text-decoration: none;">
                             <div class="c-menu__item__inner">
                                 <i class="fa fa-address-card-o"></i>
@@ -104,7 +104,7 @@
                             </div>
                         </a>
                     </li>
-                           <li class="c-menu__item has-submenu {{ strpos(request()->route()->getName() , 'dashboard.regions') !== FALSE ? 'is-active' : '' }} ? 'is-active' : '' }}" data-toggle="tooltip" title="Regions">
+                    <li class="c-menu__item has-submenu {{ strpos(request()->route()->getName() , 'dashboard.regions') !== FALSE ? 'is-active' : '' }} ? 'is-active' : '' }}" data-toggle="tooltip" title="Regions">
                         <a href="{{ route('dashboard.regions.index') }}" style="text-decoration: none;">
                             <div class="c-menu__item__inner">
                                 <i class="fa fa-address-card-o"></i>
@@ -114,12 +114,22 @@
                             </div>
                         </a>
                     </li>
-                         <li class="c-menu__item has-submenu {{ strpos(request()->route()->getName() , 'dashboard.refers') !== FALSE ? 'is-active' : '' }} ? 'is-active' : '' }}" data-toggle="tooltip" title="Refers">
+                    <li class="c-menu__item has-submenu {{ strpos(request()->route()->getName() , 'dashboard.refers') !== FALSE ? 'is-active' : '' }} ? 'is-active' : '' }}" data-toggle="tooltip" title="Refers">
                         <a href="{{ route('dashboard.refers.index') }}" style="text-decoration: none;">
                             <div class="c-menu__item__inner">
                                 <i class="fa fa-address-card-o"></i>
                                 <div class="c-menu-item__title">
                                     <span>Refers</span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="c-menu__item has-submenu {{ strpos(request()->route()->getName() , 'dashboard.spellRequests') !== FALSE ? 'is-active' : '' }} ? 'is-active' : '' }}" data-toggle="tooltip" title="Spell Part Requests">
+                        <a href="{{ route('dashboard.spellRequests.index') }}" style="text-decoration: none;">
+                            <div class="c-menu__item__inner">
+                                <i class="fa fa-address-card-o"></i>
+                                <div class="c-menu-item__title">
+                                    <span>Spell Part Requests</span>
                                 </div>
                             </div>
                         </a>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Apis;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Transformers\AgentTransformer;
+use App\Models\RequestSpellPart;
 use App\User;
 use App\Models\AgentReview;
 
@@ -64,6 +65,21 @@ class AgentController extends Controller
         $createReview = AgentReview::create($data);
         return response()->json([
             'success' => 'review submited.',
+        ],200);
+    }
+
+    public function requestSpellPart(Request $request)
+    {
+        if(!$request->input('spell_part_id')){
+            return response()->json([
+                'error' => 'Please provide spell part id.',
+            ],422);
+        }
+        $data = $request->all();
+        $data['agent_id'] = $request->user()->id;
+        $createSpellPartRequest = RequestSpellPart::create($data);
+        return response()->json([
+            'success' => 'request submited.',
         ],200);
     }
 }

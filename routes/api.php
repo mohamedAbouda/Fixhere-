@@ -19,7 +19,7 @@ Route::group(['prefix'=>'v1','namespace' => 'Apis'],function(){
     Route::post('/auth/social/register','AuthController@socialRegister');
     Route::post('/auth/social/login','AuthController@socialLogin');
     Route::post('/auth/forget','AuthController@forgetPassword');
-
+    Route::get('/all/cities','CityController@allCities');
     Route::group(['middleware'=>['JWT.auth']],function (){
         Route::post('/auth/token','AuthController@deviceToken');
         Route::post('/auth/confirm','AuthController@confirm');
@@ -36,10 +36,11 @@ Route::group(['prefix'=>'v1','namespace' => 'Apis'],function(){
             Route::post('/schedule','RequestController@Schedule');
             Route::post('/accept','RequestController@accept');
         });
+        Route::post('request/spell/part','AgentController@requestSpellPart');
         Route::post('user/promo/codes','ClientController@userPromoCodes');
         Route::post('/nearby/centers','CenterController@nearbyCenters');
         Route::get('/recent/centers','CenterController@recentCenters');
-        Route::get('/all/cities','CityController@allCities');
+        
         Route::get('/all/services','ServiceController@allServices');
         Route::get('/all/regions','RegionController@allRegions');
 
