@@ -87,7 +87,7 @@ body {
                          <td>
                             <h3 class="contact-list-view-column-categ margin-top10 contact-details-view" style="font-weight: 400;">
                               
-                                    {{ $part->spell_part_id }}
+                                    {{ $part->product->name }}
                                
                             </h3>
                         </td>
@@ -106,13 +106,16 @@ body {
                           {{ Form::open(['route' => 'dashboard.part.update.status']) }}
                             <input type="hidden" name="part_id" value="{{$part->id}}">
                             @if($part->approved == 1)
-                            <button type="submit" class="btn btn-sm btn-danger">Deacctive</button>
+                            <button type="submit" class="btn btn-sm btn-danger" >Deacctive</button>
                             @else
                             <button type="submit" class="btn btn-sm btn-primary">Active</button>
                             @endif
                           {{ Form::close() }}
                                 
                             </form>
+                             {{ Form::open(['route' => ['dashboard.spellRequests.destroy' ,$part->id] ,'method' => 'DELETE']) }}
+                                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                        {{ Form::close() }}
                         </td>
                        
                      
