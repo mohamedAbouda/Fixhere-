@@ -53,6 +53,37 @@
                             </div>
                         </a>
                     </li>
+
+                    <li class="c-menu__item has-submenu {{ strpos(request()->route()->getName() , 'dashboard.brands') !== FALSE ? 'is-active' : '' }} ? 'is-active' : '' }}" data-toggle="tooltip" title="Brands">
+                        <a href="{{ route('dashboard.brands.index') }}" style="text-decoration: none;">
+                            <div class="c-menu__item__inner">
+                                <i class="fa fa-apple"></i>
+                                <div class="c-menu-item__title">
+                                    <span>Brands</span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="c-menu__item has-submenu {{ strpos(request()->route()->getName() , 'dashboard.models') !== FALSE ? 'is-active' : '' }} ? 'is-active' : '' }}" data-toggle="tooltip" title="Models">
+                        <a href="{{ route('dashboard.models.index') }}" style="text-decoration: none;">
+                            <div class="c-menu__item__inner">
+                                <i class="fa fa-maxcdn"></i>
+                                <div class="c-menu-item__title">
+                                    <span>Models</span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="c-menu__item has-submenu {{ strpos(request()->route()->getName() , 'dashboard.products') !== FALSE ? 'is-active' : '' }} ? 'is-active' : '' }}" data-toggle="tooltip" title="Products">
+                        <a href="{{ route('dashboard.products.index') }}" style="text-decoration: none;">
+                            <div class="c-menu__item__inner">
+                                <i class="fa fa-shopping-cart"></i>
+                                <div class="c-menu-item__title">
+                                    <span>Products</span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
                     @endif
                     <li class="c-menu__item has-submenu {{ strpos(request()->route()->getName() , 'dashboard.orders') !== FALSE ? 'is-active' : '' }} ? 'is-active' : '' }}" data-toggle="tooltip" title="Orders">
                         <a href="{{ route('dashboard.orders.index') }}" style="text-decoration: none;">

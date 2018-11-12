@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\ProductCreateRequest;
 use App\Http\Requests\Dashboard\ProductUpdateRequest;
+use App\ProductImage;
 use App\Product;
 use App\Model;
 use App\Brand;
@@ -52,7 +53,31 @@ class ProductController extends Controller
     {
         $data = $request->all();
 
+        if (!$request->get('is_android_part')) {
+            $data['is_android_part'] = 0;
+        }
+        if (!$request->get('is_ios_part')) {
+            $data['is_ios_part'] = 0;
+        }
+        if (!$request->get('is_delivery_part')) {
+            $data['is_delivery_part'] = 0;
+        }
+        
         $product = Product::create($data);
+
+        if ($request->hasFile('images')) {
+            // $product_images_data = [];
+            $images = $data['images'];
+            foreach ($images as $image) {
+                $product_images_data[] = [
+                    'image' => $image
+                ];
+            }
+            /**
+            * https://laravel.com/docs/5.4/eloquent-relationships#inserting-and-updating-related-models
+            */
+            $product->images()->createMany($product_images_data);
+        }
 
         alert()->success('Product created successfully.', 'Success');
         return redirect()->route('dashboard.products.index');
@@ -97,7 +122,31 @@ class ProductController extends Controller
     {
         $data = $request->all();
 
+        if (!$request->get('is_android_part')) {
+            $data['is_android_part'] = 0;
+        }
+        if (!$request->get('is_ios_part')) {
+            $data['is_ios_part'] = 0;
+        }
+        if (!$request->get('is_delivery_part')) {
+            $data['is_delivery_part'] = 0;
+        }
+
         $product->update($data);
+        if ($request->hasFile('images')) {
+            // $product_images_data = [];
+            $images = $data['images'];
+            foreach ($images as $image) {
+                $product_images_data[] = [
+                    'image' => $image
+                ];
+            }
+            /**
+            * https://laravel.com/docs/5.4/eloquent-relationships#inserting-and-updating-related-models
+            */
+            $product->images()->delete();
+            $product->images()->createMany($product_images_data);
+        }
 
         alert()->success('Product updated successfully.', 'Success');
         return redirect()->route('dashboard.products.index');
