@@ -63,6 +63,18 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => ['a
         * Refers
         */
         Route::resource('refers','ReferController');
+        /**
+        * Brands
+        */
+        Route::resource('brands','BrandController');
+        /**
+        * Models
+        */
+        Route::resource('models','ModelController');
+        /**
+        * Products
+        */
+        Route::resource('products','ProductController');
     });
 
     /**
