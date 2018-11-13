@@ -11,7 +11,7 @@ class RequestSchedule extends Model
 	* 0 shceduled but not approved
 	* 1 sent and approved by technical agent
 	*/
-	protected $fillable = ['request_id','day_date','day_time','sent_times','approved'];
+	protected $fillable = ['request_id','day_date','day_time','sent_times'];
 	protected $dates = ['day_date'];
 
 

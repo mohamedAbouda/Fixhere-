@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Models\Request as ClientRequest;
 use App\Models\RequestSchedule;
+use App\Product;
 use App\Http\Controllers\Controller;
 use \Carbon\Carbon;
 
@@ -18,6 +19,12 @@ class RequestController extends Controller
 				'error' => ['Please Provide spell id.'],
 			],422);
 		}
+		$product = Product::where('id',$request->input('spell_part_id'))->first();
+		if(!$product){
+			return response()->json([
+				'error' => ['No Spell Part with this id.'],
+			],404);
+		}
 		$data['spell_part'] = $request->input('spell_part_id');
 		$data['user_id'] = $request->user()->id;
 		$data['request_type'] = 'android';
@@ -26,10 +33,9 @@ class RequestController extends Controller
 		$schedule['day_date'] = Carbon::now()->format('Y-m-d');
 		$schedule['day_time'] = Carbon::now()->format('h:i:s');
 		$createSchedule = RequestSchedule::create($schedule);
-		$tokens = User::where('device_id','!=',null)->pluck('device_id')->toArray();
-		if($tokens){
-			$this->sendRequest('New Request','New Request hurry up','request',$createRequest->id,$tokens);
-		}
+		// this if to sent to specific users not all users
+		// assume you have person how if fixing android but not fixing ios we will send to android only
+		$this->chekAgents($product->is_android_part,$product->is_ios_part,$product->delivery,$request->user()->city_id,$createRequest->id);
 		return response()->json([
 			'success' => ['Your request has been sent ,we will notify you when someone accepts it and you can check your request status at any time.'],
 		],200);
@@ -84,5 +90,24 @@ class RequestController extends Controller
 		return response()->json([
 			'success' => ['done.'],
 		],422);
+	}
+
+	public function chekAgents($android_part,$ios_part,$delivery,$city_id,$request_id)
+	{
+		if($android_part == 1){
+			$tokens = User::where('android_fix',1)->where('city_id',$city_id)->pluck('device_id')->toArray();
+			if($tokens)
+			$this->sendRequest('New Request','New Request hurry up','request',$request_id,$tokens);
+		}
+		if($ios_part == 1){
+			$tokens = User::where('ios_fix',1)->where('city_id',$city_id)->pluck('device_id')->toArray();
+			if($tokens)
+			$this->sendRequest('New Request','New Request hurry up','request',$request_id,$tokens);
+		}
+		if($delivery == 1){
+			$tokens = User::where('delivery',1)->where('city_id',$city_id)->pluck('device_id')->toArray();
+			if($tokens)
+			$this->sendRequest('New Request','New Request hurry up','request',$request_id,$tokens);
+		}
 	}
 }

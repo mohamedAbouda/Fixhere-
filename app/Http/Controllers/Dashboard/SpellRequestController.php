@@ -80,7 +80,10 @@ class SpellRequestController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $delete = RequestSpellPart::where('id',$id)->first();
+        $delete->delete();
+        Alert::success('Request deleted successfully.', 'Success');
+        return redirect()->back();
     }
 
     public function updateStatus(Request $request)

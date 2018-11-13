@@ -6,11 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class RequestSpellPart extends Model
 {
-    protected $table = 'request_spells';
-    protected $fillable = ['spell_part_id','agent_id','approved'];
+	protected $table = 'request_spells';
+	protected $fillable = ['spell_part_id','agent_id','approved'];
 
-    public function agent()
-    {
-        return $this->belongsTo('App\User','agent_id');
-    }
+	public function agent()
+	{
+		return $this->belongsTo('App\User','agent_id');
+	}
+
+	
+	public function product()
+	{
+		return $this->belongsTo('App\Product','spell_part_id');
+	}
 }

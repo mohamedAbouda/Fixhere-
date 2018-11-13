@@ -21,7 +21,6 @@ class CreateRequestScheduleTable extends Migration
             $table->date('day_date');
             $table->time('day_time');
             $table->integer('sent_times')->default(0);
-            $table->integer('approved')->default(0);
             $table->timestamps();
         });
     }
