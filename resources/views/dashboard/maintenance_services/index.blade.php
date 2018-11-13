@@ -12,7 +12,7 @@ body {
 <div class="row">
     <div class="col-md-4 col-xs-12">
         <h3 class="section-title contacts-section-title">
-            Products
+            Maintenance services
         </h3>
     </div>
     <div class="col-xs-12 col-md-3">
@@ -24,8 +24,8 @@ body {
         </div>
     </div>
     <div class="col-md-4 col-md-offset-1 text-right col-xs-11">
-        <a href="{{ route('dashboard.products.create') }}"class="btn btn-blue margin-left-10">
-            <span>+ </span>Add product
+        <a href="{{ route('dashboard.maintenance-services.create') }}"class="btn btn-blue margin-left-10">
+            <span>+ </span>Add maintenance service
         </a>
     </div>
 </div>
@@ -35,10 +35,10 @@ body {
 <div class="row">
     <div class="col-md-9">
         <div class="row">
-            <div class="col-md-5 margin-bottom10 margin-top20">
+            <div class="col-md-8 margin-bottom10 margin-top20">
                 <div class="total-customer-col pad5 pad-bottom5 col-md-12">
                     <div class="col-md-9 customer-stat-col-pad">
-                        <h5 class="customer-stat-text pad5">Total products count</h5>
+                        <h5 class="customer-stat-text pad5">Total maintenance services count</h5>
                     </div>
                     <div class="col-md-3 text-center">
                         <h5 class="customer-stat-num pad5">
@@ -64,25 +64,7 @@ body {
                             Name
                         </th>
                         <th>
-                            Brand
-                        </th>
-                        <th>
-                            Model
-                        </th>
-                        <th>
-                            Stock
-                        </th>
-                        <th>
-                            Price
-                        </th>
-                        <th>
-                            Maintenance service
-                        </th>
-                        <th>
                             Technician fee
-                        </th>
-                        <th>
-                            Type
                         </th>
 
                         <th></th>
@@ -101,52 +83,8 @@ body {
                         </td>
                         <td>
                             <h3 class="margin-top10 contact-details-view" style="font-weight: 400;">
-                                {{ $resource->brand() ? $resource->brand()->name : '' }}
+                                {{ $resource->tech_fee }}
                             </h3>
-                        </td>
-                        <td>
-                            <h3 class="margin-top10 contact-details-view" style="font-weight: 400;">
-                                {{ $resource->model ? $resource->model->name : '' }}
-                            </h3>
-                        </td>
-                        <td>
-                            <h3 class="margin-top10 contact-details-view" style="font-weight: 400;">
-                                {{ $resource->stock }}
-                            </h3>
-                        </td>
-                        <td>
-                            <h3 class="margin-top10 contact-details-view" style="font-weight: 400;">
-                                {{ $resource->price }}
-                            </h3>
-                        </td>
-                        <td>
-                            <h3 class="margin-top10 contact-details-view" style="font-weight: 400;">
-                                {{ $resource->maintenanceService ? $resource->maintenanceService->name : '' }}
-                            </h3>
-                        </td>
-                        <td>
-                            <h3 class="margin-top10 contact-details-view" style="font-weight: 400;">
-                                {{ $resource->maintenanceService ? $resource->maintenanceService->tech_fee : '' }}
-                            </h3>
-                        </td>
-                        <td>
-                            <ul>
-                                <?php if ($resource->is_android_part): ?>
-                                    <li>
-                                        Android part
-                                    </li>
-                                <?php endif; ?>
-                                <?php if ($resource->is_ios_part): ?>
-                                    <li>
-                                        iPhone part
-                                    </li>
-                                <?php endif; ?>
-                                <?php if ($resource->is_delivery_part): ?>
-                                    <li>
-                                        Delivery part
-                                    </li>
-                                <?php endif; ?>
-                            </ul>
                         </td>
 
                         <td>
@@ -156,11 +94,11 @@ body {
                                 </button>
                                 <ul class="dropdown-menu contact-dropdown pull-right">
                                     <li>
-                                        <a href="{{ route('dashboard.products.edit', $resource->id) }}">Edit</a>
+                                        <a href="{{ route('dashboard.maintenance-services.edit', $resource->id) }}">Edit</a>
                                     </li>
 
                                     <li>
-                                        {{ Form::open(['route' => ['dashboard.products.destroy' ,$resource->id] ,'method' => 'DELETE']) }}
+                                        {{ Form::open(['route' => ['dashboard.maintenance-services.destroy' ,$resource->id] ,'method' => 'DELETE']) }}
                                         <button type="submit">Delete</button>
                                         {{ Form::close() }}
                                     </li>

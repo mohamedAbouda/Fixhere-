@@ -8,7 +8,7 @@ use Illuminate\Http\UploadedFile;
 class Product extends AppModel
 {
     protected $fillable = [
-        'name', 'description', 'short_description', 'thumbnail', 'views', 'stock', 'model_id', 'price', 'tech_fee', 'is_android_part', 'is_ios_part', 'is_delivery_part'
+        'name', 'description', 'short_description', 'thumbnail', 'views', 'stock', 'model_id', 'price', 'is_android_part', 'is_ios_part', 'is_delivery_part', 'maintenance_service_id'
     ];
     protected $appends = [
         'thumbnail_url'
@@ -42,6 +42,10 @@ class Product extends AppModel
     public function images()
     {
         return $this->hasMany(ProductImage::class);
+    }
+    public function maintenanceService()
+    {
+        return $this->belongsTo(MaintenanceService::class);
     }
     public function model()
     {

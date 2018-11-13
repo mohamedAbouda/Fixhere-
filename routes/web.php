@@ -79,6 +79,10 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => ['a
         */
         Route::resource('models','ModelController');
         /**
+        * Maintenance Services
+        */
+        Route::resource('maintenance-services','MaintenanceServiceController');
+        /**
         * Products
         */
         Route::resource('products','ProductController');

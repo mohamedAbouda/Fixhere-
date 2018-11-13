@@ -74,6 +74,17 @@
                             </div>
                         </a>
                     </li>
+
+                    <li class="c-menu__item has-submenu {{ strpos(request()->route()->getName() , 'dashboard.maintenance-services') !== FALSE ? 'is-active' : '' }} ? 'is-active' : '' }}" data-toggle="tooltip" title="Maintenance services">
+                        <a href="{{ route('dashboard.maintenance-services.index') }}" style="text-decoration: none;">
+                            <div class="c-menu__item__inner">
+                                <i class="fa fa-tasks"></i>
+                                <div class="c-menu-item__title">
+                                    <span>Maintenance services</span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
                     <li class="c-menu__item has-submenu {{ strpos(request()->route()->getName() , 'dashboard.products') !== FALSE ? 'is-active' : '' }} ? 'is-active' : '' }}" data-toggle="tooltip" title="Products">
                         <a href="{{ route('dashboard.products.index') }}" style="text-decoration: none;">
                             <div class="c-menu__item__inner">

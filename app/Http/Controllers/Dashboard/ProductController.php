@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\ProductCreateRequest;
 use App\Http\Requests\Dashboard\ProductUpdateRequest;
+use App\MaintenanceService;
 use App\ProductImage;
 use App\Product;
 use App\Model;
@@ -23,7 +24,7 @@ class ProductController extends Controller
     */
     public function index()
     {
-        $data['resources'] = Product::orderBy('id', 'DESC')->paginate($this->paginate_by);
+        $data['resources'] = Product::with(['model', 'maintenanceService'])->orderBy('id', 'DESC')->paginate($this->paginate_by);
         $data['total_resources_count'] = Product::count();
         $index = request()->get('page' , 1);
         $data['counter_offset'] = ($index * $this->paginate_by) - $this->paginate_by;
@@ -39,6 +40,7 @@ class ProductController extends Controller
     {
         $data['brands'] = Brand::pluck('name', 'id')->toArray();
         $data['models'] = Model::get();
+        $data['maintenance_services'] = MaintenanceService::pluck('name', 'id')->toArray();
 
         return view($this->base_view_path . 'create', $data);
     }
@@ -62,7 +64,7 @@ class ProductController extends Controller
         if (!$request->get('is_delivery_part')) {
             $data['is_delivery_part'] = 0;
         }
-        
+
         $product = Product::create($data);
 
         if ($request->hasFile('images')) {
@@ -107,6 +109,7 @@ class ProductController extends Controller
         $data['resource'] = $product;
         $data['brands'] = Brand::pluck('name', 'id')->toArray();
         $data['models'] = Model::get();
+        $data['maintenance_services'] = MaintenanceService::pluck('name', 'id')->toArray();
 
         return view($this->base_view_path . 'edit',$data);
     }

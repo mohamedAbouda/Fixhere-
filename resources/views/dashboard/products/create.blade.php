@@ -73,20 +73,20 @@
             <p class="text-danger" style="margin-bottom: 0;">{{ $errors->first('model_id') }}</p>
         </div>
         <div class="form-group margin-bottom20 col-md-6">
+            <label class="control-label" for="maintenance_service_id">
+                <span class="text-danger">*</span>
+                Maintenance service
+            </label>
+            {{ Form::select('maintenance_service_id', $maintenance_services, old('maintenance_service_id'), ['id'=>'maintenance_service_id', 'required'=>'required', 'class' => 'form-control', 'placeholder' => 'select a maintenance service']) }}
+            <p class="text-danger" style="margin-bottom: 0;">{{ $errors->first('maintenance_service_id') }}</p>
+        </div>
+        <div class="form-group margin-bottom20 col-md-6">
             <label class="control-label" for="price">
                 <span class="text-danger">*</span>
                 Price
             </label>
             {{ Form::number('price', old('price', 0), ['id'=>'price', 'min' => 0, 'step' => 0.25, 'required'=>'required', 'class' => 'form-control']) }}
             <p class="text-danger" style="margin-bottom: 0;">{{ $errors->first('price') }}</p>
-        </div>
-        <div class="form-group margin-bottom20 col-md-6">
-            <label class="control-label" for="tech_fee">
-                <span class="text-danger">*</span>
-                Technician fee
-            </label>
-            {{ Form::number('tech_fee', old('tech_fee', 0), ['id'=>'tech_fee', 'min' => 0, 'step' => 0.25, 'required'=>'required', 'class' => 'form-control']) }}
-            <p class="text-danger" style="margin-bottom: 0;">{{ $errors->first('tech_fee') }}</p>
         </div>
         <div class="form-group margin-bottom20 col-md-6">
             <label class="control-label" for="stock">
