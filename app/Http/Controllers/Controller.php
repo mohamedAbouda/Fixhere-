@@ -44,4 +44,30 @@ class Controller extends BaseController
 
         $downstreamResponse = FCM::sendTo($tokens, $option, $notification, $data);
     }
+
+    public function sendClientRequest($stauts,$tokens)
+    {
+        $body = '';
+        if($stauts == 2){
+            $body = 'some technical agent has accepted your request';
+        }
+        if($stauts == 3){
+            $body = 'some technical agent has completed your request';
+        }
+       $optionBuilder = new OptionsBuilder();
+       $optionBuilder->setTimeToLive(60*20);
+
+       $notificationBuilder = new PayloadNotificationBuilder('Your Order has been updated');
+       $notificationBuilder->setBody($body)
+       ->setSound('default');
+
+       $dataBuilder = new PayloadDataBuilder();
+       $dataBuilder->addData(['data' => 'there are nothing here bitch , go fuck yourself']);
+
+       $option = $optionBuilder->build();
+       $notification = $notificationBuilder->build();
+       $data = $dataBuilder->build();
+
+       $downstreamResponse = FCM::sendTo($tokens, $option, $notification, $data);
+   }
 }

@@ -14,20 +14,19 @@ class RequestController extends Controller
 {
 	public function send(Request $request)
 	{
-		if(!$request->input('spell_part_id')){
+		if(!$request->input('product_id')){
 			return response()->json([
-				'error' => ['Please Provide spell id.'],
+				'error' => ['Please Provide product id.'],
 			],422);
 		}
-		$product = Product::where('id',$request->input('spell_part_id'))->first();
+		$product = Product::where('id',$request->input('product_id'))->first();
 		if(!$product){
 			return response()->json([
 				'error' => ['No Spell Part with this id.'],
 			],404);
 		}
-		$data['spell_part'] = $request->input('spell_part_id');
+		$data['spell_part'] = $request->input('product_id');
 		$data['user_id'] = $request->user()->id;
-		$data['request_type'] = 'android';
 		$createRequest = ClientRequest::create($data);
 		$schedule['request_id'] = $createRequest->id;
 		$schedule['day_date'] = Carbon::now()->format('Y-m-d');
@@ -43,15 +42,14 @@ class RequestController extends Controller
 
 	public function schedule(Request $request)
 	{
-		if(!$request->input('spell_part_id') || !$request->input('day_date')
+		if(!$request->input('product_id') || !$request->input('day_date')
 		 || !$request->input('day_time')){
 			return response()->json([
 				'error' => ['Please Provide spell id , day date and day time.'],
 			],422);
 		}
-		$data['spell_part'] = $request->input('spell_part_id');
+		$data['spell_part'] = $request->input('product_id');
 		$data['user_id'] = $request->user()->id;
-		$data['request_type'] = 'android';
 		$createRequest = ClientRequest::create($data);
 		$schedule['request_id'] = $createRequest->id;
 		$schedule['day_date'] = $request->input('day_date');
@@ -81,6 +79,7 @@ class RequestController extends Controller
 			],200);
 		}
 		$updateRequest = $checkRequest->update(['agent_id'=>$request->user()->id,'status'=>2]);
+		$this->sendClientRequest(2,$checkRequest->user->device_id);
 		$checkSchedule = RequestSchedule::where('request_id',$request->input('request_id'))
 							->first();
 		if($checkSchedule){
@@ -89,7 +88,29 @@ class RequestController extends Controller
 
 		return response()->json([
 			'success' => ['done.'],
-		],422);
+		],200);
+	}
+
+	public function getRequests(Request $request)
+	{
+		$requests = ClientRequest::where('user_id',$request->user()->id)->with('agent','product');
+		if($request->input('status'))
+			$requests->where('status',$request->input('status'));
+		$requests = $requests->get();
+		return response()->json([
+			'data' => $requests,
+		],200);
+	}
+
+	public function agentGetRequests(Request $request)
+	{
+		$requests = ClientRequest::where('agent_id',$request->user()->id)->with('user','product');
+		if($request->input('status'))
+			$requests->where('status',$request->input('status'));
+		$requests = $requests->get();
+		return response()->json([
+			'data' => $requests,
+		],200);
 	}
 
 	public function chekAgents($android_part,$ios_part,$delivery,$city_id,$request_id)
