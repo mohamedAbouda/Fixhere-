@@ -75,12 +75,12 @@ class RequestController extends Controller
 				'error' => ['No request with this id.'],
 			],404);
 		}
-		if($checkRequest->agent_id && $checkRequest->status != 1){
+		if($checkRequest->agent_id != $request->user()->id){
 			return response()->json([
 				'success' => ['some technical agent accepted this request before.'],
 			],200);
 		}
-		$updateRequest = $checkRequest->update(['agent_id'=>$request->user()->id,'status'=>2]);
+		$updateRequest = $checkRequest->update(['agent_id'=>$request->user()->id,'status'=>$request->input('status')]);
 		$this->sendClientRequest(2,$checkRequest->user->device_id);
 		$checkSchedule = RequestSchedule::where('request_id',$request->input('request_id'))
 							->first();

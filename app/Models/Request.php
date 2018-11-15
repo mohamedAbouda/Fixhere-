@@ -12,6 +12,7 @@ class Request extends Model
 	* 1 shceduled or sent but not accepted by technical agent yet.
 	* 2 send and accepted by technical agent but not completed.
 	* 3 send and completed by technical agent
+    * 4 canceled by technical agent
     */
     protected $fillable = ['agent_id','user_id','status','spell_part','price'];
 
