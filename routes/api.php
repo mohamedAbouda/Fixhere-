@@ -40,7 +40,7 @@ Route::group(['prefix'=>'v1','namespace' => 'Apis'],function(){
         Route::post('user/promo/codes','ClientController@userPromoCodes');
         Route::post('/nearby/centers','CenterController@nearbyCenters');
         Route::get('/recent/centers','CenterController@recentCenters');
-        
+
         Route::get('/all/services','ServiceController@allServices');
         Route::get('/all/regions','RegionController@allRegions');
 
@@ -75,5 +75,10 @@ Route::group(['prefix'=>'v1','namespace' => 'Apis'],function(){
             Route::post('/send','ChatController@send');
         });
         Route::get('faqs','FAQController@index');
+
+        Route::get('brands','BrandController@index');
+        Route::get('models','ModelController@index');
+        Route::get('maintenance-services','MaintenanceServiceController@index');
+        Route::get('parts','ProductController@index');
     });
 });
