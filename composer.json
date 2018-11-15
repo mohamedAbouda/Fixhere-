@@ -6,14 +6,15 @@
     "type": "project",
     "require": {
         "php": ">=5.6.4",
+        "brozot/laravel-fcm": "^1.2.0",
+        "gloudemans/shoppingcart": "^2.5",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
-        "zizaco/entrust": "^1.7",
-        "tymon/jwt-auth": "0.5.*",
-        "brozot/laravel-fcm": "^1.2.0",
         "laravelcollective/html": "^5.3.0",
+        "spatie/laravel-fractal": "^4.0",
+        "tymon/jwt-auth": "0.5.*",
         "uxweb/sweet-alert": "^1.4",
-        "spatie/laravel-fractal": "^4.0"
+        "zizaco/entrust": "^1.7"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

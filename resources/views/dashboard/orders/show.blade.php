@@ -1,19 +1,16 @@
-
 @extends('layouts.dashboard.app')
-
 @section('stylesheets')
 <style>
 body {
-    background-color:#edeff9;
+background-color:#edeff9;
 }
 </style>
 @stop
-
 @section('section-title')
 <div class="row">
     <div class="col-md-4 col-xs-12">
         <h3 class="section-title contacts-section-title">
-            ({{ $resource->client->name }})'s data.
+        ({{ $order->user->name }})'s data.
         </h3>
     </div>
     <div class="col-xs-12 col-md-3">
@@ -24,17 +21,16 @@ body {
             </div>
         </div>
     </div>
-  <!--   <div class="col-md-4 col-md-offset-1 text-right col-xs-11">
-      <a href="{{ route('dashboard.admins.create') }}"class="btn btn-primary margin-left-10">
-          <span>+ </span>Add admin
-      </a>
-      <a href="{{ route('dashboard.admins.edit',$resource->id) }}"class="btn btn-warning margin-left-10">
-          Edit admin
-      </a>
-  </div> -->
+    <!--   <div class="col-md-4 col-md-offset-1 text-right col-xs-11">
+        <a href="{{ route('dashboard.admins.create') }}"class="btn btn-primary margin-left-10">
+            <span>+ </span>Add admin
+        </a>
+        <a href="{{ route('dashboard.admins.edit',$order->id) }}"class="btn btn-warning margin-left-10">
+            Edit admin
+        </a>
+    </div> -->
 </div>
 @stop
-
 @section('content')
 <div class="row margin-top15">
     <div class="col-md-12">
@@ -58,126 +54,78 @@ body {
                             </span>
                         </td>
                         <td>
-                            {{ $resource->id }}
+                            {{ $order->id }}
                         </td>
                     </tr>
                     <tr>
                         <td class="">
                             <span style="margin-left:30px;">
-                               Client Name
+                                Client Name
                             </span>
                         </td>
                         <td>
-                            <a href="{{ route('dashboard.clients.show', $resource->client->id) }}">
-                                    {{ $resource->client->name }}
-                        </td>
-                    </tr>
-                       <tr>
-                        <td class="">
-                            <span style="margin-left:30px;">
-                               Technician Name
-                            </span>
-                        </td>
-                        <td>
-                            {{ $resource->technician->name }}
-                        </td>
-                    </tr>
-
+                            <a href="{{ route('dashboard.clients.show', $order->user->id) }}">
+                                {{ $order->user->name }}
+                            </td>
+                        </tr>
                         <tr>
-                        <td class="">
-                            <span style="margin-left:30px;">
-                             Service
-                            </span>
-                        </td>
-                        <td>
-                            {{ $resource->service->name }}
-                        </td>
-                    </tr>
-
+                            <td class="">
+                                <span style="margin-left:30px;">
+                                    Technician Name
+                                </span>
+                            </td>
+                            <td>
+                                {{ $order->agent->name }}
+                            </td>
+                        </tr>
                         <tr>
-                        <td class="">
-                            <span style="margin-left:30px;">
-                              Region
-                            </span>
-                        </td>
-                        <td>
-                            {{ $resource->region->city->name }}
-                        </td>
-                    </tr>
-
-                        <tr>
-                        <td class="">
-                            <span style="margin-left:30px;">
-                               Description
-                            </span>
-                        </td>
-                        <td>
-                            {{ $resource->description }}
-                        </td>
-                    </tr>
-
-                           <tr>
-                        <td class="">
-                            <span style="margin-left:30px;">
-                               Pickup Date
-                            </span>
-                        </td>
-                        <td>
-                            @if($resource->pickup)
-                            @foreach($resource->pickup as $pick)
-                                 {{$pick->date->format('Y/M/d - H:s')}}<br>
-                            @endforeach
-                            @else
-                            No Pickup date yet.
-                            @endif
-                        </td>
-                    </tr>
-
-                        <tr>
-                        <td class="">
-                            <span style="margin-left:30px;">
-                               Status
-                            </span>
-                        </td>
-                        <td>
-                             @if($resource->status === 0)
-                                Recieved
-                                @elseif($resource->status === 1)
-                                Accepted
-                                @elseif($resource->status === 2)
-                                Technical agent is on the way
-                                @elseif($resource->status === 3)
-                                Done
+                            <td class="">
+                                <span style="margin-left:30px;">
+                                    Status
+                                </span>
+                            </td>
+                            <td>
+                                @if($order->status === 1)
+                                Sent but not accepted yet
+                                @elseif($order->status === 2)
+                                Accepted but not completed
+                                @elseif($order->status === 3)
+                                Accepted & finished
+                                @else
+                                Unknown
                                 @endif
-                        </td>
-                    </tr>
-
+                            </td>
+                        </tr>
                         <tr>
-                        <td class="">
-                            <span style="margin-left:30px;">
-                              Reviews
-                            </span>
-                        </td>
-                        <td>
-                            @if($resource->reviews)
-                             <strong>Avg reviews : </strong> {{$resource->reviews->sum('rate') / count($resource->reviews)}}<br>
-                             <strong>Total reviews : </strong> {{ count($resource->reviews)}}<br>
-                             <hr>
-                            @foreach($resource->reviews as $review)
-                                 <strong>Rate : </strong> {{$review->rate}}<br>
-                                 <strong>Review : </strong>{{$review->review}}<br>
-                                 <hr>
-                            @endforeach
-
-                            @else
-                            No Reviews date yet.
-                            @endif
-                        </td>
-                    </tr>
-                 
-                </tbody>
-            </table>
+                            <td class="">
+                                <span style="margin-left:30px;">
+                                    Items
+                                </span>
+                            </td>
+                            <td>
+                                @foreach($order->items as $item)
+                                <strong>Product : </strong>{{$item->product->name}}<br>
+                                <strong>quantity : </strong>{{$item->qty}}<br>
+                                <strong>Price per item: </strong>{{$item->price}}<br>
+                                <br>
+                                <hr>
+                                @endforeach
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="">
+                                <span style="margin-left:30px;">
+                                    Total price
+                                </span>
+                            </td>
+                            <td>
+                                {{$order->total_price}}
+                            </td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-</div>
-@stop
+    @stop

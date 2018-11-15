@@ -68,9 +68,6 @@ body {
                         </th>
                      
                         <th>
-                            Location
-                        </th>
-                        <th>
                             Status
                         </th>
                         <th></th>
@@ -84,9 +81,9 @@ body {
                         </td>
                         <td>
                             <h3 class="contact-list-view-column-categ margin-top10 contact-details-view" style="font-weight: 400;">
-                                @if($resource->client)
-                                <a href="{{ route('dashboard.clients.show', $resource->client->id) }}">
-                                    {{ $resource->client->name }}
+                                @if($resource->user)
+                                <a href="{{ route('dashboard.clients.show', $resource->user->id) }}">
+                                    {{ $resource->user->name }}
                                 </a>
                                 @else
                                 <span class="text-danger">[DELETED]</span>
@@ -96,33 +93,26 @@ body {
                    
                         <td>
                             <h3 class="contact-list-view-column-categ margin-top10 contact-details-view" style="font-weight: 400;">
-                                @if($resource->technician)
+                                @if($resource->agent)
                                 <a href="#">
-                                    {{ $resource->technician->name }}
+                                    {{ $resource->agent->name }}
                                 </a>
                                 @else
-                                <span class="text-danger">[DELETED]</span>
+                                <span class="text-danger">No Assigened yet</span>
                                 @endif
                             </h3>
                         </td>
                   
                         <td>
                             <h3 class="contact-list-view-column-categ margin-top10 contact-details-view" style="font-weight: 400;">
-                                <a href="{{route('dashboard.order.location',$resource->id)}}">
-                                    view on map
-                                </a>
-                            </h3>
-                        </td>
-                        <td>
-                            <h3 class="contact-list-view-column-categ margin-top10 contact-details-view" style="font-weight: 400;">
-                                @if($resource->status === 0)
-                                Recieved
-                                @elseif($resource->status === 1)
-                                Accepted
+                                @if($resource->status === 1)
+                                Sent but not accepted yet
                                 @elseif($resource->status === 2)
-                                Technical agent is on the way
+                                Accepted but not completed
                                 @elseif($resource->status === 3)
-                                Done
+                                 Accepted & finished
+                                @else
+                                Unknown
                                 @endif
                             </h3>
                         </td>

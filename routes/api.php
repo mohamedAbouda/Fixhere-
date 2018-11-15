@@ -31,10 +31,25 @@ Route::group(['prefix'=>'v1','namespace' => 'Apis'],function(){
             Route::post('/edit','ClientController@edit');
 
         });
+
+         Route::group(['prefix' => 'cart'] , function(){
+            Route::post('add','CartController@add');
+            Route::get('get','CartController@get');
+            Route::post('update','CartController@update');
+            Route::post('remove','CartController@remove');
+            Route::post('destroy','CartController@destroy');
+            Route::get('checkout','CartController@checkout');
+            Route::post('agent/change/status','CartController@agentAccept');
+
+        });
+         Route::get('orders','CartController@orders');
+         Route::get('order/details','CartController@orderDetails');
          Route::group(['prefix' => 'request'] , function(){
             Route::post('/send','RequestController@send');
             Route::post('/schedule','RequestController@Schedule');
             Route::post('/accept','RequestController@accept');
+            Route::get('/get','RequestController@getRequests');
+            Route::get('agent/get','RequestController@agentGetRequests');
         });
         Route::post('request/spell/part','AgentController@requestSpellPart');
         Route::post('user/promo/codes','ClientController@userPromoCodes');
