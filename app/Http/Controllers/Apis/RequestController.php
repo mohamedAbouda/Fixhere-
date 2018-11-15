@@ -27,6 +27,7 @@ class RequestController extends Controller
 		}
 		$data['spell_part'] = $request->input('product_id');
 		$data['user_id'] = $request->user()->id;
+		$data['price'] = $request->input('price') ? $request->input('price'):0;
 		$createRequest = ClientRequest::create($data);
 		$schedule['request_id'] = $createRequest->id;
 		$schedule['day_date'] = Carbon::now()->format('Y-m-d');
@@ -50,6 +51,7 @@ class RequestController extends Controller
 		}
 		$data['spell_part'] = $request->input('product_id');
 		$data['user_id'] = $request->user()->id;
+		$data['price'] = $request->input('price') ? $request->input('price'):0;
 		$createRequest = ClientRequest::create($data);
 		$schedule['request_id'] = $createRequest->id;
 		$schedule['day_date'] = $request->input('day_date');
