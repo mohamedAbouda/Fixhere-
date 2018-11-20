@@ -6,7 +6,7 @@ use League\Fractal\TransformerAbstract;
 
 class ProductTransformer extends TransformerAbstract
 {
-    protected $defaultIncludes = ['service', 'model'];
+    // protected $defaultIncludes = ['service', 'model'];
     /**
      * A Fractal transformer.
      *
