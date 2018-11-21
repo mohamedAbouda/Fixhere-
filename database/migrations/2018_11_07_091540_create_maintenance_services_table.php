@@ -18,6 +18,12 @@ class CreateMaintenanceServicesTable extends Migration
 
             $table->string('name')->default('')->nullable();
             $table->decimal('tech_fee', 20, 2)->unsigned()->default(0);
+            $table->boolean('is_android_part')->default(0);
+            $table->boolean('is_ios_part')->default(0);
+            $table->boolean('is_delivery_part')->default(0);
+            $table->integer('model_id')->unsigned()->nullable();
+            $table->foreign('model_id')->references('id')->on('models')
+            ->onUpdate('cascade')->onDelete('cascade');
 
             $table->timestamps();
         });
