@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\MaintenanceServiceCreateRequest;
 use App\Http\Requests\Dashboard\MaintenanceServiceUpdateRequest;
 use App\MaintenanceService;
+use App\Brand;
+use App\Model;
 
 class MaintenanceServiceController extends Controller
 {
@@ -20,7 +22,7 @@ class MaintenanceServiceController extends Controller
     */
     public function index()
     {
-        $data['resources'] = MaintenanceService::orderBy('id', 'DESC')->paginate($this->paginate_by);
+        $data['resources'] = MaintenanceService::with(['model'])->orderBy('id', 'DESC')->paginate($this->paginate_by);
         $data['total_resources_count'] = MaintenanceService::count();
         $index = request()->get('page' , 1);
         $data['counter_offset'] = ($index * $this->paginate_by) - $this->paginate_by;
@@ -34,7 +36,10 @@ class MaintenanceServiceController extends Controller
     */
     public function create()
     {
-        return view($this->base_view_path . 'create');
+        $data['brands'] = Brand::pluck('name', 'id')->toArray();
+        $data['models'] = Model::get();
+
+        return view($this->base_view_path . 'create', $data);
     }
 
     /**
@@ -46,6 +51,15 @@ class MaintenanceServiceController extends Controller
     public function store(MaintenanceServiceCreateRequest $request)
     {
         $data = $request->all();
+        if (!$request->get('is_android_part')) {
+            $data['is_android_part'] = 0;
+        }
+        if (!$request->get('is_ios_part')) {
+            $data['is_ios_part'] = 0;
+        }
+        if (!$request->get('is_delivery_part')) {
+            $data['is_delivery_part'] = 0;
+        }
 
         $maintenance_service = MaintenanceService::create($data);
 
@@ -75,8 +89,10 @@ class MaintenanceServiceController extends Controller
     public function edit(MaintenanceService $maintenance_service)
     {
         $data['resource'] = $maintenance_service;
+        $data['brands'] = Brand::pluck('name', 'id')->toArray();
+        $data['models'] = Model::get();
 
-        return view($this->base_view_path . 'edit',$data);
+        return view($this->base_view_path . 'edit', $data);
     }
 
     /**
@@ -89,6 +105,15 @@ class MaintenanceServiceController extends Controller
     public function update(MaintenanceServiceUpdateRequest $request, MaintenanceService $maintenance_service)
     {
         $data = $request->all();
+        if (!$request->get('is_android_part')) {
+            $data['is_android_part'] = 0;
+        }
+        if (!$request->get('is_ios_part')) {
+            $data['is_ios_part'] = 0;
+        }
+        if (!$request->get('is_delivery_part')) {
+            $data['is_delivery_part'] = 0;
+        }
 
         $maintenance_service->update($data);
 

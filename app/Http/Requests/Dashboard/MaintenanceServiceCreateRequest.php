@@ -26,6 +26,8 @@ class MaintenanceServiceCreateRequest extends FormRequest
         return [
             'name' => 'required|min:1|max:190',
             'tech_fee' => 'required|min:0',
+            'brand_id' => 'required|exists:brands,id',
+            'model_id' => 'required|exists:models,id',
         ];
     }
 }

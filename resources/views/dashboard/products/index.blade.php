@@ -64,12 +64,6 @@ body {
                             Name
                         </th>
                         <th>
-                            Brand
-                        </th>
-                        <th>
-                            Model
-                        </th>
-                        <th>
                             Stock
                         </th>
                         <th>
@@ -80,9 +74,6 @@ body {
                         </th>
                         <th>
                             Technician fee
-                        </th>
-                        <th>
-                            Type
                         </th>
 
                         <th></th>
@@ -97,16 +88,6 @@ body {
                         <td>
                             <h3 class="margin-top10 contact-details-view" style="font-weight: 400;">
                                 {{ $resource->name }}
-                            </h3>
-                        </td>
-                        <td>
-                            <h3 class="margin-top10 contact-details-view" style="font-weight: 400;">
-                                {{ $resource->brand() ? $resource->brand()->name : '' }}
-                            </h3>
-                        </td>
-                        <td>
-                            <h3 class="margin-top10 contact-details-view" style="font-weight: 400;">
-                                {{ $resource->model ? $resource->model->name : '' }}
                             </h3>
                         </td>
                         <td>
@@ -128,25 +109,6 @@ body {
                             <h3 class="margin-top10 contact-details-view" style="font-weight: 400;">
                                 {{ $resource->maintenanceService ? $resource->maintenanceService->tech_fee : '' }}
                             </h3>
-                        </td>
-                        <td>
-                            <ul>
-                                <?php if ($resource->is_android_part): ?>
-                                    <li>
-                                        Android part
-                                    </li>
-                                <?php endif; ?>
-                                <?php if ($resource->is_ios_part): ?>
-                                    <li>
-                                        iPhone part
-                                    </li>
-                                <?php endif; ?>
-                                <?php if ($resource->is_delivery_part): ?>
-                                    <li>
-                                        Delivery part
-                                    </li>
-                                <?php endif; ?>
-                            </ul>
                         </td>
 
                         <td>

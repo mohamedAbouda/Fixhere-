@@ -97,5 +97,6 @@ Route::group(['prefix'=>'v1','namespace' => 'Apis'],function(){
         Route::get('models','ModelController@index');
         Route::get('maintenance-services','MaintenanceServiceController@index');
         Route::get('parts','ProductController@index');
+        Route::get('parts/{part}/related','ProductController@related');
     });
 });

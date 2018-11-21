@@ -6,7 +6,7 @@ use League\Fractal\TransformerAbstract;
 
 class ModelTransformer extends TransformerAbstract
 {
-    protected $defaultIncludes = ['products'];
+    protected $defaultIncludes = ['maintenanceServices'];
     /**
      * A Fractal transformer.
      *
@@ -21,10 +21,10 @@ class ModelTransformer extends TransformerAbstract
         ];
     }
 
-    public function includeProducts($brand)
+    public function includeMaintenanceServices($model)
     {
-        if ($brand->products) {
-            return $this->collection($brand->products, new ProductTransformer);
+        if ($model->maintenanceServices) {
+            return $this->collection($model->maintenanceServices, new MaintenanceServiceTransformer);
         }
     }
 }
