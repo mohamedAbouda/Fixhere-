@@ -22,7 +22,7 @@ class CreateRequestsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')
             ->onUpdate('cascade')->onDelete('cascade');
             $table->integer('status')->default(1);
-            $table->integer('spell_part')->nullable();
+            $table->integer('services_id')->nullable();
             $table->float('price')->default(0);
             $table->timestamps();
         });

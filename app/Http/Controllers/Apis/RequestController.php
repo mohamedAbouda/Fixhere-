@@ -7,6 +7,7 @@ use App\User;
 use App\Models\Request as ClientRequest;
 use App\Models\RequestSchedule;
 use App\Product;
+use App\Models\Order;
 use App\Http\Controllers\Controller;
 use \Carbon\Carbon;
 
@@ -132,5 +133,23 @@ class RequestController extends Controller
 			if($tokens)
 			$this->sendRequest('New Request','New Request hurry up','request',$request_id,$tokens);
 		}
+	}
+
+	public function ordersRequests(Request $request)
+	{
+		$requests = ClientRequest::where('user_id',$request->user()->id)->with('agent','product');
+		if($request->input('status'))
+			$requests->where('status',$request->input('status'));
+		$orders = Order::where('id','!=',null)->with('agent','items.product');
+		if($request->input('status'))
+			$orders->where('status',$request->input('status'));
+		$orders = $orders->get();
+		$requests = $requests->get();
+		return response()->json([
+			'data'=>['requests' => $requests,
+			'orders'=>$orders,]
+		],200);
+
+
 	}
 }

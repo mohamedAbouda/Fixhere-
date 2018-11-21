@@ -41,6 +41,7 @@ class CreateUsersTable extends Migration
             $table->integer('ios_fix')->nullable();
             $table->integer('delivery')->nullable();
             $table->string('phone')->nullable();
+            $table->float('wallet')->default(0);
 
             $table->rememberToken();
             $table->timestamps();

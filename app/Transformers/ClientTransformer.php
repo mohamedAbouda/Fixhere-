@@ -20,6 +20,7 @@ class ClientTransformer extends TransformerAbstract
             'email' => $user->email,
             'contact_number' => $user->contact_number,
             'location' => $user->location,
+            'wallet'=>$user->wallet,
             'profile_image_url' => $user->profile_image_url
         ];
     }

@@ -18,6 +18,7 @@ use App\Role;
 use App\Refer;
 use App\Wallet;
 use Carbon\Carbon;
+use Hash;
 use App\PromoCode;
 use JWTAuth;
 use Auth;
@@ -302,4 +303,47 @@ class AuthController extends Controller
             'user_id'=>$id,
         ]);
     }
+
+    public function changePassword(Request $request)
+    {
+        if(!$request->input('new_password') || !$request->input('old_password')){
+             return response()->json([
+              'error'=>'Please provide new and old passwords',
+          ],422);
+        }
+       $newPassword=$request->input('new_password');
+       $oldPassword=$request->input('old_password');
+       $authUser=$request->user();
+       if(!empty($authUser->social_id) && empty($authUser->password)){
+          return response()->json([
+              'error'=>'You are logged in with Social media account',
+          ]);
+      }
+      else{
+        if( Hash::check( $oldPassword,$authUser->password)){
+            $update=User::where('id','=',$authUser->id)->update([
+                'password'=>bcrypt($newPassword),
+            ]);
+
+            if($update){
+
+              return response()->json([
+                  'success'=>'Your Password has been Updated',
+              ]);
+          }
+          else{
+              return response()->json([
+                  'error'=>'an error occurred while you Updating your password',
+              ]);
+          }
+      }
+      else{
+       return response()->json([
+          'error'=>'the old Password in incorrect',
+      ]);
+
+   }
+
+}   
+}
 }

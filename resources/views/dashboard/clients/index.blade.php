@@ -121,9 +121,7 @@ body {
                                     <li>
                                         <a href="{{ route('dashboard.clients.edit', $resource->id) }}">Edit</a>
                                     </li>
-                                     <li>
-                                        <a href="{{ route('dashboard.admin.edit.wallet.user', $resource->id) }}">Edit Wallet</a>
-                                    </li>
+                                   
                                     <li>
                                         {{ Form::open(['route' => ['dashboard.clients.destroy' ,$resource->id] ,'method' => 'DELETE']) }}
                                         <button type="submit">Delete</button>

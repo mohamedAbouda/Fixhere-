@@ -83,6 +83,16 @@
             <p class="text-danger" style="margin-bottom: 0;">{{ $errors->first('location') }}</p>
         </div>
     </div>
+        <div class="col-md-12">
+        <div class="form-group margin-bottom20 col-md-12">
+            <label class="control-label" for="wallet">
+                Wallet
+            </label>
+            {{ Form::number('wallet',$resource->wallet,['id'=>'wallet','class' => 'form-control']) }}
+            <p class="text-danger" style="margin-bottom: 0;">{{ $errors->first('wallet') }}</p>
+        </div>
+
+    </div>
 </div>
 <div class="row">
     <div class="col-md-1 col-xs-4">

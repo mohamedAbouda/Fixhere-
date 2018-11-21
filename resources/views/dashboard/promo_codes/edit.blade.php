@@ -69,7 +69,7 @@
               <div class="form-group margin-bottom20 col-md-6">
             <label class="control-label" for="end_date">
                 <span class="text-danger">*</span>
-                Start Date
+                End Date
             </label>
             {{ Form::date('end_date',$promo_code->end_date,['id'=>'end_date','required'=>'required','class' => 'form-control']) }}
             <p class="text-danger" style="margin-bottom: 0;">{{ $errors->first('end_date') }}</p>

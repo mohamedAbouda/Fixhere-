@@ -79,10 +79,21 @@
                 <span class="text-danger">*</span>
                 Address
             </label>
-            {{ Form::text('location',old('location'),['id'=>'location','required'=>'required','class' => 'form-control']) }}
+            {{ Form::number('location',old('location'),['id'=>'location','required'=>'required','class' => 'form-control']) }}
             <p class="text-danger" style="margin-bottom: 0;">{{ $errors->first('location') }}</p>
         </div>
     </div>
+            <div class="col-md-12">
+        <div class="form-group margin-bottom20 col-md-12">
+            <label class="control-label" for="wallet">
+                Wallet
+            </label>
+            {{ Form::text('wallet',old('wallet'),['id'=>'wallet','class' => 'form-control']) }}
+            <p class="text-danger" style="margin-bottom: 0;">{{ $errors->first('wallet') }}</p>
+        </div>
+
+    </div>
+</div>
 </div>
 <div class="row">
     <div class="col-md-1 col-xs-4">

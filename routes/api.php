@@ -20,12 +20,14 @@ Route::group(['prefix'=>'v1','namespace' => 'Apis'],function(){
     Route::post('/auth/social/login','AuthController@socialLogin');
     Route::post('/auth/forget','AuthController@forgetPassword');
     Route::get('/all/cities','CityController@allCities');
+   
     Route::group(['middleware'=>['JWT.auth']],function (){
+        Route::post('auth/change/password','AuthController@changePassword');
         Route::post('/auth/token','AuthController@deviceToken');
         Route::post('/auth/confirm','AuthController@confirm');
         Route::post('/auth/resend/code','AuthController@resendCode');
         Route::post('/auth/create/refer','AuthController@createRefer');
-
+        Route::get('orders/requests','RequestController@ordersRequests');
         Route::group(['prefix' => 'profile'] , function(){
             Route::get('/','ClientController@show');
             Route::post('/edit','ClientController@edit');
