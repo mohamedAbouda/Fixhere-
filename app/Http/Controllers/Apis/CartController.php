@@ -20,7 +20,7 @@ class CartController extends Controller
 				'error' => ['Please Provide product id.'],
 			],422);
 		}
-		$product = Product::with('model','maintenanceService')->where('id',$request->input('product_id'))->first();
+		$product = Product::with('maintenanceService')->where('id',$request->input('product_id'))->first();
 		if(!$product){
 			return response()->json([
 				'error' => ['No product with this id.'],
