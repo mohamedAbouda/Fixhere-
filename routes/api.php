@@ -13,8 +13,6 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('parts','Apis\ProductController@index');
-Route::get('parts/{part}/related','Apis\ProductController@related');
 Route::group(['prefix'=>'v1','namespace' => 'Apis'],function(){
     Route::post('/auth/register','AuthController@register');
     Route::post('/auth/login','AuthController@login');
@@ -97,5 +95,6 @@ Route::group(['prefix'=>'v1','namespace' => 'Apis'],function(){
         Route::get('models','ModelController@index');
         Route::get('maintenance-services','MaintenanceServiceController@index');
         Route::get('parts','ProductController@index');
+        Route::get('parts/{part}/related','ProductController@related');
     });
 });
