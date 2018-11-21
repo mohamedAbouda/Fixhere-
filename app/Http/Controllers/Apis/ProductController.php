@@ -45,8 +45,9 @@ class ProductController extends Controller
     {
         $brand_id = $part->maintenanceService->brand()->id;
         $models = Model::where('brand_id', $brand_id)->pluck('id');
-        $maintenance_services = MaintenanceService::whereIn('id', $models)->pluck('id');
-        $products
+        $maintenance_services = MaintenanceService::whereIn('model_id', $models)->pluck('id');
+        $products = Product::whereIn('maintenance_service_id', $maintenance_services)->where('id', '<>', $part->id)->get();
+        
         return response()->json([
             'status' => 'true',
             'data' => fractal()
