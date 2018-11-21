@@ -23,14 +23,7 @@ class CreateProductsTable extends Migration
             $table->integer('views')->unsigned()->default(0);
             $table->integer('stock')->unsigned()->default(0);
             $table->decimal('price', 20, 2)->unsigned()->default(0);
-            $table->boolean('is_android_part')->default(0);
-            $table->boolean('is_ios_part')->default(0);
-            $table->boolean('is_delivery_part')->default(0);
-
-            $table->integer('model_id')->unsigned()->nullable();
-            $table->foreign('model_id')->references('id')->on('models')
-            ->onUpdate('cascade')->onDelete('cascade');
-
+            
             $table->integer('maintenance_service_id')->unsigned()->nullable();
             $table->foreign('maintenance_service_id')->references('id')->on('maintenance_services')
             ->onUpdate('cascade')->onDelete('cascade');
