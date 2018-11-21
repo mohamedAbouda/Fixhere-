@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 |
 */
 
+Route::get('parts/{part}/related','Apis\ProductController@related');
 Route::group(['prefix'=>'v1','namespace' => 'Apis'],function(){
     Route::post('/auth/register','AuthController@register');
     Route::post('/auth/login','AuthController@login');

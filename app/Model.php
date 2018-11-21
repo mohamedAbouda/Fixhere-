@@ -18,8 +18,8 @@ class Model extends AppModel
         return $this->belongsTo(Brand::class);
     }
 
-    public function products()
+    public function maintenanceServices()
     {
-        return $this->hasMany(Product::class);
+        return $this->hasMany(MaintenanceService::class);
     }
 }

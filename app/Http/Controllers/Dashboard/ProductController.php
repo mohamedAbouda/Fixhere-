@@ -9,8 +9,6 @@ use App\Http\Requests\Dashboard\ProductUpdateRequest;
 use App\MaintenanceService;
 use App\ProductImage;
 use App\Product;
-use App\Model;
-use App\Brand;
 
 class ProductController extends Controller
 {
@@ -24,7 +22,7 @@ class ProductController extends Controller
     */
     public function index()
     {
-        $data['resources'] = Product::with(['model', 'maintenanceService'])->orderBy('id', 'DESC')->paginate($this->paginate_by);
+        $data['resources'] = Product::with(['maintenanceService'])->orderBy('id', 'DESC')->paginate($this->paginate_by);
         $data['total_resources_count'] = Product::count();
         $index = request()->get('page' , 1);
         $data['counter_offset'] = ($index * $this->paginate_by) - $this->paginate_by;
@@ -38,8 +36,6 @@ class ProductController extends Controller
     */
     public function create()
     {
-        $data['brands'] = Brand::pluck('name', 'id')->toArray();
-        $data['models'] = Model::get();
         $data['maintenance_services'] = MaintenanceService::pluck('name', 'id')->toArray();
 
         return view($this->base_view_path . 'create', $data);
@@ -54,16 +50,6 @@ class ProductController extends Controller
     public function store(ProductCreateRequest $request)
     {
         $data = $request->all();
-
-        if (!$request->get('is_android_part')) {
-            $data['is_android_part'] = 0;
-        }
-        if (!$request->get('is_ios_part')) {
-            $data['is_ios_part'] = 0;
-        }
-        if (!$request->get('is_delivery_part')) {
-            $data['is_delivery_part'] = 0;
-        }
 
         $product = Product::create($data);
 
@@ -107,8 +93,6 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         $data['resource'] = $product;
-        $data['brands'] = Brand::pluck('name', 'id')->toArray();
-        $data['models'] = Model::get();
         $data['maintenance_services'] = MaintenanceService::pluck('name', 'id')->toArray();
 
         return view($this->base_view_path . 'edit',$data);
@@ -124,16 +108,6 @@ class ProductController extends Controller
     public function update(ProductUpdateRequest $request, Product $product)
     {
         $data = $request->all();
-
-        if (!$request->get('is_android_part')) {
-            $data['is_android_part'] = 0;
-        }
-        if (!$request->get('is_ios_part')) {
-            $data['is_ios_part'] = 0;
-        }
-        if (!$request->get('is_delivery_part')) {
-            $data['is_delivery_part'] = 0;
-        }
 
         $product->update($data);
         if ($request->hasFile('images')) {

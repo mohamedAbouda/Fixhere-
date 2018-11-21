@@ -29,8 +29,6 @@ class ProductUpdateRequest extends FormRequest
             'images.*' => 'image',
             'price' => 'required|min:0',
             'stock' => 'required|min:0',
-            'brand_id' => 'required|exists:brands,id',
-            'model_id' => 'required|exists:models,id',
             'maintenance_service_id' => 'required|exists:maintenance_services,id',
             // 'is_android_part' => 'required',
             // 'is_ios_part' => 'required',
