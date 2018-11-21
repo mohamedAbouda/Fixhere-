@@ -14,7 +14,7 @@ class Request extends Model
 	* 3 send and completed by technical agent
     * 4 canceled by technical agent
     */
-    protected $fillable = ['agent_id','user_id','status','spell_part','price'];
+    protected $fillable = ['agent_id','user_id','status','service_id','price'];
 
     public function user()
     {
@@ -26,8 +26,8 @@ class Request extends Model
         return $this->belongsTo('App\User','agent_id');
     }
 
-    public function product()
+    public function service()
     {
-        return $this->belongsTo('App\Product','spell_part');
+        return $this->belongsTo('App\MaintenanceService','service_id');
     }
 }

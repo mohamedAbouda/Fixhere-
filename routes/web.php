@@ -11,7 +11,6 @@
 |
 */
 Auth::routes();
-
 Route::get('/','HomeController@index')->name('home');
 /*
 * Admin Dashbord Routes

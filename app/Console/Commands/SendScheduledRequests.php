@@ -49,11 +49,11 @@ class SendScheduledRequests extends Command
        $requestSchedules = RequestSchedule::whereDate('day_date', \Carbon\Carbon::today())->where('day_time', '<=', \Carbon\Carbon::now()->toTimeString())->with('request.user')->get();
 
         foreach ($requestSchedules as $requestSchedule) {
-             $clientRequest = ClientRequest::where('id',$requestSchedule->request_id)->with('user','product')->first();
+             $clientRequest = ClientRequest::where('id',$requestSchedule->request_id)->with('user','service')->first();
             if ($requestSchedule->sent_times <= 3) {
                 $requestSchedule->update(['sent_times'=>$requestSchedule->sent_times+1]);
                 $tokens = User::where('device_id', '!=', null)->pluck('device_id')->toArray();
-               $this->chekAgents($clientRequest->product->is_android_part,$clientRequest->product->is_ios_part,$clientRequest->product->is_delivery_part,$clientRequest->user->city_id,$clientRequest->id);
+               $this->chekAgents($clientRequest->service->is_android_part,$clientRequest->service->is_ios_part,$clientRequest->service->is_delivery_part,$clientRequest->user->city_id,$clientRequest->id);
             } else {
                 $token = $requestSchedule->request->user->device_id;
                 if ($token) {

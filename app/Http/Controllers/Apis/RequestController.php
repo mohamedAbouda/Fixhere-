@@ -7,6 +7,7 @@ use App\User;
 use App\Models\Request as ClientRequest;
 use App\Models\RequestSchedule;
 use App\Product;
+use App\MaintenanceService;
 use App\Models\Order;
 use App\Http\Controllers\Controller;
 use \Carbon\Carbon;
@@ -15,18 +16,18 @@ class RequestController extends Controller
 {
 	public function send(Request $request)
 	{
-		if(!$request->input('product_id')){
+		if(!$request->input('service_id')){
 			return response()->json([
-				'error' => ['Please Provide product id.'],
+				'error' => ['Please Provide service id.'],
 			],422);
 		}
-		$product = Product::where('id',$request->input('product_id'))->first();
+		$product = MaintenanceService::where('id',$request->input('service_id'))->first();
 		if(!$product){
 			return response()->json([
-				'error' => ['No Spell Part with this id.'],
+				'error' => ['No Service with this id.'],
 			],404);
 		}
-		$data['spell_part'] = $request->input('product_id');
+		$data['service_id'] = $request->input('service_id');
 		$data['user_id'] = $request->user()->id;
 		$data['price'] = $request->input('price') ? $request->input('price'):0;
 		$createRequest = ClientRequest::create($data);
@@ -36,7 +37,7 @@ class RequestController extends Controller
 		$createSchedule = RequestSchedule::create($schedule);
 		// this if to sent to specific users not all users
 		// assume you have person how if fixing android but not fixing ios we will send to android only
-		$this->chekAgents($product->is_android_part,$product->is_ios_part,$product->delivery,$request->user()->city_id,$createRequest->id);
+		$this->chekAgents($product->is_android_part,$product->is_ios_part,$product->is_delivery_part,$request->user()->city_id,$createRequest->id);
 		return response()->json([
 			'success' => ['Your request has been sent ,we will notify you when someone accepts it and you can check your request status at any time.'],
 		],200);
@@ -44,13 +45,19 @@ class RequestController extends Controller
 
 	public function schedule(Request $request)
 	{
-		if(!$request->input('product_id') || !$request->input('day_date')
+		if(!$request->input('service_id') || !$request->input('day_date')
 		 || !$request->input('day_time')){
 			return response()->json([
-				'error' => ['Please Provide spell id , day date and day time.'],
+				'error' => ['Please Provide service id , day date and day time.'],
 			],422);
 		}
-		$data['spell_part'] = $request->input('product_id');
+		$product = MaintenanceService::where('id',$request->input('service_id'))->first();
+		if(!$product){
+			return response()->json([
+				'error' => ['No Service with this id.'],
+			],404);
+		}
+		$data['service_id'] = $request->input('service_id');
 		$data['user_id'] = $request->user()->id;
 		$data['price'] = $request->input('price') ? $request->input('price'):0;
 		$createRequest = ClientRequest::create($data);
@@ -96,7 +103,7 @@ class RequestController extends Controller
 
 	public function getRequests(Request $request)
 	{
-		$requests = ClientRequest::where('user_id',$request->user()->id)->with('agent','product');
+		$requests = ClientRequest::where('user_id',$request->user()->id)->with('agent','service');
 		if($request->input('status'))
 			$requests->where('status',$request->input('status'));
 		$requests = $requests->get();
@@ -107,7 +114,7 @@ class RequestController extends Controller
 
 	public function agentGetRequests(Request $request)
 	{
-		$requests = ClientRequest::where('agent_id',$request->user()->id)->with('user','product');
+		$requests = ClientRequest::where('agent_id',$request->user()->id)->with('user','service');
 		if($request->input('status'))
 			$requests->where('status',$request->input('status'));
 		$requests = $requests->get();
@@ -152,4 +159,5 @@ class RequestController extends Controller
 
 
 	}
+	
 }
