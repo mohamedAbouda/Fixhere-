@@ -84,6 +84,17 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => ['a
         * Products
         */
         Route::resource('products','ProductController');
+
+        /**
+        * Contact Us
+        */
+        Route::resource('contacts','ContactController');
+
+
+        /**
+        * About Us
+        */
+        Route::resource('about','AboutUsController');
     });
 
     /**

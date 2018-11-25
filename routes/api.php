@@ -20,6 +20,8 @@ Route::group(['prefix'=>'v1','namespace' => 'Apis'],function(){
     Route::post('/auth/social/login','AuthController@socialLogin');
     Route::post('/auth/forget','AuthController@forgetPassword');
     Route::get('/all/cities','CityController@allCities');
+    Route::post('contact/us','ClientController@contactUs');
+    Route::get('about/us','ClientController@aboutUs');
    
     Route::group(['middleware'=>['JWT.auth']],function (){
         Route::post('auth/change/password','AuthController@changePassword');

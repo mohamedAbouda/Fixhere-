@@ -7,7 +7,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Apis\ClientUpdateRequest;
 use App\Transformers\ClientTransformer;
 use App\Transformers\PromoCodeTransformer;
+use App\Models\Contact;
 use App\User;
+use App\Models\AboutUs;
 use App\PromoCode;
 
 class ClientController extends Controller
@@ -49,5 +51,21 @@ class ClientController extends Controller
             ->serializeWith(new \League\Fractal\Serializer\ArraySerializer())
             ->toArray()
         ,200);
+    }
+
+    public function contactUs(Request $request)
+    {
+        $data = $request->all();
+        $createContact = Contact::create($data);
+        return response()->json([
+            'success' => ['your message has been submited.'],
+        ],200);
+    }
+    public function aboutUs(Request $request)
+    {
+        $about = AboutUs::first();
+        return response()->json([
+            'about' => $about,
+        ],200);
     }
 }

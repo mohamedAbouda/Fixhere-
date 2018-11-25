@@ -209,6 +209,26 @@
                             </div>
                         </a>
                     </li>
+                     <li class="c-menu__item has-submenu {{ strpos(request()->route()->getName() , 'dashboard.contacts') !== FALSE ? 'is-active' : '' }} ? 'is-active' : '' }}" data-toggle="tooltip" title="Contact Us ">
+                        <a href="{{ route('dashboard.contacts.index') }}" style="text-decoration: none;">
+                            <div class="c-menu__item__inner">
+                                <i class="fa fa-facebook-f"></i>
+                                <div class="c-menu-item__title">
+                                    <span>Contact Us </span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                         <li class="c-menu__item has-submenu {{ strpos(request()->route()->getName() , 'dashboard.about') !== FALSE ? 'is-active' : '' }} ? 'is-active' : '' }}" data-toggle="tooltip" title="About Us ">
+                        <a href="{{ route('dashboard.about.index') }}" style="text-decoration: none;">
+                            <div class="c-menu__item__inner">
+                                <i class="fa fa-facebook-f"></i>
+                                <div class="c-menu-item__title">
+                                    <span>About Us </span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
                     @endif
                 </ul>
             </nav>
