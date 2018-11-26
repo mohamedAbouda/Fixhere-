@@ -76,7 +76,7 @@ class ClientController extends Controller
                 'error' => 'Please provide promo code id.',
             ],422);
         }
-        $promoCode = PromoCode::where('id',$request->input('promo_code_id'))->first();
+        $promoCode = PromoCode::where('code',$request->input('code'))->first();
         if(!$promoCode){
             return response()->json([
                 'error' => 'No promo code with this id.',
