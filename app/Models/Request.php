@@ -14,11 +14,16 @@ class Request extends Model
 	* 3 send and completed by technical agent
     * 4 canceled by technical agent
     */
-    protected $fillable = ['agent_id','user_id','status','service_id','price'];
+    protected $fillable = ['agent_id','user_id','status','service_id','price','promo_code_id'];
 
     public function user()
     {
         return $this->belongsTo('App\User');
+    }
+
+    public function promo_code()
+    {
+        return $this->belongsTo('App\PromoCode','promo_code_id');
     }
 
     public function agent()

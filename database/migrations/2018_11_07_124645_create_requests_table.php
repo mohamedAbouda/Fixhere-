@@ -15,6 +15,9 @@ class CreateRequestsTable extends Migration
     {
         Schema::create('requests', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('promo_code_id')->unsigned()->nullable();
+            $table->foreign('promo_code_id')->references('id')->on('promo_codes')
+            ->onUpdate('cascade')->onDelete('cascade');
             $table->integer('agent_id')->unsigned()->nullable();
             $table->foreign('agent_id')->references('id')->on('users')
             ->onUpdate('cascade')->onDelete('cascade');
@@ -22,7 +25,7 @@ class CreateRequestsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')
             ->onUpdate('cascade')->onDelete('cascade');
             $table->integer('status')->default(1);
-            $table->integer('services_id')->nullable();
+            $table->integer('service_id')->nullable();
             $table->float('price')->default(0);
             $table->timestamps();
         });

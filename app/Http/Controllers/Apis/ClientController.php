@@ -68,4 +68,22 @@ class ClientController extends Controller
             'about' => $about,
         ],200);
     }
+
+    public function promoCode(Request $request)
+    {
+         if(!$request->input('promo_code_id')){
+            return response()->json([
+                'error' => 'Please provide promo code id.',
+            ],422);
+        }
+        $promoCode = PromoCode::where('id',$request->input('promo_code_id'))->first();
+        if(!$promoCode){
+            return response()->json([
+                'error' => 'No promo code with this id.',
+            ],404);
+        }
+        return response()->json([
+                'data' => $promoCode,
+        ],200);
+    }
 }

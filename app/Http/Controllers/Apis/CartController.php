@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Product;
 use App\User;
 use App\Models\Order;
+use App\PromoCode;
 use App\Models\ItemOrder;
 use Cart;
 
@@ -96,6 +97,29 @@ class CartController extends Controller
 			$createItem->order_id = $createOrder->id;
 			$createItem->save();
 			$total_price = $total_price + ($item->qty * $item->price);
+		}
+		if($request->input('promo_code_id')){
+			$checkPromoCode = PromoCode::where('id',$request->input('promo_code_id'))->first();
+			if(!$checkPromoCode){
+				return response()->json([
+					'error' => ['No promo code with this id.'],
+				],404);
+			}
+			if($checkPromoCode->is_valid != 1){
+				return response()->json([
+					'error' => ['this promo code is not valid anymore.'],
+				],422);
+			}
+			if(\Carbon\Carbon::today() > $checkPromoCode->end_date){
+				return response()->json([
+					'error' => ['this promo has been ended.'],
+				],422);
+			}
+			if($checkPromoCode->discount_type == 1){
+				$total_price = $total_price - (($checkPromoCode->value * $total_price) / 100);
+			}else{
+				$total_price = $total_price - $checkPromoCode->value;
+			}
 		}
 		$updateOrder = $createOrder->update(['total_price'=>$total_price]);
 		Cart::destroy();

@@ -14,11 +14,16 @@ class Order extends Model
     * 4 send and canceled by technical agent
     */
     protected $table = 'orders';
-    protected $fillable = ['user_id','total_price','agent_id','status'];
+    protected $fillable = ['user_id','total_price','agent_id','status','promo_code_id'];
 
     public function items()
     {
         return $this->hasMany(ItemOrder::class);
+    }
+    
+    public function promo_code()
+    {
+        return $this->belongsTo('App\PromoCode','promo_code_id');
     }
 
     public function agent()
