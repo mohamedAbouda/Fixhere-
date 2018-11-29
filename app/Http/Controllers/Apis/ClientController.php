@@ -86,4 +86,28 @@ class ClientController extends Controller
                 'data' => $promoCode,
         ],200);
     }
+
+    public function verfiyPhone(Request $request)
+    {
+        if(!$request->input('code')){
+            return response()->json([
+                'error' => 'Please provide the code.',
+            ],422);
+        }
+        $checkUser = User::where('code',$request->input('code'))->first();
+        if(!$checkUser){
+            return response()->json([
+                'error' => 'NO user with this code.',
+            ],404);  
+        }
+        if($checkUser->phone_verfied == 1){
+            return response()->json([
+                'success' => 'This user is already verfied.',
+            ],200);
+        }
+        $checkUser->update(['phone_verfied'=>1]);
+        return response()->json([
+            'success' => 'This user has been verfied.',
+        ],200);
+    }
 }

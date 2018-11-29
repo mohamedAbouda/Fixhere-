@@ -22,6 +22,7 @@ class CreateOrdersTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')
             ->onUpdate('cascade')->onDelete('cascade');
             $table->float('total_price')->defualt(0);
+            $table->string('address')->nullable();
             $table->integer('agent_id')->unsigned()->nullable();
             $table->foreign('agent_id')->references('id')->on('users')
             ->onUpdate('cascade')->onDelete('cascade');

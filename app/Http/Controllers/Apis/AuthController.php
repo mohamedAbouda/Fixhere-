@@ -36,6 +36,7 @@ class AuthController extends Controller
     public function register(UserRegisteration $request)
     {
         $input = $request->all();
+        $input['code'] = $this->generatePIN();
 
         $user = User::create($input);
 

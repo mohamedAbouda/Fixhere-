@@ -22,7 +22,7 @@ Route::group(['prefix'=>'v1','namespace' => 'Apis'],function(){
     Route::get('/all/cities','CityController@allCities');
     Route::post('contact/us','ClientController@contactUs');
     Route::get('about/us','ClientController@aboutUs');
-   
+    Route::post('verfiy/phone','ClientController@verfiyPhone');
     Route::group(['middleware'=>['JWT.auth']],function (){
         Route::post('auth/change/password','AuthController@changePassword');
         Route::post('/auth/token','AuthController@deviceToken');

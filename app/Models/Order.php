@@ -14,7 +14,7 @@ class Order extends Model
     * 4 send and canceled by technical agent
     */
     protected $table = 'orders';
-    protected $fillable = ['user_id','total_price','agent_id','status','promo_code_id'];
+    protected $fillable = ['user_id','total_price','agent_id','status','promo_code_id','address'];
 
     public function items()
     {

@@ -34,6 +34,6 @@ class ForgetPasswordMail extends Mailable
     */
     public function build()
     {
-        return $this->view('vendor.notifications.email');
+        return $this->markdown('vendor.notifications.email');
     }
 }

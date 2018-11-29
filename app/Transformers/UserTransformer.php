@@ -21,6 +21,8 @@ class UserTransformer extends TransformerAbstract
             'id' => $user->id,
             'full_name' => $user->full_name,
             'email' => $user->email,
+            'wallet'=>$user->wallet,
+            'code' => $user->code,
             'phone_number' => $user->phone_number,
             'image_url' => $user->image ? $user->image_url : '',
             'social_image' => $user->social_image ? $user->social_image : '',

@@ -21,7 +21,8 @@ class User extends Authenticatable
         'name', 'email', 'password', 'lat', 'lng', 'location', 'cover_image',
         'cost_per_hour', 'rate', 'description', 'contact_number', 'profile_image','parent_id',
         'social_id' ,'social_type','card_pan','card_type','card_token' ,'device_id','city_id',
-        'android_fix','ios_fix','delivery','phone','wallet'
+        'android_fix','ios_fix','delivery','phone','wallet','code',
+        'phone_verfied'
     ];
 
     /**
